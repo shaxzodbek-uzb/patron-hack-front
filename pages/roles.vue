@@ -8,6 +8,7 @@
           Позиции
           <span>
             <a
+              @click="createModel = true"
               type="button"
               data-toggle="modal"
               data-target="#exampleModal"
@@ -16,7 +17,7 @@
               <span class="icon text-white">
                 <i class="text-white fas fa-plus"></i>
               </span>
-              <span class="text" @click="createModel = true">Добавить</span>
+              <span class="text" >Добавить</span>
             </a>
           </span>
         </div>
