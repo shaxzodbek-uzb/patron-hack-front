@@ -17,10 +17,10 @@
                   data-target="#exampleModal"
                   class="btn btn-sm btn-primary bg-primary btn-icon-split dropdown-item"
                 >
-                  <span class="icon text-white-50">
+                  <span class="icon text-white">
                     <i class="text-white fas fa-plus"></i>
                   </span>
-                  <span class="text">Добавить</span>
+                  <span class="text-white">Добавить</span>
                 </a>
               </span>
             </div>
