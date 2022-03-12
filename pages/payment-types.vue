@@ -128,7 +128,7 @@ export default {
     },
     updateItem() {
       this.$axios
-        .$put('/payment-types' + this.update.id, this.update)
+        .$put('/payment-types/' + this.update.id, this.update)
         .then((response) => {
           this.items.splice(
             this.items.findIndex((item) => item.id === this.update.id),
