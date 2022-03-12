@@ -13,7 +13,7 @@
               data-target="#exampleModal"
               class="btn btn-sm btn-primary btn-icon-split"
             >
-              <span class="icon text-white-50">
+              <span class="icon text-white">
                 <i class="text-white fas fa-plus"></i>
               </span>
               <span class="text">Добавить</span>
@@ -41,12 +41,12 @@
                 <td>1000 $</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-pen"></i>
                     </span>
                   </a>
                   <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </a>
@@ -59,12 +59,12 @@
                 <td>1000 $</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-pen"></i>
                     </span>
                   </a>
                   <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </a>
@@ -77,12 +77,12 @@
                 <td>1000 $</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-pen"></i>
                     </span>
                   </a>
                   <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </a>
@@ -96,12 +96,12 @@
                 <td>1000 $</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-pen"></i>
                     </span>
                   </a>
                   <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </a>
@@ -114,12 +114,12 @@
                 <td>1000 $</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-pen"></i>
                     </span>
                   </a>
                   <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </a>

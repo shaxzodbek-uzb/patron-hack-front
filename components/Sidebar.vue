@@ -46,7 +46,7 @@
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="/" class="nav-link">
+        <nuxt-link to="/bussinessRules" class="nav-link">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Бизнес правила</span>
         </nuxt-link>
