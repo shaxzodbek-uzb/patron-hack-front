@@ -21,7 +21,7 @@
       <li class="nav-item">
         <nuxt-link to="/users" class="nav-link collapsed">
           <i class="fas fa-user"></i>
-          <span>Ползователь</span>
+          <span>Сотрудники</span>
         </nuxt-link>
       </li>
 

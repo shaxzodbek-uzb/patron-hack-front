@@ -2,7 +2,7 @@
   <div>
     <div class="container-fluid">
       <!-- Page Heading -->
-
+      <Loader />
       <div class="row">
         <div class="card w-100 shadow mb-4">
           <div class="card-header py-3">
@@ -109,7 +109,12 @@
 </template>
 
 <script>
+import Loader from '../components/Loader.vue'
+
 export default {
+  components: {
+    Loader,
+  },
   data() {
     return {
       items: [],
