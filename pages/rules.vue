@@ -47,10 +47,12 @@
                       class="btn btn-sm btn-primary btn-icon-split"
                     >
                       <span class="icon text-white">
-                        <i class="fas fa-pencil-alt"></i>
+                        <i class="fas fa-pen"></i>
                       </span>
                     </div>
-                    <div class="btn btn-sm btn-danger btn-icon-split">
+                    <div 
+                      @click="deleteItem(idx)"
+                      class="btn btn-sm btn-danger btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
@@ -137,6 +139,12 @@ export default {
             response.item
           )
         })
+    },
+    deleteItem(index) {
+      let item = this.items[index]
+      this.$axios.$delete('/rules/' + item.id).then(() => {
+        this.items.splice(index, 1)
+      })
     },
   },
 }
