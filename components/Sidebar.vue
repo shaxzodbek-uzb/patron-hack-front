@@ -32,7 +32,7 @@
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="/" class="nav-link collapsed">
+        <nuxt-link to="/role" class="nav-link collapsed">
           <i class="fas fa-fw fa-award"></i>
           <span>Позиции</span>
         </nuxt-link>
