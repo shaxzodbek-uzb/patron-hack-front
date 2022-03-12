@@ -39,7 +39,7 @@
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="/" class="nav-link">
+        <nuxt-link to="/OrgStructure" class="nav-link">
           <i class="fas fa-fw fas fa-project-diagram"></i>
           <span>Орг. структура</span></nuxt-link
         >
@@ -72,4 +72,5 @@
 export default {}
 </script>
 
-<style></style>
+<style>
+</style>

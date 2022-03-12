@@ -4696,6 +4696,11 @@ input[type="button"].btn-block {
   overflow-anchor: none;
 }
 
+#accordionSidebar {
+  position: sticky;
+  top: 0;
+}
+
 .accordion > .card {
   overflow: hidden;
 }
