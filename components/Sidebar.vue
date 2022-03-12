@@ -53,7 +53,7 @@
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="" class="nav-link">
+        <nuxt-link to="/payment" class="nav-link">
           <i class="fas fa-fw far fa-credit-card"></i>
           <span>Тип платежа</span>
         </nuxt-link>
