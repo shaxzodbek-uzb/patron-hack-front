@@ -4,7 +4,7 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Главная</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                class="fas fa-download fa-sm text-white"></i> Generate Report</a>
     </div>
 
 
@@ -137,7 +137,7 @@
                     <div class="card bg-primary text-white shadow">
                         <div class="card-body">
                             Primary
-                            <div class="text-white-50 small">#4e73df</div>
+                            <div class="text-white small">#4e73df</div>
                         </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                     <div class="card bg-success text-white shadow">
                         <div class="card-body">
                             Success
-                            <div class="text-white-50 small">#1cc88a</div>
+                            <div class="text-white small">#1cc88a</div>
                         </div>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                     <div class="card bg-info text-white shadow">
                         <div class="card-body">
                             Info
-                            <div class="text-white-50 small">#36b9cc</div>
+                            <div class="text-white small">#36b9cc</div>
                         </div>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
                     <div class="card bg-warning text-white shadow">
                         <div class="card-body">
                             Warning
-                            <div class="text-white-50 small">#f6c23e</div>
+                            <div class="text-white small">#f6c23e</div>
                         </div>
                     </div>
                 </div>
@@ -169,7 +169,7 @@
                     <div class="card bg-danger text-white shadow">
                         <div class="card-body">
                             Danger
-                            <div class="text-white-50 small">#e74a3b</div>
+                            <div class="text-white small">#e74a3b</div>
                         </div>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                     <div class="card bg-secondary text-white shadow">
                         <div class="card-body">
                             Secondary
-                            <div class="text-white-50 small">#858796</div>
+                            <div class="text-white small">#858796</div>
                         </div>
                     </div>
                 </div>
@@ -193,7 +193,7 @@
                     <div class="card bg-dark text-white shadow">
                         <div class="card-body">
                             Dark
-                            <div class="text-white-50 small">#5a5c69</div>
+                            <div class="text-white small">#5a5c69</div>
                         </div>
                     </div>
                 </div>
