@@ -4,19 +4,19 @@
       class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
       id="accordionSidebar"
     >
-      <a
+      <nuxt-link
+        to="/"
         class="sidebar-brand d-flex align-items-center justify-content-center"
-        href="index.html"
       >
         <img style="width: 70%" src="~/assets/images/logo.png" alt="" />
-      </a>
+      </nuxt-link>
 
       <hr class="sidebar-divider my-0" />
 
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <nuxt-link to="/" class="nav-link">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Главная</span></a
+          <span>Главная</span></nuxt-link
         >
       </li>
 
@@ -25,39 +25,38 @@
       <div class="sidebar-heading">Интерфейс</div>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="user.html">
+        <nuxt-link to="/user" class="nav-link collapsed">
           <i class="fas fa-user"></i>
           <span>Ползователь</span>
-        </a>
+        </nuxt-link>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="role.html">
+        <nuxt-link to="/" class="nav-link collapsed">
           <i class="fas fa-fw fa-award"></i>
           <span>Позиции</span>
-        </a>
+        </nuxt-link>
       </li>
 
-
       <li class="nav-item">
-        <a class="nav-link" href="orgStructure.html">
+        <nuxt-link to="/" class="nav-link">
           <i class="fas fa-fw fas fa-project-diagram"></i>
-          <span>Орг. структура</span></a
+          <span>Орг. структура</span></nuxt-link
         >
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="orgStructure.html">
+        <nuxt-link to="/" class="nav-link">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Бизнес правила</span>
-        </a>
+        </nuxt-link>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="payment.html">
+        <nuxt-link to="" class="nav-link">
           <i class="fas fa-fw far fa-credit-card"></i>
           <span>Тип платежа</span>
-        </a>
+        </nuxt-link>
       </li>
 
       <hr class="sidebar-divider d-none d-md-block" />
