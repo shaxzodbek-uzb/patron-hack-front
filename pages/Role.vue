@@ -23,12 +23,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table
-            class="table table-bordered"
-            id="dataTable"
-            width="100%"
-            cellspacing="0"
-          >
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th scope="col">Имя</th>
@@ -93,7 +88,7 @@
                   </a>
                 </td>
               </tr>
-              
+
               <tr>
                 <td>Иван Иванов</td>
                 <td>Менеджер</td>
@@ -139,7 +134,18 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      roles: [],
+    }
+  },
+  mounted() {
+    this.$axios.$get('/api/roles').then((response) => {
+      this.roles = response.data
+    })
+  },
+}
 </script>
 
 <style></style>
