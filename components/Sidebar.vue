@@ -19,7 +19,7 @@
       <div class="sidebar-heading">Интерфейс</div>
 
       <li class="nav-item">
-        <nuxt-link to="/user" class="nav-link collapsed">
+        <nuxt-link to="/users" class="nav-link collapsed">
           <i class="fas fa-user"></i>
           <span>Ползователь</span>
         </nuxt-link>
@@ -33,21 +33,21 @@
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="/OrgStructure" class="nav-link">
+        <nuxt-link to="/organizational-structures" class="nav-link">
           <i class="fas fa-fw fas fa-project-diagram"></i>
           <span>Орг. структура</span>
         </nuxt-link>
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="/bussinessRules" class="nav-link">
+        <nuxt-link to="/rules" class="nav-link">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Бизнес правила</span>
         </nuxt-link>
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="/payment" class="nav-link">
+        <nuxt-link to="/payment-types" class="nav-link">
           <i class="fas fa-fw far fa-credit-card"></i>
           <span>Тип платежа</span>
         </nuxt-link>
