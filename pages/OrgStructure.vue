@@ -17,7 +17,7 @@
                     data-toggle="modal"
                     data-target="#exampleModal"
                   >
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="text-white fas fa-plus"></i>
                     </span>
                     <span class="text">Добавить</span>
@@ -49,7 +49,7 @@
                           href="#"
                           class="btn btn-sm btn-primary btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-pencil-alt"></i>
                           </span>
                         </a>
@@ -57,7 +57,7 @@
                           href="#"
                           class="btn btn-sm btn-danger btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
                         </a>
@@ -71,7 +71,7 @@
                           href="#"
                           class="btn btn-sm btn-primary btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-pencil-alt"></i>
                           </span>
                         </a>
@@ -79,7 +79,7 @@
                           href="#"
                           class="btn btn-sm btn-danger btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
                         </a>
@@ -93,7 +93,7 @@
                           href="#"
                           class="btn btn-sm btn-primary btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-pencil-alt"></i>
                           </span>
                         </a>
@@ -101,7 +101,7 @@
                           href="#"
                           class="btn btn-sm btn-danger btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
                         </a>
@@ -115,7 +115,7 @@
                           href="#"
                           class="btn btn-sm btn-primary btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-pencil-alt"></i>
                           </span>
                         </a>
@@ -123,7 +123,7 @@
                           href="#"
                           class="btn btn-sm btn-danger btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
                         </a>
@@ -137,7 +137,7 @@
                           href="#"
                           class="btn btn-sm btn-primary btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-pencil-alt"></i>
                           </span>
                         </a>
@@ -145,7 +145,7 @@
                           href="#"
                           class="btn btn-sm btn-danger btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
                         </a>
@@ -159,7 +159,7 @@
                           href="#"
                           class="btn btn-sm btn-primary btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-pencil-alt"></i>
                           </span>
                         </a>
@@ -167,7 +167,7 @@
                           href="#"
                           class="btn btn-sm btn-danger btn-icon-split"
                         >
-                          <span class="icon text-white-50">
+                          <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
                         </a>

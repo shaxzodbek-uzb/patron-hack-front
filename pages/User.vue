@@ -50,12 +50,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -68,12 +68,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -86,12 +86,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -104,12 +104,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -122,12 +122,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -140,12 +140,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -158,12 +158,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -176,12 +176,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -194,12 +194,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -212,12 +212,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -230,12 +230,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -248,12 +248,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -266,12 +266,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -284,12 +284,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>
@@ -302,12 +302,12 @@
                     <td>$12,000</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
                       <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                        <span class="icon text-white-50">
+                        <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
                       </a>

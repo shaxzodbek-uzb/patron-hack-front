@@ -17,7 +17,7 @@
                 data-toggle="modal"
                 data-target="#exampleModal"
               >
-                <span class="icon text-white-50">
+                <span class="icon text-white">
                   <i class="text-white fas fa-plus"></i>
                 </span>
                 <span class="text">Добавить</span>
@@ -44,12 +44,12 @@
                   <td>Денежные средства</td>
                   <td>
                     <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
                     </a>
                     <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
                     </a>
@@ -59,12 +59,12 @@
                   <td>Денежные средства</td>
                   <td>
                     <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
                     </a>
                     <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
                     </a>
@@ -74,12 +74,12 @@
                   <td>Денежные средства</td>
                   <td>
                     <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
                     </a>
                     <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
                     </a>
@@ -90,12 +90,12 @@
                   <td>Платежная карта</td>
                   <td>
                     <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
                     </a>
                     <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
                     </a>
@@ -105,12 +105,12 @@
                   <td>Номер счета</td>
                   <td>
                     <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
                     </a>
                     <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
                     </a>
@@ -120,12 +120,12 @@
                   <td>Карта банка</td>
                   <td>
                     <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
                     </a>
                     <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white-50">
+                      <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
                     </a>

@@ -13,7 +13,7 @@
               data-target="#exampleModal"
               class="btn btn-sm btn-primary btn-icon-split"
             >
-              <span class="icon text-white-50">
+              <span class="icon text-white">
                 <i class="text-white fas fa-plus"></i>
               </span>
               <span class="text">Добавить</span>
@@ -23,12 +23,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table
-            class="table table-bordered"
-            id="dataTable"
-            width="100%"
-            cellspacing="0"
-          >
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th scope="col">Имя</th>
@@ -46,12 +41,12 @@
                 <td>1000 $</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-pen"></i>
                     </span>
                   </a>
                   <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </a>
@@ -64,12 +59,12 @@
                 <td>1000 $</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-pen"></i>
                     </span>
                   </a>
                   <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </a>
@@ -82,17 +77,18 @@
                 <td>1000 $</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-pen"></i>
                     </span>
                   </a>
                   <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </a>
                 </td>
               </tr>
+
               <tr>
                 <td>Иван Иванов</td>
                 <td>Менеджер</td>
@@ -100,68 +96,12 @@
                 <td>1000 $</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-pen"></i>
                     </span>
                   </a>
                   <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-trash"></i>
-                    </span>
-                  </a>
-                </td>
-              </tr>
-              
-              <tr>
-                <td>Иван Иванов</td>
-                <td>Менеджер</td>
-                <td>01.01.2020</td>
-                <td>1000 $</td>
-                <td>
-                  <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-pen"></i>
-                    </span>
-                  </a>
-                  <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-trash"></i>
-                    </span>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>Иван Иванов</td>
-                <td>Менеджер</td>
-                <td>01.01.2020</td>
-                <td>1000 $</td>
-                <td>
-                  <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-pen"></i>
-                    </span>
-                  </a>
-                  <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-trash"></i>
-                    </span>
-                  </a>
-                </td>
-              </tr>
-              
-              <tr>
-                <td>Иван Иванов</td>
-                <td>Менеджер</td>
-                <td>01.01.2020</td>
-                <td>1000 $</td>
-                <td>
-                  <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-pen"></i>
-                    </span>
-                  </a>
-                  <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </a>
@@ -174,12 +114,12 @@
                 <td>1000 $</td>
                 <td>
                   <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-pen"></i>
                     </span>
                   </a>
                   <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
+                    <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </a>
@@ -194,7 +134,18 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      roles: [],
+    }
+  },
+  mounted() {
+    this.$axios.$get('/api/roles').then((response) => {
+      this.roles = response.data
+    })
+  },
+}
 </script>
 
 <style></style>
