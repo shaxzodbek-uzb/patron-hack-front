@@ -30,7 +30,6 @@
             <table
               class="table table-bordered"
               id="dataTable"
-              
               cellspacing="0"
             >
               <thead>
@@ -59,8 +58,6 @@
                   </td>
                 </tr>
               </tbody>
-
-              {{ items }}
             </table>
             <b-modal
               v-model="createModal"
