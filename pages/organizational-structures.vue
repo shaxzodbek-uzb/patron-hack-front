@@ -45,16 +45,16 @@
                       <td>{{ item.name }}</td>
                       <td>System Architect</td>
                       <td>
-                        <a
-                          href="#"
+                        <div
+                          @click="editItem(index)"
                           class="btn btn-sm btn-primary btn-icon-split"
                         >
                           <span class="icon text-white">
                             <i class="fas fa-pencil-alt"></i>
                           </span>
-                        </a>
+                        </div>
                         <a
-                          href="#"
+                          @click="deleteItem(index)"
                           class="btn btn-sm btn-danger btn-icon-split"
                         >
                           <span class="icon text-white">
@@ -151,6 +151,16 @@ export default {
             response.item
           )
         })
+    },
+    deleteItem(index) {
+      let item = this.items[index]
+      this.$axios
+      .$delete('/organizational-structures/' + item.id)
+      .then(() => {
+        this.items.splice(
+          this.items.findIndex((item) => item.id === item.id)
+        )
+      })
     },
   },
 }
