@@ -23,7 +23,7 @@ export default {
 
   server: {
     host: '0.0.0.0',
-    port: 3010 // default: 3000
+    port: 3012 // default: 3000
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
