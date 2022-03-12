@@ -7,7 +7,7 @@
           <div
             class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
           >
-            Ползователи
+            Бизнес процесс
             <span>
               <a
                 @click="createModal = true"
@@ -100,61 +100,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      items: [],
-      create: {
-        name: '',
-      },
-      update: {
-        name: '',
-        id: '',
-      },
-      createModal: false,
-      editModal: false,
-      showLoader: true,
-    }
-  },
-  mounted() {
-    this.$axios.$get('/organizational-structures').then((response) => {
-      console.log(response)
-      this.items = response.items
-      this.showLoader = false
-    })
-  },
-  methods: {
-    createItem() {
-      console.log('createItem')
-      this.$axios.$post('/users', this.create).then((response) => {
-        this.items.push(response.item)
-      })
-    },
-    editItem(index) {
-      let item = this.items[index]
-      this.update.name = item.name
-      this.update.id = item.id
-      this.editModal = true
-    },
-    updateItem() {
-      this.$axios
-        .$put('/users/' + this.update.id, this.update)
-        .then((response) => {
-          this.items.splice(
-            this.items.findIndex((item) => item.id === this.update.id),
-            1,
-            response.item
-          )
-        })
-    },
-    deleteItem(index) {
-      let item = this.items[index]
-      this.$axios.$delete('/users/' + item.id).then(() => {
-        this.items.splice(index, 1)
-      })
-    },
-  },
-}
+export default {}
 </script>
 
 <style></style>

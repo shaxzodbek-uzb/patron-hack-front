@@ -1,7 +1,13 @@
 <template>
   <div>
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-      <nuxt-link to="/" class="sidebar-brand d-flex align-items-center justify-content-center">
+    <ul
+      class="navbar-nav font-weight-bold bg-gradient-primary sidebar sidebar-dark accordion"
+      id="accordionSidebar"
+    >
+      <nuxt-link
+        to="/"
+        class="sidebar-brand d-flex align-items-center justify-content-center"
+      >
         <img style="width: 70%" src="~/assets/images/logo.png" alt />
       </nuxt-link>
 
@@ -39,6 +45,36 @@
         </nuxt-link>
       </li>
 
+      <li class="nav-item" @click="isCollapsed = !isCollapsed">
+        <nuxt-link
+          to="/bussiness-process"
+          v-b-toggle.my-collapse
+          class="nav-link collapsed"
+          data-toggle="collapse"
+        >
+          <i v-if="isCollapsed" class="fas fa-folder"></i>
+          <i v-else class="fas fa-folder-open"></i>
+          <span>БПМ</span>
+        </nuxt-link>
+        <div
+          id="collapseTwo"
+          class="collapse"
+          aria-labelledby="headingTwo"
+          data-parent="#accordionSidebar"
+        ></div>
+        <b-collapse id="my-collapse" class="bg-white p-2 rounded" style="font-size: 12px">
+          <nuxt-link to="/" class="collapse-item d-block" href="buttons.html">
+            БПМ группы
+          </nuxt-link>
+          <nuxt-link to="/" class="collapse-item d-block" href="cards.html">
+            БПМ классификация
+          </nuxt-link>
+        </b-collapse>
+      </li>
+      <!-- <b-collapse id="my-collapse">
+        <b-card title="Collapsible card"> Hello world! </b-card>
+      </b-collapse> -->
+
       <li class="nav-item">
         <nuxt-link to="/rules" class="nav-link">
           <i class="fas fa-fw fa-chart-area"></i>
@@ -63,8 +99,12 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: "Sidebar",
+  data() {
+    return {
+      isCollapsed: false
+    };
+  }
+};
 </script>
-
-<style>
-</style>
