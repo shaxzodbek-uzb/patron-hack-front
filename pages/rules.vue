@@ -11,6 +11,7 @@
             Бизнес правила
             <span>
               <a
+                @click="createModal = true"
                 class="btn btn-sm btn-primary btn-icon-split"
                 type="button"
                 data-toggle="modal"
@@ -19,7 +20,7 @@
                 <span class="icon text-white">
                   <i class="text-white fas fa-plus"></i>
                 </span>
-                <span class="text" @click="createModal = true">Добавить</span>
+                <span class="text" >Добавить</span>
               </a>
             </span>
           </div>
