@@ -133,7 +133,7 @@ export default {
   methods: {
     createItem() {
       console.log('createItem')
-      this.$axios.$post('/users/', this.create).then((response) => {
+      this.$axios.$post('/users', this.create).then((response) => {
         this.items.push(response.item)
       })
     },
