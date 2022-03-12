@@ -11,6 +11,7 @@
             Бизнес правила
             <span>
               <a
+                @click="createModal = true"
                 class="btn btn-sm btn-primary btn-icon-split"
                 type="button"
                 data-toggle="modal"
@@ -19,7 +20,7 @@
                 <span class="icon text-white">
                   <i class="text-white fas fa-plus"></i>
                 </span>
-                <span class="text" @click="createModal = true">Добавить</span>
+                <span class="text">Добавить</span>
               </a>
             </span>
           </div>
@@ -42,7 +43,10 @@
                 <tr v-for="(item, idx) in items" :key="item.id">
                   <td>{{ item.name }}</td>
                   <td>
-                    <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
+                    <div
+                      @click="editItem(idx)"
+                      class="btn btn-sm btn-primary btn-icon-split"
+                    >
                       <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
@@ -53,8 +57,10 @@
                       </span>
                     </div>
                   </td>
-                </tr>                
+                </tr>
               </tbody>
+
+              {{ items }}
             </table>
             <b-modal
               v-model="createModal"
@@ -108,12 +114,13 @@ export default {
   mounted() {
     this.$axios.$get('/rules').then((response) => {
       this.items = response.items
+      console.log(response)
     })
   },
   methods: {
     createItem() {
       console.log('createItem')
-      this.$axios.$post('/rules/', this.create).then((response) => {
+      this.$axios.$post('/rules', this.create).then((response) => {
         this.items.push(response.item)
       })
     },
@@ -125,7 +132,7 @@ export default {
     },
     updateItem() {
       this.$axios
-        .$put('/rules' + this.update.id, this.update)
+        .$put('/rules/' + this.update.id, this.update)
         .then((response) => {
           this.items.splice(
             this.items.findIndex((item) => item.id === this.update.id),
