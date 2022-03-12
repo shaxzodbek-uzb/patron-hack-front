@@ -8,10 +8,9 @@
           <div
             class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
           >
-            Тип платежа
+            Бизнес правила
             <span>
               <a
-                href="#"
                 class="btn btn-sm btn-primary btn-icon-split"
                 type="button"
                 data-toggle="modal"
@@ -20,7 +19,7 @@
                 <span class="icon text-white">
                   <i class="text-white fas fa-plus"></i>
                 </span>
-                <span class="text">Добавить</span>
+                <span class="text" @click="createModal = true">Добавить</span>
               </a>
             </span>
           </div>
@@ -40,38 +39,49 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Правила платежа</td>
+                <tr v-for="(item, idx) in items" :key="item.id">
+                  <td>{{ item.name }}</td>
                   <td>
-                    <a href="#" class="btn btn-sm btn-primary btn-icon-split">
+                    <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btn-icon-split">
+                    </div>
+                    <div class="btn btn-sm btn-danger btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
-                    </a>
+                    </div>
                   </td>
-                </tr>
-                <tr>
-                  <td>Правила платежа</td>
-                  <td>
-                    <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-pencil-alt"></i>
-                      </span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    </a>
-                  </td>
-                </tr>
+                </tr>                
               </tbody>
             </table>
+            <b-modal
+              v-model="createModal"
+              title="Бизнес правила"
+              @ok="createItem"
+            >
+              <div class="form-group">
+                <label for="exampleInputEmail1">Бизнес правила</label>
+                <input
+                  v-model="create.name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Введите правила"
+                />
+              </div>
+            </b-modal>
+            <b-modal v-model="editModal" title="Тип платежа" @ok="updateItem">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Тип платежа</label>
+                <input
+                  v-model="update.name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Введите тип"
+                />
+              </div>
+            </b-modal>
           </div>
         </div>
       </div>
@@ -80,7 +90,52 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      items: [],
+      create: {
+        name: '',
+      },
+      update: {
+        name: '',
+        id: '',
+      },
+      createModal: false,
+      editModal: false,
+    }
+  },
+  mounted() {
+    this.$axios.$get('/rules').then((response) => {
+      this.items = response.items
+    })
+  },
+  methods: {
+    createItem() {
+      console.log('createItem')
+      this.$axios.$post('/rules/', this.create).then((response) => {
+        this.items.push(response.item)
+      })
+    },
+    editItem(index) {
+      let item = this.items[index]
+      this.update.name = item.name
+      this.update.id = item.id
+      this.editModal = true
+    },
+    updateItem() {
+      this.$axios
+        .$put('/rules' + this.update.id, this.update)
+        .then((response) => {
+          this.items.splice(
+            this.items.findIndex((item) => item.id === this.update.id),
+            1,
+            response.item
+          )
+        })
+    },
+  },
+}
 </script>
 
 <style></style>

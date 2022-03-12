@@ -109,14 +109,14 @@ export default {
     }
   },
   mounted() {
-    this.$axios.$get('/roles').then((response) => {
+    this.$axios.$get('/payment-types').then((response) => {
       this.items = response.items
     })
   },
   methods: {
     createItem() {
       console.log('createItem')
-      this.$axios.$post('/roles', this.create).then((response) => {
+      this.$axios.$post('/payment-types', this.create).then((response) => {
         this.items.push(response.item)
       })
     },
@@ -128,7 +128,7 @@ export default {
     },
     updateItem() {
       this.$axios
-        .$put('/roles/' + this.update.id, this.update)
+        .$put('/payment-types' + this.update.id, this.update)
         .then((response) => {
           this.items.splice(
             this.items.findIndex((item) => item.id === this.update.id),
