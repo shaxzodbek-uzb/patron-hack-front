@@ -130,7 +130,7 @@ export default {
     createItem() {
       console.log('createItem')
       this.$axios
-        .$post('/organizational-structures/', this.create)
+        .$post('/organizational-structures', this.create)
         .then((response) => {
           this.items.push(response.item)
         })
