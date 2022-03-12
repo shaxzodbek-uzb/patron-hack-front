@@ -11,7 +11,6 @@
             Тип платежа
             <span>
               <a
-                href="#"
                 class="btn btn-sm btn-primary btn-icon-split"
                 type="button"
                 data-toggle="modal"
@@ -20,7 +19,7 @@
                 <span class="icon text-white">
                   <i class="text-white fas fa-plus"></i>
                 </span>
-                <span class="text">Добавить</span>
+                <span class="text" @click="createModel = true">Добавить</span>
               </a>
             </span>
           </div>
@@ -40,99 +39,52 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Денежные средства</td>
+                <tr v-for="(item, idx) in items" :key="item.id">
+                  <td>{{ item.name }}</td>
                   <td>
-                    <a href="#" class="btn btn-sm btn-primary btn-icon-split">
+                    <div
+                      @click="editItem(idx)"
+                      class="btn btn-sm btn-primary btn-icon-split"
+                    >
                       <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btn-icon-split">
+                    </div>
+                    <div class="btn btn-sm btn-danger btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Денежные средства</td>
-                  <td>
-                    <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-pencil-alt"></i>
-                      </span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Денежные средства</td>
-                  <td>
-                    <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-pencil-alt"></i>
-                      </span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    </a>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>Платежная карта</td>
-                  <td>
-                    <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-pencil-alt"></i>
-                      </span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Номер счета</td>
-                  <td>
-                    <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-pencil-alt"></i>
-                      </span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Карта банка</td>
-                  <td>
-                    <a href="#" class="btn btn-sm btn-primary btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-pencil-alt"></i>
-                      </span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btn-icon-split">
-                      <span class="icon text-white">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    </a>
+                    </div>
                   </td>
                 </tr>
               </tbody>
             </table>
+            <b-modal
+              v-model="createModel"
+              title="Тип платежа"
+              @ok="createItem"
+            >
+              <div class="form-group">
+                <label for="exampleInputEmail1">Тип платежа</label>
+                <input
+                  v-model="create.name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Введите тип"
+                />
+              </div>
+            </b-modal>
+            <b-modal v-model="editModal" title="Тип платежа" @ok="updateItem">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Тип платежа</label>
+                <input
+                  v-model="update.name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Введите тип"
+                />
+              </div>
+            </b-modal>
           </div>
         </div>
       </div>
@@ -141,7 +93,52 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      items: [],
+      create: {
+        name: '',
+      },
+      update: {
+        name: '',
+        id: '',
+      },
+      createModel: false,
+      editModal: false,
+    }
+  },
+  mounted() {
+    this.$axios.$get('/roles').then((response) => {
+      this.items = response.items
+    })
+  },
+  methods: {
+    createItem() {
+      console.log('createItem')
+      this.$axios.$post('/roles', this.create).then((response) => {
+        this.items.push(response.item)
+      })
+    },
+    editItem(index) {
+      let item = this.items[index]
+      this.update.name = item.name
+      this.update.id = item.id
+      this.editModal = true
+    },
+    updateItem() {
+      this.$axios
+        .$put('/roles/' + this.update.id, this.update)
+        .then((response) => {
+          this.items.splice(
+            this.items.findIndex((item) => item.id === this.update.id),
+            1,
+            response.item
+          )
+        })
+    },
+  },
+}
 </script>
 
 <style></style>
