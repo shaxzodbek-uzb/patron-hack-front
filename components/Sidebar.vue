@@ -1,14 +1,8 @@
 <template>
   <div>
-    <ul
-      class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-      id="accordionSidebar"
-    >
-      <nuxt-link
-        to="/"
-        class="sidebar-brand d-flex align-items-center justify-content-center"
-      >
-        <img style="width: 70%" src="~/assets/images/logo.png" alt="" />
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      <nuxt-link to="/" class="sidebar-brand d-flex align-items-center justify-content-center">
+        <img style="width: 70%" src="~/assets/images/logo.png" alt />
       </nuxt-link>
 
       <hr class="sidebar-divider my-0" />
@@ -16,8 +10,8 @@
       <li class="nav-item active">
         <nuxt-link to="/" class="nav-link">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Главная</span></nuxt-link
-        >
+          <span>Главная</span>
+        </nuxt-link>
       </li>
 
       <hr class="sidebar-divider" />
@@ -32,7 +26,7 @@
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="/role" class="nav-link collapsed">
+        <nuxt-link to="/roles" class="nav-link collapsed">
           <i class="fas fa-fw fa-award"></i>
           <span>Позиции</span>
         </nuxt-link>
@@ -41,8 +35,8 @@
       <li class="nav-item">
         <nuxt-link to="/OrgStructure" class="nav-link">
           <i class="fas fa-fw fas fa-project-diagram"></i>
-          <span>Орг. структура</span></nuxt-link
-        >
+          <span>Орг. структура</span>
+        </nuxt-link>
       </li>
 
       <li class="nav-item">
