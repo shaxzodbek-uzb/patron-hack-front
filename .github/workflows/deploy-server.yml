@@ -1,0 +1,30 @@
+name: Deploy to server
+on:
+  push:
+    branches: [master]
+
+jobs:
+  job_one:
+    name: Deploy to server
+    runs-on: ubuntu-latest
+    steps:
+    - name: Test brainly.uz server
+      uses: appleboy/ssh-action@master
+      with:
+        host: 176.99.11.80
+        username: root
+        key: ${{ secrets.PATRON_SECRET }}
+        port: 22
+        script: |
+          cd /var/www/www-root/data/www/brainly.uz/
+          git pull
+          yarn install
+          yarn build
+          pm2 delete hack
+          pm2 start --name=hack yarn -- start
+
+        
+
+
+
+
