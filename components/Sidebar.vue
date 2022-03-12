@@ -3,6 +3,7 @@
     <ul
       class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
       id="accordionSidebar"
+      style="position: sticky; top: 0"
     >
       <nuxt-link
         to="/"
@@ -72,4 +73,5 @@
 export default {}
 </script>
 
-<style></style>
+<style>
+</style>
