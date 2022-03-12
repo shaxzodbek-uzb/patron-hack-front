@@ -93,6 +93,61 @@
                   </a>
                 </td>
               </tr>
+              <tr>
+                <td>Иван Иванов</td>
+                <td>Менеджер</td>
+                <td>01.01.2020</td>
+                <td>1000 $</td>
+                <td>
+                  <a href="#" class="btn btn-sm btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-pen"></i>
+                    </span>
+                  </a>
+                  <a href="#" class="btn btn-sm btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-trash"></i>
+                    </span>
+                  </a>
+                </td>
+              </tr>
+              
+              <tr>
+                <td>Иван Иванов</td>
+                <td>Менеджер</td>
+                <td>01.01.2020</td>
+                <td>1000 $</td>
+                <td>
+                  <a href="#" class="btn btn-sm btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-pen"></i>
+                    </span>
+                  </a>
+                  <a href="#" class="btn btn-sm btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-trash"></i>
+                    </span>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Иван Иванов</td>
+                <td>Менеджер</td>
+                <td>01.01.2020</td>
+                <td>1000 $</td>
+                <td>
+                  <a href="#" class="btn btn-sm btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-pen"></i>
+                    </span>
+                  </a>
+                  <a href="#" class="btn btn-sm btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-trash"></i>
+                    </span>
+                  </a>
+                </td>
+              </tr>
               
               <tr>
                 <td>Иван Иванов</td>
