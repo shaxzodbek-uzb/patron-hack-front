@@ -2,7 +2,6 @@
   <div>
     <div class="container-fluid">
       <!-- Page Heading -->
-      <Loader />
       <div class="row">
         <div class="card w-100 shadow mb-4">
           <div class="card-header py-3">
@@ -28,10 +27,9 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table
+              <table v-if="!showLoader"
                 class="table table-bordered"
                 id="dataTable"
-                
                 cellspacing="0"
               >
                 <thead>
@@ -58,10 +56,7 @@
                           <i class="fas fa-pencil-alt"></i>
                         </span>
                       </a>
-                      <a
-                        
-                        class="btn btn-sm btn-danger btn-icon-split"
-                      >
+                      <a class="btn btn-sm btn-danger btn-icon-split">
                         <span class="icon text-white">
                           <i class="fas fa-trash"></i>
                         </span>
@@ -70,6 +65,7 @@
                   </tr>
                 </tbody>
               </table>
+              <Loader v-else-if="showLoader" />
               <b-modal
                 v-model="createModal"
                 title="BootstrapVue"
@@ -109,12 +105,7 @@
 </template>
 
 <script>
-import Loader from '../components/Loader.vue'
-
 export default {
-  components: {
-    Loader,
-  },
   data() {
     return {
       items: [],
@@ -127,12 +118,14 @@ export default {
       },
       createModal: false,
       editModal: false,
+      showLoader: true,
     }
   },
   mounted() {
     this.$axios.$get('/organizational-structures').then((response) => {
       console.log(response)
       this.items = response.items
+      // this.showLoader = false
     })
   },
   methods: {
@@ -159,7 +152,7 @@ export default {
           )
         })
     },
-     deleteItem(index) {
+    deleteItem(index) {
       let item = this.items[index]
       this.$axios.$delete('/users/' + item.id).then(() => {
         this.items.splice(index, 1)
