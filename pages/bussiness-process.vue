@@ -18,7 +18,7 @@
                 <span class="icon text-white">
                   <i class="text-white fas fa-plus"></i>
                 </span>
-                <span class="text-white">Добавить</span>
+                <span class="text-white px-2">Добавить</span>
               </a>
             </span>
           </div>
@@ -34,18 +34,19 @@
               <thead>
                 <tr>
                   <th>Имя</th>
-                  <th>Позиция</th>
-                  <th>Дата начала</th>
-                  <th>Зарплата</th>
-                  <th>Действия</th>
+                  <th>Платежная средства</th>
+                  <th>Сумма платежа</th>
+                  <th>ID группы классификации</th>
+                  <th>Классификационный ID</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="item in items" :key="item.id">
                   <td>{{ item.name }}</td>
-                  <td>Бизнес тренер</td>
-                  <td>Офис 2</td>
-                  <td>$12,000</td>
+                  <td>Денежные</td>
+                  <td>{{ item.amount }}</td>
+                  <td>{{ item.group_classification_id }}</td>
+                  <td>{{ item.classification_id }}</td>
                   <td>
                     <a
                       @click="editItem(idx)"
