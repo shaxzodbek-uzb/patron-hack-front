@@ -27,7 +27,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Код</th>
@@ -56,6 +56,7 @@
                     </tr>
                   </tbody>
                 </table>
+                <Loader v-else-if="showLoader" />
                 <b-modal v-model="createModal" title="Классификации" @ok="createItem">
                   <div class="form-group">
                     <label>Название</label>
@@ -136,11 +137,13 @@ export default {
       },
       createModal: false,
       editModal: false,
+      showLoader: true,
     }
   },
   mounted() {
     this.$axios.$get('/classifications').then((response) => {
       this.items = response.items
+      this.showLoader = false
     })
     this.$axios.$get('/classification-groups').then((response) => {
       this.groups = response.items

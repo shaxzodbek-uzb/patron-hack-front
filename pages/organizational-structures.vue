@@ -27,7 +27,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Имя</th>
@@ -54,25 +54,26 @@
                     </tr>
                   </tbody>
                 </table>
-                <b-modal v-model="createModal" title="Бизнес правила" @ok="createItem">
+                <Loader v-else-if="showLoader" />
+                <b-modal v-model="createModal" title="Организационная структура" @ok="createItem">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Бизнес правила</label>
+                    <label for="exampleInputEmail1">Организационная структура</label>
                     <input
                       v-model="create.name"
                       type="text"
                       class="form-control"
-                      placeholder="Введите правила"
+                      placeholder="Введите структура"
                     />
                   </div>
                 </b-modal>
-                <b-modal v-model="editModal" title="Тип платежа" @ok="updateItem">
+                <b-modal v-model="editModal" title="Организационная структура" @ok="updateItem">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Тип платежа</label>
+                    <label for="exampleInputEmail1">Организационная структура</label>
                     <input
                       v-model="update.name"
                       type="text"
                       class="form-control"
-                      placeholder="Введите тип"
+                      placeholder="Введите структура"
                     />
                   </div>
                 </b-modal>
@@ -99,11 +100,13 @@ export default {
       },
       createModal: false,
       editModal: false,
+      showLoader: true,
     }
   },
   mounted() {
     this.$axios.$get('/organizational-structures').then((response) => {
       this.items = response.items
+      this.showLoader = false
       console.log(response)
     })
   },
