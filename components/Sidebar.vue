@@ -66,7 +66,7 @@
           <nuxt-link to="/" class="collapse-item d-block" href="buttons.html">
             Классификация
           </nuxt-link>
-          <nuxt-link to="/" class="collapse-item d-block" href="cards.html">
+          <nuxt-link to="/bpm-classification-group" class="collapse-item d-block" href="cards.html">
             Группы
           </nuxt-link>
         </b-collapse>
