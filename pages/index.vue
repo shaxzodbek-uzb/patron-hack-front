@@ -53,7 +53,7 @@
           </div>
           <div class="card-body">
             <h4 class="small font-weight-bold">
-              Server Migration
+              Плохо
               <span class="float-right">20%</span>
             </h4>
             <div class="progress mb-4">
@@ -67,7 +67,7 @@
               ></div>
             </div>
             <h4 class="small font-weight-bold">
-              Sales Tracking
+              Hеудовлетворительный
               <span class="float-right">40%</span>
             </h4>
             <div class="progress mb-4">
@@ -81,7 +81,7 @@
               ></div>
             </div>
             <h4 class="small font-weight-bold">
-              Customer Database
+              Удовлетворительный
               <span class="float-right">60%</span>
             </h4>
             <div class="progress mb-4">
@@ -95,7 +95,7 @@
               ></div>
             </div>
             <h4 class="small font-weight-bold">
-              Payout Details
+              Хорошо
               <span class="float-right">80%</span>
             </h4>
             <div class="progress mb-4">
@@ -109,8 +109,8 @@
               ></div>
             </div>
             <h4 class="small font-weight-bold">
-              Account Setup
-              <span class="float-right">Complete!</span>
+              Отлично
+              <span class="float-right">Завершенo!</span>
             </h4>
             <div class="progress">
               <div
@@ -121,6 +121,47 @@
                 aria-valuemin="0"
                 aria-valuemax="100"
               ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Определение оценки</h6>
+          </div>
+          <div class="card-body">
+            <div class="small">
+              <b-badge class="circle text-danger" variant="danger">.</b-badge>
+              <span>Плохо - </span>
+              <span>
+                если бизнес-процесс оценивается плохо, значит, в процессе очень много недостатков, и трудно надеяться на будущее этого бизнеса.
+              </span>
+            </div>
+            <div class="small">
+              <b-badge class="circle text-warning" variant="warning">.</b-badge>
+            <span>Hеудовлетворительный - </span>
+            <span>
+              если бизнес-процесс оценивается неудовлетворительно, значит, в процессе много недостатков, но надеяться на будущее этого бизнеса невозможно.
+            </span>
+            </div>
+            <div class="small">
+              <b-badge class="circle text-primary" variant="primary">.</b-badge>
+            <span>
+              Удовлетворительный - 
+            </span>
+            <span>
+              если бизнес-процесс оценивается удовлетворительно, значит, в процессе мало недостатков, но надеяться на будущее этого бизнеса возможно.
+            </span>
+            </div>
+            <div class="small">
+              <b-badge class="circle text-info" variant="info">.</b-badge>
+              Хорошо
+            </div>
+            <div class="small">
+              <b-badge class="circle text-success" variant="success">.</b-badge>
+              Отлично
             </div>
           </div>
         </div>
@@ -139,3 +180,10 @@ export default {
   name: 'IndexPage',
 }
 </script>
+
+<style scoped>
+.circle {
+  width: 16px;
+  border-radius: 50%;
+}
+</style>
