@@ -1,6 +1,5 @@
 <template>
   <div class="container-fluid">
-    <!-- Page Heading -->
     <div class="row">
       <div class="card w-100 shadow mb-4">
         <div class="card-header py-3">
@@ -10,6 +9,7 @@
             Бизнес процесс
             <span>
               <a
+                @click="createModal = true"
                 type="button"
                 data-toggle="modal"
                 data-target="#exampleModal"
@@ -34,19 +34,27 @@
               <thead>
                 <tr>
                   <th>Имя</th>
-                  <th>Платежная средства</th>
+                  <th>Детали платежа</th>
                   <th>Сумма платежа</th>
                   <th>ID группы классификации</th>
                   <th>Классификационный ID</th>
+                  <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="item in items" :key="item.id">
                   <td>{{ item.name }}</td>
-                  <td>Денежные</td>
-                  <td>{{ item.amount }}</td>
-                  <td>{{ item.group_classification_id }}</td>
-                  <td>{{ item.classification_id }}</td>
+                  <td>Быстро</td>
+                  <td>{{ item.payment_amount }}</td>
+                  <td>
+                    <select>
+                      <option value="">Выберите группу</option>
+                      <option value="">Группа 1</option>
+                      <option value="">Группа 2</option>
+                      <option value="">Группа 3</option>
+                    </select>
+                  </td>
+                  <td>{{ item.classification_group_id }}</td>
                   <td>
                     <a
                       @click="editItem(idx)"
@@ -67,8 +75,42 @@
             </table>
             <Loader v-else-if="showLoader" />
             <b-modal
+              v-model="createModal"
               title="BootstrapVue"
+              @ok="createItem"
             >
+              <div class="form-group">
+                <label for="exampleInputEmail1">Имя</label>
+                <input
+                  v-model="create.name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Имя"
+                />
+                <label for="exampleInputEmail1">Детали платежа</label>
+                <input
+                  v-model="create.payment_detail"
+                  type="text"
+                  class="form-control"
+                  placeholder="Детали платежа"
+                />
+                <label for="exampleInputEmail1">Сумма платежа</label>
+                <input
+                  v-model="create.payment_amount"
+                  type="text"
+                  class="form-control"
+                  placeholder="Сумма платежа"
+                />
+                <label for="exampleInputEmail1">ID группы классификации</label>
+                <input
+                  v-model="create.classification_group_id"
+                  type="text"
+                  class="form-control"
+                  placeholder="ID группы классификации"
+                />
+              </div>
+            </b-modal>
+            <b-modal v-model="editModal" title="BootstrapVue" @ok="updateItem">
               <div class="form-group">
                 <label for="exampleInputEmail1">Имя</label>
                 <input
@@ -76,15 +118,23 @@
                   class="form-control"
                   placeholder="Имя"
                 />
-              </div>
-            </b-modal>
-            <b-modal  title="BootstrapVue" >
-              <div class="form-group">
-                <label for="exampleInputEmail1">Имя</label>
+                <label for="exampleInputEmail1">Детали платежа</label>
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Имя"
+                  placeholder="Детали платежа"
+                />
+                <label for="exampleInputEmail1">Сумма платежа</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Сумма платежа"
+                />
+                <label for="exampleInputEmail1">ID группы классификации</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="ID группы классификации"
                 />
               </div>
             </b-modal>
@@ -96,7 +146,68 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      items: [],
+      showLoader: false,
+      idx: '',
+      createModal: false,
+      editModal: false,
+      create: {
+        name: "",
+        payment_detail: "",
+        payment_amount: "",
+        classification_group_id: "",
+      },
+      update: {
+        name: "",
+        payment_detail: "",
+        payment_amount: "",
+        classification_group_id: "",
+      },
+    }
+  },
+  mounted() {
+    this.$axios.$get('/business-processes').then((response) => {
+      this.items = response.items
+      console.log(response)
+    })
+  },
+  methods: {
+    createItem() {
+      console.log('createItem')
+      this.$axios.$post('/business-processes', this.create).then((response) => {
+        this.items.push(response.item)
+      })
+    },
+    editItem(index) {
+      let item = this.items[index]
+      this.update.id = item.id
+      this.update.name = item.name
+      this.update.payment_amount = item.amount
+      this.update.classification_group_id = item.classification_id
+      this.editModal = true
+    },
+    updateItem() {
+      this.$axios
+        .$put('/business-processes/' + this.update.id, this.update)
+        .then((response) => {
+          this.items.splice(
+            this.items.findIndex((item) => item.id === this.update.id),
+            1,
+            response.item
+          )
+        })
+    },
+    deleteItem(index) {
+      let item = this.items[index]
+      this.$axios.$delete('/business-processes/' + item.id).then(() => {
+        this.items.splice(index, 1)
+      })
+    },
+  },
+}
 </script>
 
 <style></style>
