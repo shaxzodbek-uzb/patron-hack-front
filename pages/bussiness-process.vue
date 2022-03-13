@@ -31,25 +31,16 @@
                   <th>Имя</th>
                   <th>Детали платежа</th>
                   <th>Сумма платежа</th>
-                  <th>ID группы классификации</th>
-                  <th>Классификационный ID</th>
+                  <th>группы классификации</th>
                   <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in items" :key="item.id">
+                <tr v-for="(item, idx) in items" :key="item.id">
                   <td>{{ item.name }}</td>
                   <td>Быстро</td>
                   <td>{{ item.payment_amount }}</td>
-                  <td>
-                    <select>
-                      <option value>Выберите группу</option>
-                      <option value>Группа 1</option>
-                      <option value>Группа 2</option>
-                      <option value>Группа 3</option>
-                    </select>
-                  </td>
-                  <td>{{ item.classification_group_id }}</td>
+                  <td>{{ getGroupName(item.classification_group) }}</td>
                   <td>
                     <a @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
                       <span class="icon text-white">
@@ -85,24 +76,33 @@
                   placeholder="Сумма платежа"
                 />
                 <label for="exampleInputEmail1">ID группы классификации</label>
-                <input
-                  v-model="create.classification_group_id"
-                  type="text"
-                  class="form-control"
-                  placeholder="ID группы классификации"
-                />
+                <select v-model="create.classification_group_id">
+                  <option v-for="item in groups" :key="item.id" :value="item.id">{{ item.name }}</option>
+                </select>
               </div>
             </b-modal>
             <b-modal v-model="editModal" title="BootstrapVue" @ok="updateItem">
               <div class="form-group">
-                <label for="exampleInputEmail1">Имя</label>
-                <input type="text" class="form-control" placeholder="Имя" />
-                <label for="exampleInputEmail1">Детали платежа</label>
-                <input type="text" class="form-control" placeholder="Детали платежа" />
-                <label for="exampleInputEmail1">Сумма платежа</label>
-                <input type="text" class="form-control" placeholder="Сумма платежа" />
-                <label for="exampleInputEmail1">ID группы классификации</label>
-                <input type="text" class="form-control" placeholder="ID группы классификации" />
+                <label>Имя</label>
+                <input type="text" class="form-control" v-model="update.name" placeholder="Имя" />
+                <label>Детали платежа</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="update.payment_detail"
+                  placeholder="Детали платежа"
+                />
+                <label>Сумма платежа</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="update.payment_amount"
+                  placeholder="Сумма платежа"
+                />
+                <label>группы классификации</label>
+                <select v-model="update.classification_group_id">
+                  <option v-for="item in groups" :key="item.id" :value="item.id">{{ item.name }}</option>
+                </select>
               </div>
             </b-modal>
           </div>
@@ -116,6 +116,7 @@
 export default {
   data() {
     return {
+      groups: [],
       items: [],
       showLoader: false,
       idx: '',
@@ -142,8 +143,14 @@ export default {
       this.showLoader = false
       console.log(response)
     })
+    this.$axios.$get('/classification-groups').then((response) => {
+      this.groups = response.items
+    })
   },
   methods: {
+    getGroupName(item) {
+      return item ? item.name : '-'
+    },
     createItem() {
       console.log('createItem')
       this.$axios.$post('/business-processes', this.create).then((response) => {
@@ -154,8 +161,9 @@ export default {
       let item = this.items[index]
       this.update.id = item.id
       this.update.name = item.name
-      this.update.payment_amount = item.amount
-      this.update.classification_group_id = item.classification_id
+      this.update.payment_detail = item.payment_detail
+      this.update.payment_amount = item.payment_amount
+      this.update.classification_group_id = item.classification_group_id
       this.editModal = true
     },
     updateItem() {
@@ -178,9 +186,3 @@ export default {
   },
 }
 </script>
-
-<style>
-  select {
-    color: #666;
-  }
-</style>
