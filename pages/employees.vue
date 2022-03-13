@@ -67,11 +67,7 @@
               </tbody>
             </table>
             <Loader v-else-if="showLoader" />
-            <b-modal
-              v-model="createModal"
-              title="BootstrapVue"
-              @ok="createItem"
-            >
+            <b-modal v-model="createModal" title="Ползователи" @ok="createItem">
               <div class="form-group">
                 <label for="exampleInputEmail1">Имя</label>
                 <input
@@ -97,7 +93,7 @@
                 </select>
               </div>
             </b-modal>
-            <b-modal v-model="editModal" title="BootstrapVue" @ok="updateItem">
+            <b-modal v-model="editModal" title="Ползователи" @ok="updateItem">
               <div class="form-group">
                 <label for="exampleInputEmail1">Имя</label>
                 <input
