@@ -30,7 +30,6 @@
                 <table
                   class="table table-bordered"
                   id="dataTable"
-                  
                   cellspacing="0"
                 >
                   <thead>
@@ -46,21 +45,21 @@
                       <td>System Architect</td>
                       <td>
                         <div
-                          @click="editItem(index)"
+                          @click="editItem(idx)"
                           class="btn btn-sm btn-primary btn-icon-split"
                         >
                           <span class="icon text-white">
                             <i class="fas fa-pencil-alt"></i>
                           </span>
                         </div>
-                        <a
-                          @click="deleteItem(index)"
+                        <div
+                          @click="deleteItem(idx)"
                           class="btn btn-sm btn-danger btn-icon-split"
                         >
                           <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
-                        </a>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
@@ -143,7 +142,7 @@ export default {
     },
     updateItem() {
       this.$axios
-        .$put('/organizational-structures' + this.update.id, this.update)
+        .$put('/organizational-structures/' + this.update.id, this.update)
         .then((response) => {
           this.items.splice(
             this.items.findIndex((item) => item.id === this.update.id),
@@ -154,12 +153,8 @@ export default {
     },
     deleteItem(index) {
       let item = this.items[index]
-      this.$axios
-      .$delete('/organizational-structures/' + item.id)
-      .then(() => {
-        this.items.splice(
-          this.items.findIndex((item) => item.id === item.id)
-        )
+      this.$axios.$delete('/organizational-structures/' + item.id).then(() => {
+        this.items.splice(this.items.findIndex((item) => item.id === item.id))
       })
     },
   },
