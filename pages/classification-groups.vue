@@ -40,9 +40,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="item in items" :key="item.id">
+                    <tr v-for="(item,idx) in items" :key="item.id">
+                      <td>{{ item.code }}</td>
                       <td>{{ item.name }}</td>
-                      <td>System Architect</td>
                       <td>
                         <div
                           @click="editItem(idx)"
@@ -74,7 +74,7 @@
                     <div class="row">
                       <div class="col">
                         <input
-                          v-model="create.name"
+                          v-model="create.code"
                           type="text"
                           class="form-control"
                           placeholder="Введите код"
@@ -98,12 +98,24 @@
                 >
                   <div class="form-group">
                     <label for="exampleInputEmail1">Тип платежа</label>
+                    <div class="row">
+                    <div class="col">
+                    <input
+                      v-model="update.code"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите код"
+                    />
+                    </div>
+                    <div class="col">
                     <input
                       v-model="update.name"
                       type="text"
                       class="form-control"
-                      placeholder="Введите тип"
+                      placeholder="Введите имя"
                     />
+                    </div>
+                  </div>
                   </div>
                 </b-modal>
               </div>
@@ -125,6 +137,7 @@ export default {
         name: '',
       },
       update: {
+        code: '',
         name: '',
         id: '',
       },
@@ -149,6 +162,7 @@ export default {
     },
     editItem(index) {
       let item = this.items[index]
+      this.update.name = item.code
       this.update.name = item.name
       this.update.id = item.id
       this.editModal = true
@@ -166,7 +180,7 @@ export default {
     },
     deleteItem(index) {
       let item = this.items[index]
-      this.$axios.$delete('/classification-groups/' + item.id).then(() => {
+      this.$axios.$delete('/classification-groups/' + (item.id)).then(() => {
         this.items.splice(this.items.findIndex((item) => item.id === item.id))
       })
     },
