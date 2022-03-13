@@ -24,7 +24,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-bordered" id="dataTable" cellspacing="0">
+          <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
             <thead>
               <tr>
                 <th scope="col">Имя</th>
@@ -55,16 +55,17 @@
               </tr>
             </tbody>
           </table>
-          <b-modal v-model="createModel" title="BootstrapVue" @ok="createItem">
+          <Loader v-else-if="showLoader" />
+          <b-modal v-model="createModel" title="Позиция" @ok="createItem">
             <div class="form-group">
-              <label for="exampleInputEmail1">Имя</label>
-              <input v-model="create.name" type="text" class="form-control" placeholder="Имя" />
+              <label for="exampleInputEmail1">Позиция</label>
+              <input v-model="create.name" type="text" class="form-control" placeholder="Позиция" />
             </div>
           </b-modal>
-          <b-modal v-model="editModal" title="BootstrapVue" @ok="updateItem">
+          <b-modal v-model="editModal" title="Позиция" @ok="updateItem">
             <div class="form-group">
-              <label for="exampleInputEmail1">Имя</label>
-              <input v-model="update.name" type="text" class="form-control" placeholder="Имя" />
+              <label for="exampleInputEmail1">Позиция</label>
+              <input v-model="update.name" type="text" class="form-control" placeholder="Позиция" />
             </div>
           </b-modal>
         </div>
@@ -87,11 +88,13 @@ export default {
       },
       createModel: false,
       editModal: false,
+      showLoader: true,
     }
   },
   mounted() {
     this.$axios.$get('/roles').then((response) => {
       this.items = response.items
+      this.showLoader = false
     })
   },
   methods: {
