@@ -133,7 +133,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.$get('/classification-group').then((response) => {
+    this.$axios.$get('/classification-groups').then((response) => {
       this.items = response.items
       console.log(response)
     })
@@ -142,7 +142,7 @@ export default {
     createItem() {
       console.log('createItem')
       this.$axios
-        .$post('/classification-group', this.create)
+        .$post('/classification-groups', this.create)
         .then((response) => {
           this.items.push(response.item)
         })
@@ -155,7 +155,7 @@ export default {
     },
     updateItem() {
       this.$axios
-        .$put('/classification-group/' + this.update.id, this.update)
+        .$put('/classification-groups/' + this.update.id, this.update)
         .then((response) => {
           this.items.splice(
             this.items.findIndex((item) => item.id === this.update.id),
@@ -166,7 +166,7 @@ export default {
     },
     deleteItem(index) {
       let item = this.items[index]
-      this.$axios.$delete('/classification-group/' + item.id).then(() => {
+      this.$axios.$delete('/classification-groups/' + item.id).then(() => {
         this.items.splice(this.items.findIndex((item) => item.id === item.id))
       })
     },
