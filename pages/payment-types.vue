@@ -29,8 +29,8 @@
             <table class="table table-bordered" id="dataTable" cellspacing="0">
               <thead>
                 <tr>
-                  <td>Тип платежа</td>
-                  <td>Действия</td>
+                  <th>Тип платежа</th>
+                  <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
