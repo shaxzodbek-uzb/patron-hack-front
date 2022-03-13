@@ -56,16 +56,16 @@
             </tbody>
           </table>
           <Loader v-else-if="showLoader" />
-          <b-modal v-model="createModel" title="BootstrapVue" @ok="createItem">
+          <b-modal v-model="createModel" title="Позиция" @ok="createItem">
             <div class="form-group">
-              <label for="exampleInputEmail1">Имя</label>
-              <input v-model="create.name" type="text" class="form-control" placeholder="Имя" />
+              <label for="exampleInputEmail1">Позиция</label>
+              <input v-model="create.name" type="text" class="form-control" placeholder="Позиция" />
             </div>
           </b-modal>
-          <b-modal v-model="editModal" title="BootstrapVue" @ok="updateItem">
+          <b-modal v-model="editModal" title="Позиция" @ok="updateItem">
             <div class="form-group">
-              <label for="exampleInputEmail1">Имя</label>
-              <input v-model="update.name" type="text" class="form-control" placeholder="Имя" />
+              <label for="exampleInputEmail1">Позиция</label>
+              <input v-model="update.name" type="text" class="form-control" placeholder="Позиция" />
             </div>
           </b-modal>
         </div>
