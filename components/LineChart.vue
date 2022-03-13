@@ -30,7 +30,7 @@
       </div>
       <!-- Card Body -->
       <div class="card-body">
-        <ChartBar :data="barChartData" :options="barChartOptions" :height="400" />
+        <ChartBar :data="barChartData" :options="barChartOptions" :height="1000" />
       </div>
     </div>
   </div>
