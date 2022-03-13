@@ -77,9 +77,9 @@
                     </div>
                   </div>
                 </b-modal>
-                <b-modal v-model="editModal" title="Тип платежа" @ok="updateItem">
+                <b-modal v-model="editModal" title="Группа классификация" @ok="updateItem">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Тип платежа</label>
+                    <label for="exampleInputEmail1">Группа классификация</label>
                     <div class="row">
                       <div class="col">
                         <input
