@@ -10,7 +10,6 @@
             Бизнес процесс
             <span>
               <a
-                @click="createModal = true"
                 type="button"
                 data-toggle="modal"
                 data-target="#exampleModal"
@@ -67,25 +66,21 @@
             </table>
             <Loader v-else-if="showLoader" />
             <b-modal
-              v-model="createModal"
               title="BootstrapVue"
-              @ok="createItem"
             >
               <div class="form-group">
                 <label for="exampleInputEmail1">Имя</label>
                 <input
-                  v-model="create.name"
                   type="text"
                   class="form-control"
                   placeholder="Имя"
                 />
               </div>
             </b-modal>
-            <b-modal v-model="editModal" title="BootstrapVue" @ok="updateItem">
+            <b-modal  title="BootstrapVue" >
               <div class="form-group">
                 <label for="exampleInputEmail1">Имя</label>
                 <input
-                  v-model="update.name"
                   type="text"
                   class="form-control"
                   placeholder="Имя"
