@@ -182,7 +182,7 @@ export default {
         .$put('/classifications/' + this.update.id, this.update)
         .then((response) => {
           this.items.splice(
-            this.items.findIndex((item) => item.id === this.update.id),
+            this.items.findIndex((i) => i.id === this.update.id),
             1,
             response.item
           )
@@ -191,7 +191,7 @@ export default {
     deleteItem(index) {
       let item = this.items[index]
       this.$axios.$delete('/organizational-structures/' + item.id).then(() => {
-        this.items.splice(this.items.findIndex((item) => item.id === item.id))
+        this.items.splice(this.items.findIndex((i) => i.id === item.id))
       })
     },
   },

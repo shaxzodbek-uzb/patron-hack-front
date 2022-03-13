@@ -26,12 +26,7 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table
-              class="table table-bordered"
-              id="dataTable"
-              
-              cellspacing="0"
-            >
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
               <thead>
                 <tr>
                   <td>Тип платежа</td>
@@ -42,17 +37,12 @@
                 <tr v-for="(item, idx) in items" :key="item.id">
                   <td>{{ item.name }}</td>
                   <td>
-                    <div
-                      @click="editItem(idx)"
-                      class="btn btn-sm btn-primary btn-icon-split"
-                    >
+                    <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
                     </div>
-                    <div 
-                      @click="deleteItem(idx)"
-                      class="btn btn-sm btn-danger btn-icon-split">
+                    <div @click="deleteItem(idx)" class="btn btn-sm btn-danger btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
@@ -61,11 +51,7 @@
                 </tr>
               </tbody>
             </table>
-            <b-modal
-              v-model="createModel"
-              title="Тип платежа"
-              @ok="createItem"
-            >
+            <b-modal v-model="createModel" title="Тип платежа" @ok="createItem">
               <div class="form-group">
                 <label for="exampleInputEmail1">Тип платежа</label>
                 <input
@@ -133,7 +119,7 @@ export default {
         .$put('/payment-types/' + this.update.id, this.update)
         .then((response) => {
           this.items.splice(
-            this.items.findIndex((item) => item.id === this.update.id),
+            this.items.findIndex((i) => i.id === this.update.id),
             1,
             response.item
           )
@@ -142,9 +128,9 @@ export default {
     deleteItem(index) {
       let item = this.items[index]
       this.$axios.$delete('/payment-types/' + item.id).then(() => {
-        this.items.splice(index, 1)
+        this.items.splice(this.items.findIndex((i) => i.id === item.id))
       })
-    }, 
+    },
   },
 }
 </script>
