@@ -30,7 +30,7 @@
       </div>
       <!-- Card Body -->
       <div class="card-body">
-        <ChartBar :data="barChartData" :options="barChartOptions" :height="1000" />
+        <ChartBar :data="barChartData" :options="barChartOptions" :height="180" />
       </div>
     </div>
   </div>
@@ -69,7 +69,7 @@ export default {
         },
         title: {
           display: true,
-          text: 'Google analytics data',
+          text: 'Аналистика проекта',
           fontSize: 24,
           fontColor: '#6b7280',
         },

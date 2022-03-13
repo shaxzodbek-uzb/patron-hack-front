@@ -12,7 +12,7 @@
 
     <div class="row">
       <!-- Area Chart -->
-      <LineChart />
+      <LineChart :height="180" />
 
       <!-- Pie Chart -->
       <div class="col-xl-4 col-lg-5">
