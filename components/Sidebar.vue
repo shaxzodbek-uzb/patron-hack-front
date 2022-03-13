@@ -52,9 +52,9 @@
           class="nav-link collapsed"
           data-toggle="collapse"
         >
-          <i v-if="isCollapsed" class="fas fa-folder"></i>
+          <i v-if="!isCollapsed" class="fas fa-folder"></i>
           <i v-else class="fas fa-folder-open"></i>
-          <span>БПМ</span>
+          <span>Бизнес процесс</span>
         </nuxt-link>
         <div
           id="collapseTwo"
@@ -64,10 +64,10 @@
         ></div>
         <b-collapse id="my-collapse" class="bg-white p-2 rounded" style="font-size: 12px">
           <nuxt-link to="/" class="collapse-item d-block" href="buttons.html">
-            БПМ группы
+            Классификация
           </nuxt-link>
           <nuxt-link to="/" class="collapse-item d-block" href="cards.html">
-            БПМ классификация
+            Группы
           </nuxt-link>
         </b-collapse>
       </li>
