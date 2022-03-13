@@ -66,7 +66,7 @@
                 </table>
                 <b-modal
                   v-model="createModal"
-                  title="Бизнес правила"
+                  title="Группа классификация"
                   @ok="createItem"
                 >
                   <div class="form-group">

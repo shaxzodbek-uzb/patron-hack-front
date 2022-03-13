@@ -48,19 +48,21 @@
                   <td>Офис 2</td>
                   <td>$12,000</td>
                   <td>
-                    <a
+                    <div
                       @click="editItem(idx)"
                       class="btn btn-sm btn-primary btn-icon-split"
                     >
                       <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
-                    </a>
-                    <a class="btn btn-sm btn-danger btn-icon-split">
+                    </div>
+                    <div 
+                      @click="deleteItem(idx)"
+                      class="btn btn-sm btn-danger btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
-                    </a>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -117,7 +119,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.$get('/organizational-structures').then((response) => {
+    this.$axios.$get('/users').then((response) => {
       console.log(response)
       this.items = response.items
       this.showLoader = false
