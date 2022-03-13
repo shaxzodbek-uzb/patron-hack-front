@@ -32,16 +32,14 @@
                   <th>Имя</th>
                   <th>Позиция</th>
                   <th>Дата начала</th>
-                  <th>Зарплата</th>
                   <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in items" :key="item.id">
-                  <td>{{ item.name }}</td>
-                  <td>Бизнес тренер</td>
-                  <td>Офис 2</td>
-                  <td>$12,000</td>
+                <tr v-for="(item, idx) in items" :key="item.id">
+                  <td>{{ item.full_name }}</td>
+                  <td>{{ getEmployeePositionName(item) }}</td>
+                  <td>{{ (item.created_at).substring(0,10) }}</td>
                   <td>
                     <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
                       <span class="icon text-white">
@@ -61,13 +59,43 @@
             <b-modal v-model="createModal" title="BootstrapVue" @ok="createItem">
               <div class="form-group">
                 <label for="exampleInputEmail1">Имя</label>
-                <input v-model="create.name" type="text" class="form-control" placeholder="Имя" />
+                <input
+                  v-model="create.full_name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Имя"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Позиция</label>
+                <select v-model="create.employee_position_id" class="form-control">
+                  <option
+                    v-for="position in positions"
+                    :key="position.id"
+                    :value="position.id"
+                  >{{ position.name }}</option>
+                </select>
               </div>
             </b-modal>
             <b-modal v-model="editModal" title="BootstrapVue" @ok="updateItem">
               <div class="form-group">
                 <label for="exampleInputEmail1">Имя</label>
-                <input v-model="update.name" type="text" class="form-control" placeholder="Имя" />
+                <input
+                  v-model="update.full_name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Имя"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Позиция</label>
+                <select v-model="update.employee_position_id" class="form-control">
+                  <option
+                    v-for="position in positions"
+                    :key="position.id"
+                    :value="position.id"
+                  >{{ position.name }}</option>
+                </select>
               </div>
             </b-modal>
           </div>
@@ -82,11 +110,14 @@ export default {
   data() {
     return {
       items: [],
+      positions: [],
       create: {
-        name: '',
+        full_name: '',
+        employee_position_id: null,
       },
       update: {
-        name: '',
+        full_name: '',
+        employee_position_id: null,
         id: '',
       },
       createModal: false,
@@ -95,28 +126,34 @@ export default {
     }
   },
   mounted() {
-    this.$axios.$get('/users').then((response) => {
+    this.$axios.$get('/employee-positions').then((response) => {
+      this.positions = response.items
+    })
+    this.$axios.$get('/employees').then((response) => {
       console.log(response)
       this.items = response.items
       this.showLoader = false
     })
   },
   methods: {
+    getEmployeePositionName(item) {
+      return item.employee_position ? item.employee_position.name : '-'
+    },
     createItem() {
       console.log('createItem')
-      this.$axios.$post('/users', this.create).then((response) => {
+      this.$axios.$post('/employees', this.create).then((response) => {
         this.items.push(response.item)
       })
     },
     editItem(index) {
       let item = this.items[index]
-      this.update.name = item.name
+      this.update.full_name = item.full_name
       this.update.id = item.id
       this.editModal = true
     },
     updateItem() {
       this.$axios
-        .$put('/users/' + this.update.id, this.update)
+        .$put('/employees/' + this.update.id, this.update)
         .then((response) => {
           this.items.splice(
             this.items.findIndex((i) => i.id === this.update.id),
@@ -127,7 +164,7 @@ export default {
     },
     deleteItem(index) {
       let item = this.items[index]
-      this.$axios.$delete('/users/' + item.id).then(() => {
+      this.$axios.$delete('/employees/' + item.id).then(() => {
         this.items.splice(this.items.findIndex((i) => i.id === item.id))
       })
     },

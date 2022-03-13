@@ -27,19 +27,15 @@
           <table class="table table-bordered" id="dataTable" cellspacing="0">
             <thead>
               <tr>
-                <th scope="col">Имя</th>
                 <th scope="col">Позиция</th>
-                <th scope="col">Дата начала</th>
                 <th scope="col">Зарплата</th>
                 <th scope="col">Действия</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(item, idx) in items" :key="item.id">
-                <td>Иван Иванов</td>
                 <td>{{ item.name }}</td>
-                <td>01.01.2020</td>
-                <td>1000 $</td>
+                <td>${{ item.salary }}</td>
                 <td>
                   <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
                     <span class="icon text-white">
@@ -57,14 +53,32 @@
           </table>
           <b-modal v-model="createModel" title="BootstrapVue" @ok="createItem">
             <div class="form-group">
-              <label for="exampleInputEmail1">Имя</label>
-              <input v-model="create.name" type="text" class="form-control" placeholder="Имя" />
+              <label for="exampleInputEmail1">Название</label>
+              <input v-model="create.name" type="text" class="form-control" placeholder="Название" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Зарплата</label>
+              <input
+                v-model="create.salary"
+                type="text"
+                class="form-control"
+                placeholder="Зарплата"
+              />
             </div>
           </b-modal>
           <b-modal v-model="editModal" title="BootstrapVue" @ok="updateItem">
             <div class="form-group">
-              <label for="exampleInputEmail1">Имя</label>
-              <input v-model="update.name" type="text" class="form-control" placeholder="Имя" />
+              <label for="exampleInputEmail1">Название</label>
+              <input v-model="update.name" type="text" class="form-control" placeholder="Название" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Зарплата</label>
+              <input
+                v-model="update.salary"
+                type="text"
+                class="form-control"
+                placeholder="Зарплата"
+              />
             </div>
           </b-modal>
         </div>
@@ -80,36 +94,39 @@ export default {
       items: [],
       create: {
         name: '',
+        salary: 0,
       },
       update: {
-        name: '',
         id: '',
+        name: '',
+        salary: 0,
       },
       createModel: false,
       editModal: false,
     }
   },
   mounted() {
-    this.$axios.$get('/roles').then((response) => {
+    this.$axios.$get('/employee-positions').then((response) => {
       this.items = response.items
     })
   },
   methods: {
     createItem() {
       console.log('createItem')
-      this.$axios.$post('/roles', this.create).then((response) => {
+      this.$axios.$post('/employee-positions', this.create).then((response) => {
         this.items.push(response.item)
       })
     },
     editItem(index) {
       let item = this.items[index]
       this.update.name = item.name
+      this.update.salary = item.salary
       this.update.id = item.id
       this.editModal = true
     },
     updateItem() {
       this.$axios
-        .$put('/roles/' + this.update.id, this.update)
+        .$put('/employee-positions/' + this.update.id, this.update)
         .then((response) => {
           this.items.splice(
             this.items.findIndex((i) => i.id === this.update.id),
@@ -120,7 +137,7 @@ export default {
     },
     deleteItem(index) {
       let item = this.items[index]
-      this.$axios.$delete('/roles/' + item.id).then(() => {
+      this.$axios.$delete('/employee-positions/' + item.id).then(() => {
         this.items.splice(this.items.findIndex((i) => i.id === item.id))
       })
     },

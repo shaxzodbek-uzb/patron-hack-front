@@ -22,14 +22,14 @@
       <div class="sidebar-heading">Интерфейс</div>
 
       <li class="nav-item">
-        <nuxt-link to="/users" class="nav-link collapsed">
+        <nuxt-link to="/employees" class="nav-link collapsed">
           <i class="fas fa-user"></i>
           <span>Сотрудники</span>
         </nuxt-link>
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="/roles" class="nav-link collapsed">
+        <nuxt-link to="/employee-positions" class="nav-link collapsed">
           <i class="fas fa-fw fa-award"></i>
           <span>Позиции</span>
         </nuxt-link>
