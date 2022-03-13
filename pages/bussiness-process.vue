@@ -210,4 +210,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+  select {
+    color: #666;
+  }
+</style>
