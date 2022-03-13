@@ -25,12 +25,7 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table
-              v-if="!showLoader"
-              class="table table-bordered"
-              id="dataTable"
-              cellspacing="0"
-            >
+            <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
               <thead>
                 <tr>
                   <th>Имя</th>
@@ -48,18 +43,15 @@
                   <td>{{ item.payment_amount }}</td>
                   <td>
                     <select>
-                      <option value="">Выберите группу</option>
-                      <option value="">Группа 1</option>
-                      <option value="">Группа 2</option>
-                      <option value="">Группа 3</option>
+                      <option value>Выберите группу</option>
+                      <option value>Группа 1</option>
+                      <option value>Группа 2</option>
+                      <option value>Группа 3</option>
                     </select>
                   </td>
                   <td>{{ item.classification_group_id }}</td>
                   <td>
-                    <a
-                      @click="editItem(idx)"
-                      class="btn btn-sm btn-primary btn-icon-split"
-                    >
+                    <a @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
@@ -74,19 +66,10 @@
               </tbody>
             </table>
             <Loader v-else-if="showLoader" />
-            <b-modal
-              v-model="createModal"
-              title="BootstrapVue"
-              @ok="createItem"
-            >
+            <b-modal v-model="createModal" title="BootstrapVue" @ok="createItem">
               <div class="form-group">
                 <label for="exampleInputEmail1">Имя</label>
-                <input
-                  v-model="create.name"
-                  type="text"
-                  class="form-control"
-                  placeholder="Имя"
-                />
+                <input v-model="create.name" type="text" class="form-control" placeholder="Имя" />
                 <label for="exampleInputEmail1">Детали платежа</label>
                 <input
                   v-model="create.payment_detail"
@@ -113,29 +96,13 @@
             <b-modal v-model="editModal" title="BootstrapVue" @ok="updateItem">
               <div class="form-group">
                 <label for="exampleInputEmail1">Имя</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Имя"
-                />
+                <input type="text" class="form-control" placeholder="Имя" />
                 <label for="exampleInputEmail1">Детали платежа</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Детали платежа"
-                />
+                <input type="text" class="form-control" placeholder="Детали платежа" />
                 <label for="exampleInputEmail1">Сумма платежа</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Сумма платежа"
-                />
+                <input type="text" class="form-control" placeholder="Сумма платежа" />
                 <label for="exampleInputEmail1">ID группы классификации</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="ID группы классификации"
-                />
+                <input type="text" class="form-control" placeholder="ID группы классификации" />
               </div>
             </b-modal>
           </div>
@@ -155,16 +122,16 @@ export default {
       createModal: false,
       editModal: false,
       create: {
-        name: "",
-        payment_detail: "",
-        payment_amount: "",
-        classification_group_id: "",
+        name: '',
+        payment_detail: '',
+        payment_amount: '',
+        classification_group_id: '',
       },
       update: {
-        name: "",
-        payment_detail: "",
-        payment_amount: "",
-        classification_group_id: "",
+        name: '',
+        payment_detail: '',
+        payment_amount: '',
+        classification_group_id: '',
       },
     }
   },
@@ -194,7 +161,7 @@ export default {
         .$put('/business-processes/' + this.update.id, this.update)
         .then((response) => {
           this.items.splice(
-            this.items.findIndex((item) => item.id === this.update.id),
+            this.items.findIndex((i) => i.id === this.update.id),
             1,
             response.item
           )
@@ -203,7 +170,7 @@ export default {
     deleteItem(index) {
       let item = this.items[index]
       this.$axios.$delete('/business-processes/' + item.id).then(() => {
-        this.items.splice(index, 1)
+        this.items.splice(this.items.findIndex((i) => i.id === item.id))
       })
     },
   },

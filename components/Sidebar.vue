@@ -4,10 +4,7 @@
       class="navbar-nav font-weight-bold bg-gradient-primary sidebar sidebar-dark accordion"
       id="accordionSidebar"
     >
-      <nuxt-link
-        to="/"
-        class="sidebar-brand d-flex align-items-center justify-content-center"
-      >
+      <nuxt-link to="/" class="sidebar-brand d-flex align-items-center justify-content-center">
         <img style="width: 70%" src="~/assets/images/logo.png" alt />
       </nuxt-link>
 
@@ -46,11 +43,7 @@
       </li>
 
       <li class="nav-item">
-        <nuxt-link
-          to="/bussiness-process"
-          class="nav-link collapsed"
-          data-toggle="collapse"
-        >
+        <nuxt-link to="/bussiness-process" class="nav-link collapsed" data-toggle="collapse">
           <i v-if="!isCollapsed" class="fas fa-folder"></i>
           <i v-else class="fas fa-folder-open"></i>
           <span @click="isCollapsed = !isCollapsed" v-b-toggle.my-collapse>Бизнес процесс</span>
@@ -62,17 +55,13 @@
           data-parent="#accordionSidebar"
         ></div>
         <b-collapse id="my-collapse" class="bg-white p-2 rounded" style="font-size: 12px">
-          <nuxt-link to="/" class="collapse-item d-block" href="buttons.html">
-            Классификация
-          </nuxt-link>
-          <nuxt-link to="/classification-groups" class="collapse-item d-block" href="cards.html">
-            Группы
-          </nuxt-link>
+          <nuxt-link to="/classifications" class="collapse-item d-block">Классификация</nuxt-link>
+          <nuxt-link to="/classification-groups" class="collapse-item d-block">Группы</nuxt-link>
         </b-collapse>
       </li>
       <!-- <b-collapse id="my-collapse">
         <b-card title="Collapsible card"> Hello world! </b-card>
-      </b-collapse> -->
+      </b-collapse>-->
 
       <li class="nav-item">
         <nuxt-link to="/rules" class="nav-link">
@@ -99,11 +88,11 @@
 
 <script>
 export default {
-  name: "Sidebar",
+  name: 'Sidebar',
   data() {
     return {
-      isCollapsed: false
-    };
-  }
-};
+      isCollapsed: false,
+    }
+  },
+}
 </script>
