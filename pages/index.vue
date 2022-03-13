@@ -157,11 +157,21 @@
             </div>
             <div class="small">
               <b-badge class="circle text-info" variant="info">.</b-badge>
-              Хорошо
+              <span>
+                Хорошо - 
+              </span>
+              <span>
+                если бизнес-процесс оценивается хорошо, значит, в процессе все нормальнo...
+              </span>
             </div>
             <div class="small">
               <b-badge class="circle text-success" variant="success">.</b-badge>
-              Отлично
+              <span>
+                Отлично - 
+              </span>
+              <span>
+                если бизнес-процесс оценивается отлично, значит, в процессе почти нет недостатков, а это говорит о том, что вероятность достижения больших фекалий с этим проектом очень высока в процентах
+              </span>
             </div>
           </div>
         </div>
