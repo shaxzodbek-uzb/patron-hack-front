@@ -32,34 +32,11 @@
               >
                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
               </a>
-              <div
-                class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                aria-labelledby="dropdownMenuLink"
-              >
-                <div class="dropdown-header">Dropdown Header:</div>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
             </div>
           </div>
           <!-- Card Body -->
           <div class="card-body">
-            <div class="chart-pie pt-4 pb-2">
-              <canvas id="myPieChart"></canvas>
-            </div>
-            <div class="mt-4 text-center small">
-              <span class="mr-2">
-                <i class="fas fa-circle text-primary"></i> Direct
-              </span>
-              <span class="mr-2">
-                <i class="fas fa-circle text-success"></i> Social
-              </span>
-              <span class="mr-2">
-                <i class="fas fa-circle text-info"></i> Referral
-              </span>
-            </div>
+            <ChartLine />
           </div>
         </div>
       </div>
