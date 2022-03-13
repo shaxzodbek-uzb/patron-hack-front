@@ -55,12 +55,8 @@
           data-parent="#accordionSidebar"
         ></div>
         <b-collapse id="my-collapse" class="bg-white p-2 rounded" style="font-size: 12px">
-          <nuxt-link to="/classifications" class="collapse-item d-block">Классификации</nuxt-link>
-          <nuxt-link
-            to="/bpm-classification-group"
-            class="collapse-item d-block"
-            href="cards.html"
-          >Группы</nuxt-link>
+          <nuxt-link to="/classifications" class="collapse-item d-block">Классификация</nuxt-link>
+          <nuxt-link to="/classification-groups" class="collapse-item d-block">Группы</nuxt-link>
         </b-collapse>
       </li>
       <!-- <b-collapse id="my-collapse">
