@@ -6,63 +6,80 @@ export default {
   props: {
     chartdata: {
       default: () => ({
-        labels: [],
+        labels: [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
+        ],
         datasets: [
           {
             label: 'Количество платежей',
-            data: [],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-            ],
-            borderColor: [
-              'rgba(255,99,132,1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
+            data: [
+              {
+                x: 'Первый платеж',
+                y: 32,
+              },
+              {
+                x: 'Второй платеж',
+                y: 43,
+              },
+              {
+                x: 'Третий платеж',
+                y: 23,
+              },
+              {
+                x: 'Четвертый платеж',
+                y: 17,
+              },
+              {
+                x: 'Пятый платеж',
+                y: 64,
+              },
+              {
+                x: 'Шестой платеж',
+                y: 32,
+              },
+              {
+                x: 'Седьмой платеж',
+                y: 54,
+              },
+              {
+                x: 'Восьмой платеж',
+                y: 34,
+              },
+              {
+                x: 'Девятый платеж',
+                y: 32,
+              },
+              {
+                x: 'Десятый платеж',
+                y: 54,
+              },
+              {
+                x: 'Одиннадцатый платеж',
+                y: 23,
+              },
+              {
+                x: 'Двенадцатый платеж',
+                y: 45,
+              },
+              {
+                x: 'Тринадцатый платеж',
+                y: 32,
+              },
             ],
             borderWidth: 1,
           },
         ],
-      }),
-    },
-    options: {
-      default: () => ({
-        responsive: true,
-        legend: {
-          display: false,
-        },
-        title: {
-          display: true,
-          text: 'Количество платежей',
-          fontSize: 24,
-          fontColor: '#6b7280',
-        },
-        tooltips: {
-          backgroundColor: '#17BF62',
-        },
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: true,
-              },
-            },
-          ],
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-              },
-            },
-          ],
-        },
       }),
     },
   },

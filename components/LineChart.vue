@@ -55,7 +55,7 @@ export default {
         datasets: [
           {
             label: 'Visualizaciones',
-            data: [2, 1, 16, 3, 4, 5, 0, 0, 4, 12, 2],
+            data: [2, 1, 4, 3, 4, 5, 0, 0, 4, 2, 2],
             backgroundColor: 'rgba(20, 255, 0, 0.3)',
             borderColor: 'rgba(100, 255, 0, 1)',
             borderWidth: 2,
