@@ -8,7 +8,7 @@
               <div
                 class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
               >
-                Организационная структура
+                Группа классификация
                 <span>
                   <a
                     @click="createModal = true"
@@ -34,8 +34,8 @@
                 >
                   <thead>
                     <tr>
+                      <th>Код</th>
                       <th>Имя</th>
-                      <th>Parent Id</th>
                       <th>Действия</th>
                     </tr>
                   </thead>
