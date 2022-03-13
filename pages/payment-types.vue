@@ -26,7 +26,7 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" cellspacing="0">
+            <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
               <thead>
                 <tr>
                   <th>Тип платежа</th>
@@ -51,6 +51,7 @@
                 </tr>
               </tbody>
             </table>
+            <Loader v-else-if="showLoader" />
             <b-modal v-model="createModel" title="Тип платежа" @ok="createItem">
               <div class="form-group">
                 <label for="exampleInputEmail1">Тип платежа</label>
@@ -94,11 +95,13 @@ export default {
       },
       createModel: false,
       editModal: false,
+      showLoader: true,
     }
   },
   mounted() {
     this.$axios.$get('/payment-types').then((response) => {
       this.items = response.items
+      this.showLoader = false
     })
   },
   methods: {
