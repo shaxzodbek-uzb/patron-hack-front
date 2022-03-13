@@ -7,7 +7,7 @@
           <div
             class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
           >
-            Ползователи
+            Сотрудники
             <span>
               <a
                 @click="createModal = true"
@@ -26,7 +26,12 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
+            <table
+              v-if="!showLoader"
+              class="table table-bordered"
+              id="dataTable"
+              cellspacing="0"
+            >
               <thead>
                 <tr>
                   <th>Имя</th>
@@ -39,14 +44,20 @@
                 <tr v-for="(item, idx) in items" :key="item.id">
                   <td>{{ item.full_name }}</td>
                   <td>{{ getEmployeePositionName(item) }}</td>
-                  <td>{{ (item.created_at).substring(0,10) }}</td>
+                  <td>{{ item.created_at.substring(0, 10) }}</td>
                   <td>
-                    <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
+                    <div
+                      @click="editItem(idx)"
+                      class="btn btn-sm btn-primary btn-icon-split"
+                    >
                       <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
                     </div>
-                    <div @click="deleteItem(idx)" class="btn btn-sm btn-danger btn-icon-split">
+                    <div
+                      @click="deleteItem(idx)"
+                      class="btn btn-sm btn-danger btn-icon-split"
+                    >
                       <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
@@ -56,7 +67,11 @@
               </tbody>
             </table>
             <Loader v-else-if="showLoader" />
-            <b-modal v-model="createModal" title="BootstrapVue" @ok="createItem">
+            <b-modal
+              v-model="createModal"
+              title="BootstrapVue"
+              @ok="createItem"
+            >
               <div class="form-group">
                 <label for="exampleInputEmail1">Имя</label>
                 <input
@@ -68,12 +83,17 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Позиция</label>
-                <select v-model="create.employee_position_id" class="form-control">
+                <select
+                  v-model="create.employee_position_id"
+                  class="form-control"
+                >
                   <option
                     v-for="position in positions"
                     :key="position.id"
                     :value="position.id"
-                  >{{ position.name }}</option>
+                  >
+                    {{ position.name }}
+                  </option>
                 </select>
               </div>
             </b-modal>
@@ -89,12 +109,17 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Позиция</label>
-                <select v-model="update.employee_position_id" class="form-control">
+                <select
+                  v-model="update.employee_position_id"
+                  class="form-control"
+                >
                   <option
                     v-for="position in positions"
                     :key="position.id"
                     :value="position.id"
-                  >{{ position.name }}</option>
+                  >
+                    {{ position.name }}
+                  </option>
                 </select>
               </div>
             </b-modal>
