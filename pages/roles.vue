@@ -24,7 +24,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-bordered" id="dataTable" cellspacing="0">
+          <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
             <thead>
               <tr>
                 <th scope="col">Имя</th>
@@ -55,6 +55,7 @@
               </tr>
             </tbody>
           </table>
+          <Loader v-else-if="showLoader" />
           <b-modal v-model="createModel" title="BootstrapVue" @ok="createItem">
             <div class="form-group">
               <label for="exampleInputEmail1">Имя</label>
@@ -87,11 +88,13 @@ export default {
       },
       createModel: false,
       editModal: false,
+      showLoader: true,
     }
   },
   mounted() {
     this.$axios.$get('/roles').then((response) => {
       this.items = response.items
+      this.showLoader = false
     })
   },
   methods: {

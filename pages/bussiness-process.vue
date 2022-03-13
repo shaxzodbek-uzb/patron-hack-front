@@ -121,6 +121,7 @@ export default {
       idx: '',
       createModal: false,
       editModal: false,
+      showLoader: true,
       create: {
         name: '',
         payment_detail: '',
@@ -138,6 +139,7 @@ export default {
   mounted() {
     this.$axios.$get('/business-processes').then((response) => {
       this.items = response.items
+      this.showLoader = false
       console.log(response)
     })
   },
