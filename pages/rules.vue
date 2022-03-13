@@ -30,8 +30,8 @@
             <table class="table table-bordered" id="dataTable" cellspacing="0">
               <thead>
                 <tr>
-                  <td>Бизнес правила</td>
-                  <td>Действия</td>
+                  <th>Бизнес правила</th>
+                  <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
