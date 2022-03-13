@@ -17,7 +17,7 @@
               <span class="icon text-white">
                 <i class="text-white fas fa-plus"></i>
               </span>
-              <span class="text" >Добавить</span>
+              <span class="text">Добавить</span>
             </a>
           </span>
         </div>
