@@ -134,7 +134,7 @@
           <div class="card-body">
             <div class="small">
               <b-badge class="circle text-danger" variant="danger">.</b-badge>
-              <span>Плохо - </span>
+              <b>Плохо - </b>
               <span>
                 если бизнес-процесс оценивается плохо, значит, в процессе очень много недостатков, и трудно надеяться на будущее этого бизнеса.
                 <br><br>
@@ -143,16 +143,16 @@
             <div class="small">
               <b-badge class="circle text-warning" variant="warning">.</b-badge>
             <span>Hеудовлетворительный - </span>
-            <span>
+            <b>
               если бизнес-процесс оценивается неудовлетворительно, значит, в процессе много недостатков, но надеяться на будущее этого бизнеса невозможно.
               <br><br>
-            </span>
+            </b>
             </div>
             <div class="small">
               <b-badge class="circle text-primary" variant="primary">.</b-badge>
-            <span>
+            <b>
               Удовлетворительный - 
-            </span>
+            </b>
             <span>
               если бизнес-процесс оценивается удовлетворительно, значит, в процессе мало недостатков, но надеяться на будущее этого бизнеса возможно.
               <br><br>
@@ -160,9 +160,9 @@
             </div>
             <div class="small">
               <b-badge class="circle text-info" variant="info">.</b-badge>
-              <span>
+              <b>
                 Хорошо - 
-              </span>
+              </b>
               <span>
                 если бизнес-процесс оценивается хорошо, значит, в процессе все нормальнo...
                 <br><br>
@@ -170,9 +170,9 @@
             </div>
             <div class="small">
               <b-badge class="circle text-success" variant="success">.</b-badge>
-              <span>
+              <b>
                 Отлично - 
-              </span>
+              </b>
               <span>
                 если бизнес-процесс оценивается отлично, значит, в процессе почти нет недостатков, а это говорит о том, что вероятность достижения больших фекалий с этим проектом очень высока в процентах
                 <br>
