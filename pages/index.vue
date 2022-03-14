@@ -142,11 +142,11 @@
             </div>
             <div class="small">
               <b-badge class="circle text-warning" variant="warning">.</b-badge>
-            <span>Hеудовлетворительный - </span>
-            <b>
+            <a>Hеудовлетворительный - </a>
+            <span>
               если бизнес-процесс оценивается неудовлетворительно, значит, в процессе много недостатков, но надеяться на будущее этого бизнеса невозможно.
               <br><br>
-            </b>
+            </span>
             </div>
             <div class="small">
               <b-badge class="circle text-primary" variant="primary">.</b-badge>
