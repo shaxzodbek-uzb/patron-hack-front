@@ -3,8 +3,11 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800">Главная</h1>
-      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-        <i class="fas fa-download fa-sm text-white"></i>  Создать отчет
+      <a
+        href="#"
+        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+      >
+        <i class="fas fa-download fa-sm text-white"></i> Создать отчет
       </a>
     </div>
 
@@ -18,8 +21,12 @@
       <div class="col-xl-4 col-lg-5">
         <div class="card shadow mb-4">
           <!-- Card Header - Dropdown -->
-          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Количество платежей</h6>
+          <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+          >
+            <h6 class="m-0 font-weight-bold text-primary">
+              Количество платежей
+            </h6>
             <div class="dropdown no-arrow">
               <a
                 class="dropdown-toggle"
@@ -42,18 +49,15 @@
       </div>
     </div>
 
-    <!-- Content Row -->
     <div class="row">
-      <!-- Content Column -->
       <div class="col-lg-6 mb-4">
-        <!-- Project Card Example -->
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Оценкы БПМ</h6>
           </div>
           <div class="card-body">
             <h4 class="small font-weight-bold">
-              Плохо
+              Очень низкое
               <span class="float-right">20%</span>
             </h4>
             <div class="progress mb-4">
@@ -67,7 +71,7 @@
               ></div>
             </div>
             <h4 class="small font-weight-bold">
-              Hеудовлетворительный
+              Низкое
               <span class="float-right">40%</span>
             </h4>
             <div class="progress mb-4">
@@ -81,7 +85,7 @@
               ></div>
             </div>
             <h4 class="small font-weight-bold">
-              Удовлетворительный
+              Среднее
               <span class="float-right">60%</span>
             </h4>
             <div class="progress mb-4">
@@ -95,7 +99,7 @@
               ></div>
             </div>
             <h4 class="small font-weight-bold">
-              Хорошо
+              Высокое
               <span class="float-right">80%</span>
             </h4>
             <div class="progress mb-4">
@@ -109,8 +113,8 @@
               ></div>
             </div>
             <h4 class="small font-weight-bold">
-              Отлично
-              <span class="float-right">Завершенo!</span>
+              Очень высокое
+              <span class="float-right">100%</span>
             </h4>
             <div class="progress">
               <div
@@ -129,53 +133,54 @@
       <div class="col-lg-6 mb-4">
         <div class="card shadow mb-4">
           <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Определение оценки</h6>
+            <h6 class="m-0 font-weight-bold text-primary">
+              Определение оценки
+            </h6>
           </div>
           <div class="card-body">
             <div class="small">
               <b-badge class="circle text-danger" variant="danger">.</b-badge>
-              <b>Плохо - </b>
+              <b>Очень низкое - </b>
               <span>
-                если бизнес-процесс оценивается плохо, значит, в процессе очень много недостатков, и трудно надеяться на будущее этого бизнеса.
-                <br><br>
+                функционирование не результативное, степень не допустимая-
+                Требуется разработка системы и вмешательства руководства
+                <br /><br />
               </span>
             </div>
             <div class="small">
               <b-badge class="circle text-warning" variant="warning">.</b-badge>
-            <a>Hеудовлетворительный - </a>
-            <span>
-              если бизнес-процесс оценивается неудовлетворительно, значит, в процессе много недостатков, но надеяться на будущее этого бизнеса невозможно.
-              <br><br>
-            </span>
+              <b>Низкое - </b>
+              <span>
+                функционирование не результативное, степень не допустимая-
+                Требуется разработка значительных КД
+                <br /><br />
+              </span>
             </div>
             <div class="small">
               <b-badge class="circle text-primary" variant="primary">.</b-badge>
-            <b>
-              Удовлетворительный - 
-            </b>
-            <span>
-              если бизнес-процесс оценивается удовлетворительно, значит, в процессе мало недостатков, но надеяться на будущее этого бизнеса возможно.
-              <br><br>
-            </span>
+              <b> Среднее - </b>
+              <span>
+                функционирование результативное, степень допустимая-Требуется
+                разработка КД
+                <br /><br />
+              </span>
             </div>
             <div class="small">
               <b-badge class="circle text-info" variant="info">.</b-badge>
-              <b>
-                Хорошо - 
-              </b>
+              <b> Высокое - </b>
               <span>
-                если бизнес-процесс оценивается хорошо, значит, в процессе все нормальнo...
-                <br><br>
+                функционирование результативное, степень достаточная- Требуется
+                разработка некоторых КД
+                <br /><br />
               </span>
             </div>
             <div class="small">
               <b-badge class="circle text-success" variant="success">.</b-badge>
-              <b>
-                Отлично - 
-              </b>
+              <b> Очень высокое - </b>
               <span>
-                если бизнес-процесс оценивается отлично, значит, в процессе почти нет недостатков, а это говорит о том, что вероятность достижения больших фекалий с этим проектом очень высока в процентах
-                <br>
+                функционирование результативное, степень высокая-Требуется
+                пересмотр системы и разработка ПД
+                <br /><br />
               </span>
             </div>
           </div>
@@ -198,7 +203,11 @@ export default {
 
 <style scoped>
 .circle {
-  width: 16px;
+  width: 14px;
   border-radius: 50%;
+}
+
+.circle::selection {
+  background: none;
 }
 </style>
