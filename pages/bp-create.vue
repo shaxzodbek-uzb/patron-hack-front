@@ -9,6 +9,7 @@
             Бизнес процесс
             <span>
               <a
+                @click="itemCreate"
                 type="button"
                 data-toggle="modal"
                 data-target="#exampleModal"
@@ -26,6 +27,7 @@
           <form class="row" action="">
             <div class="input-group col-6 input-group-sm mb-3">
               <input
+              v-model="create.name"
                 type="text"
                 class="form-control"
                 aria-label="Sizing example input"
@@ -36,6 +38,7 @@
 
             <div class="input-group col-6 input-group-sm mb-3">
               <input
+              v-model="create.code"
                 type="text"
                 class="form-control"
                 aria-label="Sizing example input"
@@ -85,16 +88,14 @@
                   <th class="border-bottom">Имя</th>
                   <th class="border-bottom">Код</th>
                   <th class="border-bottom">Группы классификации</th>
-                  <th class="border-bottom">Оценка</th>
+                  <th class="border-bottom">Статус</th>
                   <th class="border-bottom"></th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="count in trCount" :key="count" class="border-bottom">
                   <td>
-                    <div
-                      class="form-check w-100 h-100 d-flex justify-content-center"
-                    >
+                    <div class="form-check d-flex justify-content-center">
                       <input
                         class="form-check-input mt-2 ml-1"
                         type="checkbox"
@@ -115,7 +116,7 @@
                       class="form-control form-control-sm"
                       v-model="items"
                     >
-                      <option>Выберите код</option>
+                      <option selected>Выберите код</option>
                       <option v-for="(item, code) in items" :key="code">
                         {{ item.code }}
                       </option>
@@ -126,7 +127,7 @@
                       class="form-control form-control-sm"
                       v-model="items"
                     >
-                      <option>Выберите группу</option>
+                      <option selected>Выберите группу</option>
                       <option v-for="(item, code) in items" :key="code">
                         {{ item.name }}
                       </option>
@@ -177,6 +178,10 @@ export default {
   data() {
     return {
       trCount: 1,
+      create: {
+        name: '',
+        code: '',
+      },
     }
   },
   mounted() {
@@ -184,6 +189,18 @@ export default {
       this.items = response.items
       console.log(response)
     })
+  },
+  methods: {
+    itemCreate() {
+      this.$axios
+        .$post('/classification-groups', this.create)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
   },
 }
 </script>
@@ -200,21 +217,21 @@ table tbody td {
   border: none;
 }
 
+input:focus {
+  outline: none;
+}
 
-input:focus { outline: none; }
-
-
-input[type="checkbox"] {
+input[type='checkbox'] {
   appearance: none;
   width: 1.5em;
   height: 1.5em;
   position: relative;
   margin: 0 0.5em 0 0;
   cursor: pointer;
-  transform: scale(.8);
+  transform: scale(0.8);
 }
 
-input[type="checkbox"]:before {
+input[type='checkbox']:before {
   content: '';
   width: 100%;
   height: 100%;
@@ -229,41 +246,42 @@ input[type="checkbox"]:before {
   z-index: 10;
 }
 
-input[type="checkbox"]:checked:before {
+input[type='checkbox']:checked:before {
   font-family: -apple-system !important;
   content: '\2714';
   background: #3e64d3;
 }
 
-input[type="checkbox"]:after {
+input[type='checkbox']:after {
   content: '';
   width: 300%;
   height: 300%;
   background-color: #3e64d3;
   border-radius: 100%;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   z-index: 5;
   opacity: 0;
-  transform: translate( -50%, -50% );
+  transform: translate(-50%, -50%);
   animation: none;
 }
 
-input[type="checkbox"]:checked:after {
+input[type='checkbox']:checked:after {
   animation: check 0.3s;
 }
 
 @keyframes check {
-    0% { 
-      transform: translate( -50%, -50% ) scale( 0.1 ); 
-      opacity: 1;
-    }
-    40% { 
-      opacity: 1; }
-    100% { 
-      transform: translate( -50%, -50% ) scale( 1 ); 
-      opacity: 0;
-    }
+  0% {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
 }
 </style>
