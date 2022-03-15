@@ -43,7 +43,7 @@
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="/bussiness-process" class="nav-link collapsed" data-toggle="collapse">
+        <nuxt-link to="/business-process" class="nav-link collapsed" data-toggle="collapse">
           <i v-if="!isCollapsed" class="fas fa-folder"></i>
           <i v-else class="fas fa-folder-open"></i>
           <span @click="isCollapsed = !isCollapsed" v-b-toggle.my-collapse>Бизнес процесс</span>

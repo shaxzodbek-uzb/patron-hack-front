@@ -27,7 +27,12 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
+                <table
+                  v-if="!showLoader"
+                  class="table table-bordered"
+                  id="dataTable"
+                  cellspacing="0"
+                >
                   <thead>
                     <tr>
                       <th>Код</th>
@@ -147,7 +152,7 @@ export default {
     },
     editItem(index) {
       let item = this.items[index]
-      this.update.name = item.code
+      this.update.code = item.code
       this.update.name = item.name
       this.update.id = item.id
       this.editModal = true
@@ -173,4 +178,3 @@ export default {
 }
 </script>
 
-<style></style>
