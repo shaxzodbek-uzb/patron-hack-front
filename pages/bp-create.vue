@@ -199,4 +199,71 @@ export default {
 table tbody td {
   border: none;
 }
+
+
+input:focus { outline: none; }
+
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 1.5em;
+  height: 1.5em;
+  position: relative;
+  margin: 0 0.5em 0 0;
+  cursor: pointer;
+  transform: scale(.8);
+}
+
+input[type="checkbox"]:before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: #ddd;
+  color: #fff;
+  text-align: center;
+  line-height: 1.5;
+  border-radius: 0.4em;
+  position: absolute;
+  top: -4px;
+  left: 0;
+  z-index: 10;
+}
+
+input[type="checkbox"]:checked:before {
+  font-family: -apple-system !important;
+  content: '\2714';
+  background: #3e64d3;
+}
+
+input[type="checkbox"]:after {
+  content: '';
+  width: 300%;
+  height: 300%;
+  background-color: #3e64d3;
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  opacity: 0;
+  transform: translate( -50%, -50% );
+  animation: none;
+}
+
+input[type="checkbox"]:checked:after {
+  animation: check 0.3s;
+}
+
+@keyframes check {
+    0% { 
+      transform: translate( -50%, -50% ) scale( 0.1 ); 
+      opacity: 1;
+    }
+    40% { 
+      opacity: 1; }
+    100% { 
+      transform: translate( -50%, -50% ) scale( 1 ); 
+      opacity: 0;
+    }
+}
 </style>
