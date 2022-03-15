@@ -27,11 +27,21 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
+                <table
+                  v-if="!showLoader"
+                  class="table table-bordered"
+                  id="dataTable"
+                  cellspacing="0"
+                >
                   <thead>
                     <tr>
                       <th>Код</th>
                       <th>Имя</th>
+                      <th>Мин. балл</th>
+                      <th>Макс. балл</th>
+                      <th>Высокий показатель</th>
+                      <th>Средний показатель</th>
+                      <th>Низкий показатель</th>
                       <th>Группа</th>
                       <th>Действия</th>
                     </tr>
@@ -40,6 +50,11 @@
                     <tr v-for="(item,idx) in items" :key="item.id">
                       <td>{{ item.code }}</td>
                       <td>{{ item.name }}</td>
+                      <td>{{ item.min_rate }}</td>
+                      <td>{{ item.max_rate }}</td>
+                      <td>{{ item.high_rate }}</td>
+                      <td>{{ item.middle_rate }}</td>
+                      <td>{{ item.low_rate }}</td>
                       <td>{{ getClassificationName(item.classification_group) }}:{{ getClassificationCode(item.classification_group) }}</td>
                       <td>
                         <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
@@ -77,6 +92,54 @@
                     />
                   </div>
                   <div class="form-group">
+                    <label>Мин. балл</label>
+                    <input
+                      v-model="create.min_rate"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите правила"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Макс. балл</label>
+                    <input
+                      v-model="create.max_rate"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите правила"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Высокий показатель</label>
+                    <input
+                      v-model="create.high_rate"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите правила"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Средний показатель</label>
+                    <input
+                      v-model="create.middle_rate"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите правила"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Низкий показатель</label>
+                    <input
+                      v-model="create.low_rate"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите правила"
+                    />
+                  </div>
+                  <div class="form-group">
                     <label>Группа</label>
                     <select v-model="create.classification_group_id" class="form-control">
                       <option v-for="item in groups" :key="item.id" :value="item.id">{{ item.name }}</option>
@@ -97,6 +160,54 @@
                     <label>Код</label>
                     <input
                       v-model="update.code"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите правила"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Мин. балл</label>
+                    <input
+                      v-model="update.min_rate"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите правила"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Макс. балл</label>
+                    <input
+                      v-model="update.max_rate"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите правила"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Высокий показатель</label>
+                    <input
+                      v-model="update.high_rate"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите правила"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Средний показатель</label>
+                    <input
+                      v-model="update.middle_rate"
+                      type="text"
+                      class="form-control"
+                      placeholder="Введите правила"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Низкий показатель</label>
+                    <input
+                      v-model="update.low_rate"
                       type="text"
                       class="form-control"
                       placeholder="Введите правила"
@@ -127,12 +238,22 @@ export default {
       create: {
         name: '',
         code: '',
+        min_rate: 0,
+        max_rate: 0,
+        high_rate: 0,
+        middle_rate: 0,
+        low_rate: 0,
         classification_group_id: null,
       },
       update: {
         id: '',
         name: '',
         code: '',
+        min_rate: 0,
+        max_rate: 0,
+        high_rate: 0,
+        middle_rate: 0,
+        low_rate: 0,
         classification_group_id: null,
       },
       createModal: false,
@@ -175,6 +296,8 @@ export default {
     editItem(index) {
       let item = this.items[index]
       this.update.name = item.name
+      this.update.max_rate = item.max_rate
+      this.update.min_rate = item.min_rate
       this.update.code = item.code
       this.update.classification_group_id = item.classification_group_id
       this.update.id = item.id

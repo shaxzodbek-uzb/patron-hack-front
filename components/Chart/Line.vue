@@ -4,87 +4,68 @@ import { Line } from 'vue-chartjs'
 export default {
   extends: Line,
   props: {
+    chartoptions: {
+      default: () => ({}),
+    },
     chartdata: {
       default: () => ({
-        labels: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
-        ],
+        labels: ['a1', 'a2', 'a3'],
         datasets: [
           {
-            label: 'Количество платежей',
-            data: [
-              {
-                x: 'Первый платеж',
-                y: 32,
-              },
-              {
-                x: 'Второй платеж',
-                y: 43,
-              },
-              {
-                x: 'Третий платеж',
-                y: 23,
-              },
-              {
-                x: 'Четвертый платеж',
-                y: 30,
-              },
-              {
-                x: 'Пятый платеж',
-                y: 64,
-              },
-              {
-                x: 'Шестой платеж',
-                y: 32,
-              },
-              {
-                x: 'Седьмой платеж',
-                y: 54,
-              },
-              {
-                x: 'Восьмой платеж',
-                y: 34,
-              },
-              {
-                x: 'Девятый платеж',
-                y: 32,
-              },
-              {
-                x: 'Десятый платеж',
-                y: 54,
-              },
-              {
-                x: 'Одиннадцатый платеж',
-                y: 23,
-              },
-              {
-                x: 'Двенадцатый платеж',
-                y: 45,
-              },
-              {
-                x: 'Тринадцатый платеж',
-                y: 32,
-              },
-            ],
-            borderWidth: 1,
+            fill: false,
+
+            label: 'Максимум',
+            data: [91, 85, 97],
+            borderWidth: 2,
+            backgroundColor: false,
+            borderColor: 'lime',
+          },
+
+          {
+            fill: false,
+
+            label: 'Средний',
+            data: [75, 65, 77],
+            borderWidth: 2,
+            backgroundColor: false,
+            borderColor: 'green',
+          },
+          {
+            fill: false,
+
+            label: 'Минимум',
+            data: [61, 45, 57],
+            borderWidth: 2,
+            backgroundColor: false,
+            borderColor: 'red',
+          },
+
+          {
+            fill: false,
+
+            label: 'Рейтинг в классификации',
+            data: [72, 80, 60],
+            borderWidth: 2,
+            backgroundColor: false,
+            borderColor: 'blue',
           },
         ],
       }),
     },
   },
   mounted() {
-    this.renderChart(this.chartdata, this.options)
+    if (this.chartdata != false)
+      this.renderChart(this.chartdata, this.chartoptions)
+  },
+  watch: {
+    chartdata: {
+      handler(newValue) {
+        if (newValue != false) {
+          this.renderChart(this.chartdata, this.chartoptions)
+        }
+      },
+      deep: true,
+    },
   },
 }
 </script>

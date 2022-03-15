@@ -40,8 +40,9 @@
                   <td>{{ getGroupName(item.classification_group) }}</td>
                   <td>
                     <nuxt-link
-                      to="/business-process/edit"
-                      class="btn btn-sm btn-primary btn-icon-split">
+                      :to="`/business-process/edit/${item.id}`"
+                      class="btn btn-sm btn-primary btn-icon-split"
+                    >
                       <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>

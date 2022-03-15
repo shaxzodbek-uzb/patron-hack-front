@@ -6,10 +6,10 @@
           <div
             class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
           >
-            Бизнес процесс
+            Бизнес процесс: {{ update.id }}
             <span>
               <div
-                @click="UpdateItem"
+                @click="updateItem"
                 type="button"
                 class="btn btn-sm btn-success bg-success btn-icon-split dropdown-item"
               >
@@ -25,7 +25,7 @@
           <form class="row" action>
             <div class="input-group col-6 input-group-sm mb-3">
               <input
-                :value="group"
+                v-model="update.name"
                 type="text"
                 class="form-control"
                 placeholder="Название бизнес процесса"
@@ -57,11 +57,11 @@
                 aria-placeholder="Выберите бизнес процесс"
               >
                 <option
+                  disabled
                   v-for="(item, code) in groups"
                   :key="code"
                   :value="item.id"
-                >
-                </option>
+                >{{ item.code }}: {{ item.name }}</option>
               </select>
             </div>
           </form>
@@ -73,16 +73,13 @@
         <div class="card-header py-3">
           <div
             class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
-          >
-            Бизнес процесс
-          </div>
+          >Бизнес процесс</div>
         </div>
         <div class="card-body">
           <div class="table-responsive border rounded">
             <table class="table" id="dataTable" cellspacing="0">
               <thead>
                 <tr class="border-0 small">
-                  <th class="border-bottom"></th>
                   <th class="border-bottom">Код</th>
                   <th class="border-bottom">Группы классификации</th>
                   <th class="border-bottom">Дата</th>
@@ -92,36 +89,26 @@
               </thead>
               <tbody>
                 <tr
-                  v-for="classification in classifications"
+                  v-for="(classification, index) in update.classifications"
                   :key="classification.id"
                   class="border-bottom"
                 >
-                  <td>
-                    <div class="form-check d-flex justify-content-center">
-                      <input
-                        class="form-check-input mt-2 ml-1"
-                        type="checkbox"
-                        value
-                        id="defaultCheck1"
-                      />
-                    </div>
-                  </td>
                   <td>{{ classification.code }}</td>
                   <td>{{ classification.name }}</td>
                   <td>
-                    <div class="input-group input-group-sm">
-                      <input type="date" class="form-control form-control-sm" />
-                      <input type="date" class="form-control form-control-sm" />
-                    </div>
+                    <div
+                      class="input-group input-group-sm"
+                    >{{classification.pivot.date_start }} -> {{ classification.pivot.date_finish}}</div>
                   </td>
                   <td>
-                    <div class="input-group input-group-sm">
+                    <div class="input-group input-group-sm" v-if="!classification.pivot.done">
                       <input
                         placeholder="Время"
                         type="text"
                         class="form-control form-control-sm"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
+                        v-model="classification.pivot.time_rate"
                       />
                       <input
                         placeholder="Качество"
@@ -129,11 +116,20 @@
                         class="form-control form-control-sm"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
+                        v-model="classification.pivot.quality_rate"
                       />
+                    </div>
+                    <div v-else>
+                      <span class="badge badge-warning">{{ classification.pivot.time_rate }}</span>
+                      <span class="badge badge-info">{{ classification.pivot.quality_rate }}</span>
                     </div>
                   </td>
                   <td>
-                    <div class="btn btn-sm btn-success btn-icon-split">
+                    <div
+                      class="btn btn-sm btn-success btn-icon-split"
+                      @click="completeClassification(index)"
+                      v-if="!classification.pivot.done"
+                    >
                       <span class="icon text-white">
                         <i class="fas fa-check"></i>
                       </span>
@@ -142,11 +138,38 @@
                 </tr>
               </tbody>
               <tfoot>
-                <td class="text-center small text-success" colspan="5">
-                  Заполните все поля для добавления нового процесса
-                </td>
+                <td
+                  class="text-center small text-success"
+                  colspan="5"
+                >Заполните все поля для добавления нового процесса</td>
               </tfoot>
             </table>
+          </div>
+        </div>
+      </div>
+      <!-- Pie Chart -->
+      <div class="w-100" v-if="update.status == 'done'">
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Количество платежей</h6>
+            <div class="dropdown no-arrow">
+              <a
+                class="dropdown-toggle"
+                href="#"
+                role="button"
+                id="dropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <ChartLine :height="100" :chartdata="dataset" />
           </div>
         </div>
       </div>
@@ -158,22 +181,108 @@
 export default {
   data() {
     return {
-      classifications: [],
+      loading: false,
       groups: [],
       update: {
-        name: '1',
-        payment_detail: 'Бистро',
-        payment_amount: '12000',
+        id: this.$route.params.id,
+        name: '',
+        payment_detail: '',
+        payment_amount: '',
         classification_group_id: '1',
-        classifications: [{ id: 1, date_start: null, date_finish: null }],
+        classifications: [],
+        status: 'new',
       },
     }
   },
+  computed: {
+    dataset() {
+      const low_rates = this.update.classifications.map((item) =>
+        parseInt((item.low_rate / item.max_rate) * 100)
+      )
+
+      const high_rates = this.update.classifications.map((item) =>
+        parseInt((item.high_rate / item.max_rate) * 100)
+      )
+      const middle_rates = this.update.classifications.map((item) =>
+        parseInt((item.middle_rate / item.max_rate) * 100)
+      )
+      const classification_rates = this.update.classifications.map(
+        (item) =>
+          ((Number(item.pivot.time_rate) + Number(item.pivot.quality_rate)) /
+            2 /
+            item.max_rate) *
+          100
+      )
+      const labels = this.update.classifications.map((item) => item.code)
+      // if one of the rates has no items return false
+      if (
+        low_rates.length === 0 ||
+        high_rates.length === 0 ||
+        middle_rates.length === 0 ||
+        classification_rates === 0 ||
+        labels === 0
+      ) {
+        return false
+      }
+
+      return {
+        labels,
+        datasets: [
+          {
+            fill: false,
+            label: 'Максимум',
+            data: high_rates,
+            borderWidth: 2,
+            backgroundColor: false,
+            borderColor: 'lime',
+          },
+
+          {
+            fill: false,
+            label: 'Средний',
+            data: middle_rates,
+            borderWidth: 2,
+            backgroundColor: false,
+            borderColor: 'green',
+          },
+          {
+            fill: false,
+
+            label: 'Минимум',
+            data: low_rates,
+            borderWidth: 2,
+            backgroundColor: false,
+            borderColor: 'red',
+          },
+
+          {
+            fill: false,
+
+            label: 'Рейтинг в классификации',
+            data: classification_rates,
+            borderWidth: 2,
+            backgroundColor: false,
+            borderColor: 'blue',
+          },
+        ],
+      }
+    },
+  },
   mounted() {
-    this.$axios.$get('/classification-groups').then((response) => {
-      this.groups = response.items
-      console.log(response)
-    })
+    this.$axios
+      .$get(`/business-processes/${this.update.id}`)
+      .then(({ item }) => {
+        this.update.name = item.name
+        this.update.payment_detail = item.payment_detail
+        this.update.payment_amount = item.payment_amount
+        this.update.classification_group_id = item.classification_group_id
+        this.update.classifications = item.classifications
+        this.update.status = item.status
+        this.groups = [item.classification_group]
+        this.$nextTick(() => {
+          this.loading = false
+        })
+      })
   },
   watch: {
     'create.classification_group_id'() {
@@ -189,11 +298,28 @@ export default {
     },
   },
   methods: {
-    itemUpdate() {
+    updateItem() {
       this.$axios
-        .put('/classifications/' + this.update.id, this.update)
+        .put('/business-processes/' + this.update.id, this.update)
         .then(({ data: { items } }) => {
-          this.classifications = items
+          this.$router.push('/business-process')
+        })
+    },
+    completeClassification(index) {
+      this.$axios
+        .post('/business-processes/complete-classification', {
+          business_process_id: this.update.id,
+          classification_id: this.update.classifications[index].id,
+          time_rate: this.update.classifications[index].pivot.time_rate,
+          quality_rate: this.update.classifications[index].pivot.quality_rate,
+        })
+        .then(({ data: { done, success } }) => {
+          if (success) {
+            this.update.classifications[index].pivot.done = true
+          }
+          if (done) {
+            this.update.status = 'done'
+          }
         })
     },
   },

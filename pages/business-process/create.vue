@@ -62,9 +62,7 @@
                   v-for="(item, code) in groups"
                   :key="code"
                   :value="item.id"
-                >
-                  {{ item.code }}
-                </option>
+                >{{ item.code }}: {{ item.name }}</option>
               </select>
             </div>
           </form>
@@ -76,9 +74,7 @@
         <div class="card-header py-3">
           <div
             class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
-          >
-            Бизнес процесс
-          </div>
+          >Бизнес процесс</div>
         </div>
         <div class="card-body">
           <div class="table-responsive border rounded">
@@ -87,20 +83,21 @@
                 <tr class="border-0 small">
                   <th class="border-bottom"></th>
                   <th class="border-bottom">Код</th>
-                  <th class="border-bottom">Группы классификации</th>
+                  <th class="border-bottom">Классификации</th>
                   <th class="border-bottom">Дата</th>
                   <th class="border-bottom"></th>
                 </tr>
               </thead>
               <tbody>
                 <tr
-                  v-for="classification in classifications"
+                  v-for="classification in create.classifications"
                   :key="classification.id"
                   class="border-bottom"
                 >
                   <td>
                     <div class="form-check d-flex justify-content-center">
                       <input
+                        v-model="classification.checked"
                         class="form-check-input mt-2 ml-1"
                         type="checkbox"
                         value
@@ -112,16 +109,25 @@
                   <td>{{ classification.name }}</td>
                   <td>
                     <div class="input-group input-group-sm">
-                      <input type="date" class="form-control form-control-sm" />
-                      <input type="date" class="form-control form-control-sm" />
+                      <input
+                        v-model="classification.date_start"
+                        type="date"
+                        class="form-control form-control-sm"
+                      />
+                      <input
+                        v-model="classification.date_finish"
+                        type="date"
+                        class="form-control form-control-sm"
+                      />
                     </div>
                   </td>
                 </tr>
               </tbody>
               <tfoot>
-                <td class="text-center small text-success" colspan="5">
-                  Заполните все поля для добавления нового процесса
-                </td>
+                <td
+                  class="text-center small text-success"
+                  colspan="5"
+                >Заполните все поля для добавления нового процесса</td>
               </tfoot>
             </table>
           </div>
@@ -135,14 +141,13 @@
 export default {
   data() {
     return {
-      classifications: [],
       groups: [],
       create: {
         name: '',
         payment_detail: '',
         payment_amount: '',
         classification_group_id: '',
-        classifications: [{ id: 1, date_start: null, date_finish: null }],
+        classifications: [],
       },
     }
   },
@@ -161,7 +166,7 @@ export default {
           },
         })
         .then(({ data: { items } }) => {
-          this.classifications = items
+          this.create.classifications = items
         })
     },
   },
@@ -169,7 +174,7 @@ export default {
     itemCreate() {
       console.log('createItem')
       this.$axios.$post('/business-processes', this.create).then((response) => {
-        this.items.push(response.item)
+        this.$router.push('/business-process')
       })
     },
   },
