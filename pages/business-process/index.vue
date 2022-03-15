@@ -33,17 +33,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, idx) in items" :key="item.id">
+                <tr v-for="item in items" :key="item.id">
                   <td>{{ item.name }}</td>
                   <td>Быстро</td>
                   <td>{{ item.payment_amount }}</td>
                   <td>{{ getGroupName(item.classification_group) }}</td>
                   <td>
-                    <a @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
+                    <nuxt-link
+                      to="/business-process/edit"
+                      class="btn btn-sm btn-primary btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-pencil-alt"></i>
                       </span>
-                    </a>
+                    </nuxt-link>
                     <a class="btn btn-sm btn-danger btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-trash"></i>

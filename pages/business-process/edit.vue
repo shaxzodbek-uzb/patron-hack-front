@@ -9,10 +9,8 @@
             Бизнес процесс
             <span>
               <div
-                @click="itemCreate"
+                @click="UpdateItem"
                 type="button"
-                data-toggle="modal"
-                data-target="#exampleModal"
                 class="btn btn-sm btn-success bg-success btn-icon-split dropdown-item"
               >
                 <span class="icon text-white">
@@ -27,7 +25,7 @@
           <form class="row" action>
             <div class="input-group col-6 input-group-sm mb-3">
               <input
-                v-model="create.name"
+                :value="group"
                 type="text"
                 class="form-control"
                 placeholder="Название бизнес процесса"
@@ -36,7 +34,7 @@
 
             <div class="input-group col-6 input-group-sm mb-3">
               <input
-                v-model="create.payment_detail"
+                v-model="update.payment_detail"
                 type="text"
                 class="form-control"
                 placeholder="Детали платежа"
@@ -45,7 +43,7 @@
 
             <div class="input-group col-6 input-group-sm mb-3">
               <input
-                v-model="create.payment_amount"
+                v-model="update.payment_amount"
                 type="text"
                 class="form-control"
                 placeholder="Сумма платежа"
@@ -54,7 +52,7 @@
 
             <div class="input-group col-6 input-group-sm mb-3">
               <select
-                v-model="create.classification_group_id"
+                v-model="update.classification_group_id"
                 class="small w-100"
                 aria-placeholder="Выберите бизнес процесс"
               >
@@ -63,7 +61,6 @@
                   :key="code"
                   :value="item.id"
                 >
-                  {{ item.code }}
                 </option>
               </select>
             </div>
@@ -89,6 +86,7 @@
                   <th class="border-bottom">Код</th>
                   <th class="border-bottom">Группы классификации</th>
                   <th class="border-bottom">Дата</th>
+                  <th class="border-bottom">Оценка</th>
                   <th class="border-bottom"></th>
                 </tr>
               </thead>
@@ -116,6 +114,31 @@
                       <input type="date" class="form-control form-control-sm" />
                     </div>
                   </td>
+                  <td>
+                    <div class="input-group input-group-sm">
+                      <input
+                        placeholder="Время"
+                        type="text"
+                        class="form-control form-control-sm"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                      />
+                      <input
+                        placeholder="Качество"
+                        type="text"
+                        class="form-control form-control-sm"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    <div class="btn btn-sm btn-success btn-icon-split">
+                      <span class="icon text-white">
+                        <i class="fas fa-check"></i>
+                      </span>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
               <tfoot>
@@ -137,11 +160,11 @@ export default {
     return {
       classifications: [],
       groups: [],
-      create: {
-        name: '',
-        payment_detail: '',
-        payment_amount: '',
-        classification_group_id: '',
+      update: {
+        name: '1',
+        payment_detail: 'Бистро',
+        payment_amount: '12000',
+        classification_group_id: '1',
         classifications: [{ id: 1, date_start: null, date_finish: null }],
       },
     }
@@ -166,11 +189,12 @@ export default {
     },
   },
   methods: {
-    itemCreate() {
-      console.log('createItem')
-      this.$axios.$post('/business-processes', this.create).then((response) => {
-        this.items.push(response.item)
-      })
+    itemUpdate() {
+      this.$axios
+        .put('/classifications/' + this.update.id, this.update)
+        .then(({ data: { items } }) => {
+          this.classifications = items
+        })
     },
   },
 }
