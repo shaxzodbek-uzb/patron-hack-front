@@ -23,50 +23,144 @@
           </div>
         </div>
         <div class="card-body">
+          <form class="row" action="">
+            <div class="input-group col-6 input-group-sm mb-3">
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-sm"
+                placeholder="Название бизнес процесса"
+              />
+            </div>
+
+            <div class="input-group col-6 input-group-sm mb-3">
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-sm"
+                placeholder="Детали платежа"
+              />
+            </div>
+
+            <div class="input-group col-6 input-group-sm mb-3">
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-sm"
+                placeholder="Сумма платежа"
+              />
+            </div>
+
+            <div class="input-group col-6 input-group-sm mb-3">
+              <select v-model="items" class="bp-select small text-muted">
+                <option>Выберите бизнес процесс</option>
+                <option v-for="(item, code) in items" :key="code">
+                  {{ item.code }}
+                </option>
+              </select>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card w-100 shadow mb-4">
+        <div class="card-header py-3">
+          <div
+            class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
+          >
+            Бизнес процесс
+          </div>
+        </div>
+        <div class="card-body">
           <div class="table-responsive border rounded">
             <table class="table" id="dataTable" cellspacing="0">
               <thead>
-                <tr class="border-0">
+                <tr class="border-0 small">
+                  <th class="border-bottom"></th>
                   <th class="border-bottom">Имя</th>
-                  <th class="border-bottom">Детали платежа</th>
-                  <th class="border-bottom">Сумма платежа</th>
+                  <th class="border-bottom">Код</th>
                   <th class="border-bottom">Группы классификации</th>
+                  <th class="border-bottom">Оценка</th>
+                  <th class="border-bottom"></th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="border-0">
+                <tr v-for="count in trCount" :key="count" class="border-bottom">
+                  <td>
+                    <div
+                      class="form-check w-100 h-100 d-flex justify-content-center"
+                    >
+                      <input
+                        class="form-check-input mt-2 ml-1"
+                        type="checkbox"
+                        value=""
+                        id="defaultCheck1"
+                      />
+                    </div>
+                  </td>
+                  <td>
                     <input
                       type="text"
                       class="form-control form-control-sm"
                       placeholder="Имя"
                     />
                   </td>
-                  <td class="border-0">
-                    <input
-                      type="text"
+                  <td>
+                    <select
                       class="form-control form-control-sm"
-                      placeholder="Детали платежа"
-                    />
-                  </td>
-                  <td class="border-0">
-                    <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      placeholder="Сумма платежа"
-                    />
-                  </td>
-                  <td class="border-0">
-                    <select v-model="items" class="border rounded py-1">
-                      <option v-for="item in items" :key="item.id">
-                        {{ item }}
+                      v-model="items"
+                    >
+                      <option>Выберите код</option>
+                      <option v-for="(item, code) in items" :key="code">
+                        {{ item.code }}
                       </option>
                     </select>
+                  </td>
+                  <td>
+                    <select
+                      class="form-control form-control-sm"
+                      v-model="items"
+                    >
+                      <option>Выберите группу</option>
+                      <option v-for="(item, code) in items" :key="code">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <span class="d-flex justify-content-space-between">
+                      <div class="input-group input-group-sm">
+                        <input
+                          placeholder="Оценка"
+                          type="text"
+                          class="form-control form-control-sm"
+                          aria-label="Sizing example input"
+                          aria-describedby="inputGroup-sizing-sm"
+                        />
+                        <input
+                          placeholder="Балл"
+                          type="text"
+                          class="form-control form-control-sm"
+                          aria-label="Sizing example input"
+                          aria-describedby="inputGroup-sizing-sm"
+                        />
+                      </div>
+                    </span>
+                  </td>
+                  <td>
+                    <button @click="trCount++" class="btn btn-sm btn-primary">
+                      <i class="fas fa-plus"></i>
+                    </button>
                   </td>
                 </tr>
               </tbody>
               <tfoot>
-                <td class="text-center small text-success" colspan="4">
+                <td class="text-center small text-success" colspan="5">
                   Заполните все поля для добавления нового процесса
                 </td>
               </tfoot>
@@ -82,7 +176,7 @@
 export default {
   data() {
     return {
-      items: [],
+      trCount: 1,
     }
   },
   mounted() {
@@ -93,3 +187,16 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.bp-select {
+  width: 100%;
+  background: none;
+  border-radius: 5px;
+  border: 1px solid rgb(186, 199, 199);
+}
+
+table tbody td {
+  border: none;
+}
+</style>
