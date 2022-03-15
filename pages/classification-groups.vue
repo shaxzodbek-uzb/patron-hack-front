@@ -10,8 +10,8 @@
               >
                 Группа классификация
                 <span>
-                  <a
-                    @click="createModal = true"
+                  <nuxt-link
+                    to="/bp-create"
                     class="btn btn-sm btn-primary btn-icon-split"
                     type="button"
                     data-toggle="modal"
@@ -21,7 +21,7 @@
                       <i class="text-white fas fa-plus"></i>
                     </span>
                     <span class="text px-2">Добавить</span>
-                  </a>
+                  </т>
                 </span>
               </div>
             </div>
@@ -55,29 +55,6 @@
                   </tbody>
                 </table>
                 <Loader v-else-if="showLoader" />
-                <b-modal v-model="createModal" title="Группа классификация" @ok="createItem">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Группа классификация</label>
-                    <div class="row">
-                      <div class="col">
-                        <input
-                          v-model="create.code"
-                          type="text"
-                          class="form-control"
-                          placeholder="Введите код"
-                        />
-                      </div>
-                      <div class="col">
-                        <input
-                          v-model="create.name"
-                          type="text"
-                          class="form-control"
-                          placeholder="Введите имя"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </b-modal>
                 <b-modal v-model="editModal" title="Группа классификация" @ok="updateItem">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Группа классификация</label>
@@ -124,7 +101,6 @@ export default {
         name: '',
         id: '',
       },
-      createModal: false,
       editModal: false,
       showLoader: true,
     }
