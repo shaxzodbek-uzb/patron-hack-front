@@ -27,7 +27,7 @@
           <form class="row" action="">
             <div class="input-group col-6 input-group-sm mb-3">
               <input
-              v-model="create.name"
+                v-model="create.name"
                 type="text"
                 class="form-control"
                 aria-label="Sizing example input"
@@ -38,7 +38,7 @@
 
             <div class="input-group col-6 input-group-sm mb-3">
               <input
-              v-model="create.code"
+                v-model="create.payment_detail"
                 type="text"
                 class="form-control"
                 aria-label="Sizing example input"
@@ -49,6 +49,7 @@
 
             <div class="input-group col-6 input-group-sm mb-3">
               <input
+                v-model="payment_amount"
                 type="text"
                 class="form-control"
                 aria-label="Sizing example input"
@@ -58,7 +59,7 @@
             </div>
 
             <div class="input-group col-6 input-group-sm mb-3">
-              <select v-model="items" class="bp-select small text-muted">
+              <select v-model="classification_group_id" class="bp-select small text-muted">
                 <option>Выберите бизнес процесс</option>
                 <option v-for="(item, code) in items" :key="code">
                   {{ item.code }}
@@ -85,9 +86,9 @@
               <thead>
                 <tr class="border-0 small">
                   <th class="border-bottom"></th>
-                  <th class="border-bottom">Имя</th>
                   <th class="border-bottom">Код</th>
                   <th class="border-bottom">Группы классификации</th>
+                  <th class="border-bottom">Дата начала</th>
                   <th class="border-bottom">Статус</th>
                   <th class="border-bottom"></th>
                 </tr>
@@ -103,13 +104,6 @@
                         id="defaultCheck1"
                       />
                     </div>
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      class="form-control form-control-sm"
-                      placeholder="Имя"
-                    />
                   </td>
                   <td>
                     <select
@@ -132,6 +126,13 @@
                         {{ item.name }}
                       </option>
                     </select>
+                  </td>
+                  <td>
+                    <input
+                      type="date"
+                      class="form-control form-control-sm"
+                      placeholder="Дата начала"
+                    />
                   </td>
                   <td>
                     <span class="d-flex justify-content-space-between">
@@ -180,7 +181,9 @@ export default {
       trCount: 1,
       create: {
         name: '',
-        code: '',
+        payment_detail: '',
+        payment_amount: '',
+        classification_group_id: '',
       },
     }
   },
@@ -191,15 +194,11 @@ export default {
     })
   },
   methods: {
-    itemCreate() {
-      this.$axios
-        .$post('/classification-groups', this.create)
-        .then((response) => {
-          console.log(response)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+     itemCreate() {
+      console.log('createItem')
+      this.$axios.$post('/business-processes', this.create).then((response) => {
+        this.items.push(response.item)
+      })
     },
   },
 }
@@ -209,8 +208,8 @@ export default {
 .bp-select {
   width: 100%;
   background: none;
-  border-radius: 5px;
-  border: 1px solid rgb(186, 199, 199);
+  border-radius: 4px;
+  border: 1px solid rgba(186, 199, 199, 0.637);
 }
 
 table tbody td {
