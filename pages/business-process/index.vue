@@ -44,7 +44,7 @@
                       class="btn btn-sm btn-primary btn-icon-split"
                     >
                       <span class="icon text-white">
-                        <i class="fas fa-pencil-alt"></i>
+                        <i class="fas fa-eye"></i>
                       </span>
                     </nuxt-link>
                     <a class="btn btn-sm btn-danger btn-icon-split">
