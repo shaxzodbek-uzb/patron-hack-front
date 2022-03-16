@@ -15,7 +15,7 @@
                 <span class="icon text-white">
                   <i class="text-white fas fa-plus"></i>
                 </span>
-                <span class="text-white px-2">Добавить</span>
+                <span class="text-white px-2 py-1">Добавить</span>
               </nuxt-link>
             </span>
           </div>
