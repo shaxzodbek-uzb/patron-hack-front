@@ -59,9 +59,6 @@
           <nuxt-link to="/classification-groups" class="collapse-item d-block">Группы</nuxt-link>
         </b-collapse>
       </li>
-      <!-- <b-collapse id="my-collapse">
-        <b-card title="Collapsible card"> Hello world! </b-card>
-      </b-collapse>-->
 
       <li class="nav-item">
         <nuxt-link to="/rules" class="nav-link">
@@ -70,11 +67,22 @@
         </nuxt-link>
       </li>
 
-      <li class="nav-item">
-        <nuxt-link to="/payment-types" class="nav-link">
+       <li class="nav-item">
+        <nuxt-link to="/payment-types" class="nav-link collapsed" data-toggle="collapse">
           <i class="fas fa-fw far fa-credit-card"></i>
-          <span>Тип платежа</span>
+          <span @click="pyCollapsed = !pyCollapsed" v-b-toggle.py-collapse>Тип платежа</span>
         </nuxt-link>
+        <div
+          id="collapseTwo"
+          class="collapse"
+          aria-labelledby="headingTwo"
+          data-parent="#accordionSidebar"
+        ></div>
+        <b-collapse id="py-collapse" class="bg-white p-2 rounded" style="font-size: 12px">
+          <nuxt-link to="/payment-transactions" class="collapse-item d-block">
+            История платежей
+          </nuxt-link>
+        </b-collapse>
       </li>
 
       <hr class="sidebar-divider d-none d-md-block" />
@@ -92,6 +100,7 @@ export default {
   data() {
     return {
       isCollapsed: false,
+      pyCollapsed: false
     }
   },
 }
