@@ -47,7 +47,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(item,idx) in items" :key="item.id">
+                    <tr v-for="(item, idx) in items" :key="item.id">
                       <td>{{ item.code }}</td>
                       <td>{{ item.name }}</td>
                       <td>{{ item.min_rate }}</td>
@@ -55,24 +55,49 @@
                       <td>{{ item.high_rate }}</td>
                       <td>{{ item.middle_rate }}</td>
                       <td>{{ item.low_rate }}</td>
-                      <td>{{ getClassificationName(item.classification_group) }}:{{ getClassificationCode(item.classification_group) }}</td>
                       <td>
-                        <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
+                        {{
+                          getClassificationName(item.classification_group)
+                        }}:{{
+                          getClassificationCode(item.classification_group)
+                        }}
+                      </td>
+                      <td>
+                        <div
+                          @click="editItem(idx)"
+                          class="btn btn-sm btn-primary btn-icon-split"
+                        >
                           <span class="icon text-white">
                             <i class="fas fa-eye"></i>
                           </span>
                         </div>
-                        <div @click="deleteItem(idx)" class="btn btn-sm btn-danger btn-icon-split">
+                        <div
+                          @click="deleteModal = true"
+                          class="btn btn-sm btn-danger btn-icon-split"
+                        >
                           <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
                         </div>
                       </td>
+                      <b-modal
+                        v-model="deleteModal"
+                        title="Удаление классификации"
+                        @ok="deleteItem(idx)"
+                      >
+                        <p class="pt-3">
+                          Вы действительно хотите удалить запись?
+                        </p>
+                      </b-modal>
                     </tr>
                   </tbody>
                 </table>
                 <Loader v-else-if="showLoader" />
-                <b-modal v-model="createModal" title="Классификации" @ok="createItem">
+                <b-modal
+                  v-model="createModal"
+                  title="Классификации"
+                  @ok="createItem"
+                >
                   <div class="form-group">
                     <label>Название</label>
                     <input
@@ -141,12 +166,25 @@
                   </div>
                   <div class="form-group">
                     <label>Группа</label>
-                    <select v-model="create.classification_group_id" class="form-control">
-                      <option v-for="item in groups" :key="item.id" :value="item.id">{{ item.name }}</option>
+                    <select
+                      v-model="create.classification_group_id"
+                      class="form-control"
+                    >
+                      <option
+                        v-for="item in groups"
+                        :key="item.id"
+                        :value="item.id"
+                      >
+                        {{ item.name }}
+                      </option>
                     </select>
                   </div>
                 </b-modal>
-                <b-modal v-model="editModal" title="Классификации" @ok="updateItem">
+                <b-modal
+                  v-model="editModal"
+                  title="Классификации"
+                  @ok="updateItem"
+                >
                   <div class="form-group">
                     <label>Название</label>
                     <input
@@ -215,8 +253,17 @@
                   </div>
                   <div class="form-group">
                     <label>Группа</label>
-                    <select v-model="update.classification_group_id" class="form-control">
-                      <option v-for="item in groups" :key="item.id" :value="item.id">{{ item.name }}</option>
+                    <select
+                      v-model="update.classification_group_id"
+                      class="form-control"
+                    >
+                      <option
+                        v-for="item in groups"
+                        :key="item.id"
+                        :value="item.id"
+                      >
+                        {{ item.name }}
+                      </option>
                     </select>
                   </div>
                 </b-modal>
@@ -258,6 +305,7 @@ export default {
       },
       createModal: false,
       editModal: false,
+      deleteModal: false,
       showLoader: true,
     }
   },
@@ -324,11 +372,16 @@ export default {
           )
         })
     },
-    deleteItem(index) {
-      let item = this.items[index]
-      this.$axios.$delete('/organizational-structures/' + item.id).then(() => {
+    deleteItem(idx) {
+      this.deleteModal = true
+      this.update.id = this.items[idx].id
+
+      let item = this.items[idx]
+      this.$axios.$delete('/classifications/' + item.id).then(() => {
         this.items.splice(this.items.findIndex((i) => i.id === item.id))
       })
+      console.log(this.update.id)
+      console.log(this.items)
     },
   },
 }
