@@ -23,7 +23,7 @@
         </div>
         <div class="card-body">
           <form class="row small">
-            <label class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-md-6 input-group-sm mb-3">
               Название
               <input
                 v-model="update.name"
@@ -33,7 +33,7 @@
               />
             </label>
 
-            <label class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-md-6 input-group-sm mb-3">
               Детали платежа
               <input
                 v-model="update.payment_detail"
@@ -43,7 +43,7 @@
               />
             </label>
 
-            <label class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-md-6 input-group-sm mb-3">
               Сумма платежа
               <input
                 v-model="update.payment_amount"
@@ -53,7 +53,7 @@
               />
             </label>
 
-            <label class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-md-6 input-group-sm mb-3">
               Выберите бизнес процесс
               <select
                 v-model="update.classification_group_id"
@@ -175,22 +175,22 @@
       <b-modal
         v-model="createModal"
         title="Группа классификация"
-        @ok="createItem"
+        @ok="message = true"
       >
         <div class="form-group">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 ">
               <label class="input-group input-group-sm">
                 Общая сумма:
-                  <input
-                    type="text"
-                    class="form-control w-100"
-                    readonly
-                    :value="update.payment_amount"
-                  />
+                <input
+                  type="text"
+                  class="form-control w-100"
+                  readonly
+                  :value="update.payment_amount"
+                />
               </label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 ">
               <label class="input-group input-group-sm">
                 Тип платежа
                 <select class="form-control small w-100">
@@ -204,6 +204,19 @@
                 </select>
               </label>
             </div>
+          </div>
+        </div>
+      </b-modal>
+
+        <b-modal
+        v-model="message"
+        title="Процесс завершен"
+        @ok="message"
+      >
+        <div class="form-group">
+          <div class="d-flex text-success flex-column justify-content-center align-items-center">
+            <span class="my-3">Операция выполнена успешно</span>
+            <i class="fas fa-check fa-2x"></i>
           </div>
         </div>
       </b-modal>
@@ -237,11 +250,11 @@
             <ChartLine :height="100" :chartdata="dataset" />
           </div>
         </div>
-        <div class="d-flex justify-content-end pb-5">
-          <button
-            class="btn btn-sm btn-primary btn-icon-split"
-            @click="createModal = true"
-          >
+        <div
+          @click="createModal = true"
+          class="d-flex justify-content-end pb-5"
+        >
+          <button class="btn btn-sm btn-primary btn-icon-split">
             <span class="icon text-white">
               <i class="fas fa-check"></i>
             </span>
@@ -257,7 +270,8 @@
 export default {
   data() {
     return {
-      createModal: true,
+      message: false,
+      createModal: false,
       loading: false,
       groups: [],
       create: {
@@ -387,6 +401,13 @@ export default {
         .put('/business-processes/' + this.update.id, this.update)
         .then(({ data: { items } }) => {
           this.$router.push('/business-process')
+        })
+    },
+    createItem() {
+      this.$axios
+        .post('/payment-transactions', this.create)
+        .then(({ data: { items } }) => {
+          this.$router.push('/payment-transactions')
         })
     },
     completeClassification(index) {

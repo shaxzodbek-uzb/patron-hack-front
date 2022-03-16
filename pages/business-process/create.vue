@@ -25,7 +25,7 @@
         </div>
         <div class="card-body">
           <form class="row small" action>
-            <label class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-md-6 input-group-sm mb-3">
               Название
               <input
                 v-model="create.name"
@@ -35,7 +35,7 @@
               />
             </label>
 
-            <label class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-md-6 input-group-sm mb-3">
               Детали платежа
               <input
                 v-model="create.payment_detail"
@@ -45,7 +45,7 @@
               />
             </label>
 
-            <label class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-md-6 input-group-sm mb-3">
               Сумма платежа
               <input
                 v-model="create.payment_amount"
@@ -55,7 +55,7 @@
               />
             </label>
 
-            <label class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-md-6 input-group-sm mb-3">
               Выберите группу
               <select
                 v-model="create.classification_group_id"
