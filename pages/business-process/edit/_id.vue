@@ -90,7 +90,12 @@
                 <tr class="border-0 small">
                   <th class="border-bottom">Код</th>
                   <th class="border-bottom">Группы классификации</th>
-                  <th class="border-bottom">Дата</th>
+                  <th class="border-bottom">
+                    <span class="row text-center">
+                      <div class="col-6">Начало</div>
+                      <div class="col-6">Конец</div>
+                    </span>
+                  </th>
                   <th class="border-bottom">Оценка</th>
                   <th class="border-bottom"></th>
                 </tr>
@@ -104,9 +109,13 @@
                   <td>{{ classification.code }}</td>
                   <td>{{ classification.name }}</td>
                   <td>
-                    <div class="input-group input-group-sm">
-                      {{ classification.pivot.date_start }} ->
-                      {{ classification.pivot.date_finish }}
+                    <div class="row text-center">
+                      <span class="col-6">
+                        {{ classification.pivot.date_start }}
+                      </span>
+                      <span class="col-6">
+                        {{ classification.pivot.date_finish }}
+                      </span>
                     </div>
                   </td>
                   <td>
@@ -132,12 +141,12 @@
                       />
                     </div>
                     <div v-else>
-                      <span class="badge badge-warning">{{
-                        classification.pivot.time_rate
-                      }}</span>
-                      <span class="badge badge-info">{{
-                        classification.pivot.quality_rate
-                      }}</span>
+                      <span class="badge badge-warning">
+                        {{ classification.pivot.time_rate }}
+                      </span>
+                      <span class="badge badge-info">
+                        {{ classification.pivot.quality_rate }}
+                      </span>
                     </div>
                   </td>
                   <td>
@@ -162,6 +171,43 @@
           </div>
         </div>
       </div>
+
+      <b-modal
+        v-model="createModal"
+        title="Группа классификация"
+        @ok="createItem"
+      >
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="input-group input-group-sm">
+                Общая сумма:
+                  <input
+                    type="text"
+                    class="form-control w-100"
+                    readonly
+                    :value="update.payment_amount"
+                  />
+              </label>
+            </div>
+            <div class="col-md-6">
+              <label class="input-group input-group-sm">
+                Тип платежа
+                <select class="form-control small w-100">
+                  <option
+                    v-for="(item, code) in payment"
+                    :key="code"
+                    :value="item.id"
+                  >
+                    {{ item.name }}
+                  </option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+      </b-modal>
+
       <!-- Pie Chart -->
       <div class="w-100" v-if="update.status == 'done'">
         <div class="card shadow mb-4">
@@ -191,6 +237,17 @@
             <ChartLine :height="100" :chartdata="dataset" />
           </div>
         </div>
+        <div class="d-flex justify-content-end pb-5">
+          <button
+            class="btn btn-sm btn-primary btn-icon-split"
+            @click="createModal = true"
+          >
+            <span class="icon text-white">
+              <i class="fas fa-check"></i>
+            </span>
+            <span class="text">Завершить</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -200,8 +257,13 @@
 export default {
   data() {
     return {
+      createModal: true,
       loading: false,
       groups: [],
+      create: {
+        payment_amount: '',
+        payment_type: '',
+      },
       update: {
         id: this.$route.params.id,
         name: '',
@@ -302,6 +364,9 @@ export default {
           this.loading = false
         })
       })
+    this.$axios.$get(`/payment-types`).then(({ items }) => {
+      this.payment = items
+    })
   },
   watch: {
     'create.classification_group_id'() {
