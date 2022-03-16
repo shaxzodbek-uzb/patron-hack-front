@@ -39,7 +39,7 @@
                   <td>
                     <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
                       <span class="icon text-white">
-                        <i class="fas fa-pencil-alt"></i>
+                        <i class="fas fa-eye"></i>
                       </span>
                     </div>
                     <div @click="deleteItem(idx)" class="btn btn-sm btn-danger btn-icon-split">
