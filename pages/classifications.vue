@@ -291,6 +291,16 @@ export default {
       console.log('createItem')
       this.$axios.$post('/classifications', this.create).then((response) => {
         this.items.push(response.item)
+        this.create = {
+          name: '',
+          code: '',
+          min_rate: 0,
+          max_rate: 0,
+          high_rate: 0,
+          middle_rate: 0,
+          low_rate: 0,
+          classification_group_id: null,
+        }
       })
     },
     editItem(index) {

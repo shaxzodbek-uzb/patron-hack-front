@@ -111,6 +111,9 @@ export default {
       console.log('createItem')
       this.$axios.$post('/rules', this.create).then((response) => {
         this.items.push(response.item)
+        this.create = {
+          name: '',
+        }
       })
     },
     editItem(index) {

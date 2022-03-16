@@ -164,6 +164,10 @@ export default {
       console.log('createItem')
       this.$axios.$post('/employees', this.create).then((response) => {
         this.items.push(response.item)
+        this.create = {
+          full_name: '',
+          employee_position_id: null,
+        }
       })
     },
     editItem(index) {

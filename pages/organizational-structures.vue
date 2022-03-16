@@ -117,6 +117,9 @@ export default {
         .$post('/organizational-structures', this.create)
         .then((response) => {
           this.items.push(response.item)
+          this.create = {
+            name: '',
+          }
         })
     },
     editItem(index) {

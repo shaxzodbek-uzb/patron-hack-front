@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="card-body">
-          <form class="row small" action>
+          <form class="row small">
             <label class="input-group col-6 input-group-sm mb-3">
               Название
               <input

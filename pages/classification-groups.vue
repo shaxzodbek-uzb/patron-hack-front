@@ -143,11 +143,14 @@ export default {
   },
   methods: {
     createItem() {
-      console.log('createItem')
       this.$axios
         .$post('/classification-groups', this.create)
         .then((response) => {
           this.items.push(response.item)
+          this.create = {
+            code: '',
+            name: '',
+          }
         })
     },
     editItem(index) {

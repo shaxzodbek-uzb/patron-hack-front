@@ -115,9 +115,12 @@ export default {
   },
   methods: {
     createItem() {
-      console.log('createItem')
       this.$axios.$post('/employee-positions', this.create).then((response) => {
         this.items.push(response.item)
+        this.create = {
+          name: '',
+          salary: 0,
+        }
       })
     },
     editItem(index) {
