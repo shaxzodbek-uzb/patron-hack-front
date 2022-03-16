@@ -22,38 +22,42 @@
           </div>
         </div>
         <div class="card-body">
-          <form class="row" action>
-            <div class="input-group col-6 input-group-sm mb-3">
+          <form class="row small" action>
+            <label class="input-group col-6 input-group-sm mb-3">
+              Название
               <input
                 v-model="update.name"
                 type="text"
-                class="form-control"
+                class="form-control w-100"
                 placeholder="Название бизнес процесса"
               />
-            </div>
+            </label>
 
-            <div class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-6 input-group-sm mb-3">
+              Детали платежа
               <input
                 v-model="update.payment_detail"
                 type="text"
-                class="form-control"
+                class="form-control w-100"
                 placeholder="Детали платежа"
               />
-            </div>
+            </label>
 
-            <div class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-6 input-group-sm mb-3">
+              Сумма платежа
               <input
                 v-model="update.payment_amount"
                 type="text"
-                class="form-control"
+                class="form-control w-100"
                 placeholder="Сумма платежа"
               />
-            </div>
+            </label>
 
-            <div class="input-group col-6 input-group-sm mb-3">
+            <label class="input-group col-6 input-group-sm mb-3">
+              Выберите бизнес процесс
               <select
                 v-model="update.classification_group_id"
-                class="small w-100"
+                class="small form-control w-100"
                 aria-placeholder="Выберите бизнес процесс"
               >
                 <option
@@ -61,9 +65,11 @@
                   v-for="(item, code) in groups"
                   :key="code"
                   :value="item.id"
-                >{{ item.code }}: {{ item.name }}</option>
+                >
+                  {{ item.code }}: {{ item.name }}
+                </option>
               </select>
-            </div>
+            </label>
           </form>
         </div>
       </div>
@@ -73,7 +79,9 @@
         <div class="card-header py-3">
           <div
             class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
-          >Бизнес процесс</div>
+          >
+            Бизнес процесс
+          </div>
         </div>
         <div class="card-body">
           <div class="table-responsive border rounded">
@@ -96,12 +104,16 @@
                   <td>{{ classification.code }}</td>
                   <td>{{ classification.name }}</td>
                   <td>
-                    <div
-                      class="input-group input-group-sm"
-                    >{{classification.pivot.date_start }} -> {{ classification.pivot.date_finish}}</div>
+                    <div class="input-group input-group-sm">
+                      {{ classification.pivot.date_start }} ->
+                      {{ classification.pivot.date_finish }}
+                    </div>
                   </td>
                   <td>
-                    <div class="input-group input-group-sm" v-if="!classification.pivot.done">
+                    <div
+                      class="input-group input-group-sm"
+                      v-if="!classification.pivot.done"
+                    >
                       <input
                         placeholder="Время"
                         type="text"
@@ -120,8 +132,12 @@
                       />
                     </div>
                     <div v-else>
-                      <span class="badge badge-warning">{{ classification.pivot.time_rate }}</span>
-                      <span class="badge badge-info">{{ classification.pivot.quality_rate }}</span>
+                      <span class="badge badge-warning">{{
+                        classification.pivot.time_rate
+                      }}</span>
+                      <span class="badge badge-info">{{
+                        classification.pivot.quality_rate
+                      }}</span>
                     </div>
                   </td>
                   <td>
@@ -138,10 +154,9 @@
                 </tr>
               </tbody>
               <tfoot>
-                <td
-                  class="text-center small text-success"
-                  colspan="5"
-                >Заполните все поля для добавления нового процесса</td>
+                <td class="text-center small text-success" colspan="5">
+                  Заполните все поля для добавления нового процесса
+                </td>
               </tfoot>
             </table>
           </div>
@@ -151,8 +166,12 @@
       <div class="w-100" v-if="update.status == 'done'">
         <div class="card shadow mb-4">
           <!-- Card Header - Dropdown -->
-          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Количество платежей</h6>
+          <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+          >
+            <h6 class="m-0 font-weight-bold text-primary">
+              Количество платежей
+            </h6>
             <div class="dropdown no-arrow">
               <a
                 class="dropdown-toggle"
