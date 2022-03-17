@@ -26,16 +26,12 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table
-              v-if="!showLoader"
-              class="table table-bordered"
-              id="dataTable"
-              cellspacing="0"
-            >
+            <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Имя</th>
+                  <th>ФИО</th>
+                  <th>Отдел</th>
                   <th>Позиция</th>
                   <th>Дата начала</th>
                   <th>Действия</th>
@@ -45,21 +41,16 @@
                 <tr v-for="(item, idx) in items" :key="item.id">
                   <td>{{ item.id }}</td>
                   <td>{{ item.full_name }}</td>
+                  <td>{{ getOrganizationalStructureName(item) }}</td>
                   <td>{{ getEmployeePositionName(item) }}</td>
                   <td>{{ item.created_at.substring(0, 10) }}</td>
                   <td>
-                    <div
-                      @click="editItem(idx)"
-                      class="btn btn-sm btn-primary btn-icon-split"
-                    >
+                    <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-eye"></i>
                       </span>
                     </div>
-                    <div
-                      @click="deleteModal = true"
-                      class="btn btn-sm btn-danger btn-icon-split"
-                    >
+                    <div @click="deleteModal = true" class="btn btn-sm btn-danger btn-icon-split">
                       <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
@@ -79,7 +70,7 @@
             <Loader v-else-if="showLoader" />
             <b-modal v-model="createModal" title="Ползователи" @ok="createItem">
               <div class="form-group">
-                <label for="exampleInputEmail1">Имя</label>
+                <label for="exampleInputEmail1">ФИО</label>
                 <input
                   v-model="create.full_name"
                   type="text"
@@ -89,23 +80,28 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Позиция</label>
-                <select
-                  v-model="create.employee_position_id"
-                  class="form-control"
-                >
+                <select v-model="create.employee_position_id" class="form-control">
                   <option
                     v-for="position in positions"
                     :key="position.id"
                     :value="position.id"
-                  >
-                    {{ position.name }}
-                  </option>
+                  >{{ position.name }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Позиция</label>
+                <select v-model="create.organizational_structure_id" class="form-control">
+                  <option
+                    v-for="position in organizational_structures"
+                    :key="position.id"
+                    :value="position.id"
+                  >{{ position.name }}</option>
                 </select>
               </div>
             </b-modal>
             <b-modal v-model="editModal" title="Ползователи" @ok="updateItem">
               <div class="form-group">
-                <label for="exampleInputEmail1">Имя</label>
+                <label for="exampleInputEmail1">ФИО</label>
                 <input
                   v-model="update.full_name"
                   type="text"
@@ -115,17 +111,22 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Позиция</label>
-                <select
-                  v-model="update.employee_position_id"
-                  class="form-control"
-                >
+                <select v-model="update.employee_position_id" class="form-control">
                   <option
                     v-for="position in positions"
                     :key="position.id"
                     :value="position.id"
-                  >
-                    {{ position.name }}
-                  </option>
+                  >{{ position.name }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Позиция</label>
+                <select v-model="update.organizational_structure_id" class="form-control">
+                  <option
+                    v-for="position in organizational_structures"
+                    :key="position.id"
+                    :value="position.id"
+                  >{{ position.name }}</option>
                 </select>
               </div>
             </b-modal>
@@ -142,13 +143,16 @@ export default {
     return {
       items: [],
       positions: [],
+      organizational_structures: [],
       create: {
         full_name: '',
         employee_position_id: null,
+        organizational_structure_id: null,
       },
       update: {
         full_name: '',
         employee_position_id: null,
+        organizational_structure_id: null,
         id: '',
       },
       createModal: false,
@@ -165,10 +169,18 @@ export default {
       this.items = response.items
       this.showLoader = false
     })
+    this.$axios.$get('/organizational-structures').then((response) => {
+      this.organizational_structures = response.items
+    })
   },
   methods: {
     getEmployeePositionName(item) {
       return item.employee_position ? item.employee_position.name : '-'
+    },
+    getOrganizationalStructureName(item) {
+      return item.organizational_structure
+        ? item.organizational_structure.name
+        : '-'
     },
     createItem() {
       this.$axios.$post('/employees', this.create).then((response) => {
@@ -176,12 +188,15 @@ export default {
         this.create = {
           full_name: '',
           employee_position_id: null,
+          organizational_structure_id: null,
         }
       })
     },
     editItem(index) {
       let item = this.items[index]
       this.update.full_name = item.full_name
+      this.update.employee_position_id = item.employee_position_id
+      this.update.organizational_structure_id = item.organizational_structure_id
       this.update.id = item.id
       this.editModal = true
     },

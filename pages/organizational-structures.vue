@@ -2,6 +2,9 @@
   <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
       <div class="container-fluid">
+        <no-ssr>
+          <OrganizationalStructureDiagram v-model="treeDataLoaded" :treeData="treeData" />
+        </no-ssr>
         <div class="row">
           <div class="card w-100 shadow mb-4">
             <div class="card-header py-3">
@@ -37,7 +40,7 @@
                     <tr>
                       <th>ID</th>
                       <th>Имя</th>
-                      <th>Parent Id</th>
+                      <th>по пункту</th>
                       <th>Действия</th>
                     </tr>
                   </thead>
@@ -45,12 +48,9 @@
                     <tr v-for="(item, idx) in items" :key="item.id">
                       <td>{{ item.id }}</td>
                       <td>{{ item.name }}</td>
-                      <td>System Architect</td>
+                      <td>{{ getParentName(item) }}</td>
                       <td>
-                        <div
-                          @click="editItem(idx)"
-                          class="btn btn-sm btn-primary btn-icon-split"
-                        >
+                        <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
                           <span class="icon text-white">
                             <i class="fas fa-eye"></i>
                           </span>
@@ -69,23 +69,15 @@
                         title="Удаление классификации"
                         @ok="deleteItem(idx)"
                       >
-                        <p class="pt-3">
-                          Вы действительно хотите удалить запись?
-                        </p>
+                        <p class="pt-3">Вы действительно хотите удалить запись?</p>
                       </b-modal>
                     </tr>
                   </tbody>
                 </table>
                 <Loader v-else-if="showLoader" />
-                <b-modal
-                  v-model="createModal"
-                  title="Организационная структура"
-                  @ok="createItem"
-                >
+                <b-modal v-model="createModal" title="Организационная структура" @ok="createItem">
                   <div class="form-group">
-                    <label for="exampleInputEmail1"
-                      >Организационная структура</label
-                    >
+                    <label for="exampleInputEmail1">Организационная структура</label>
                     <input
                       v-model="create.name"
                       type="text"
@@ -93,22 +85,45 @@
                       placeholder="Введите структура"
                     />
                   </div>
-                </b-modal>
-                <b-modal
-                  v-model="editModal"
-                  title="Организационная структура"
-                  @ok="updateItem"
-                >
                   <div class="form-group">
-                    <label for="exampleInputEmail1"
-                      >Организационная структура</label
+                    <label for="exampleInputEmail1">по пункту</label>
+                    <select
+                      v-model="create.parent_id"
+                      class="form-control"
+                      id="exampleFormControlSelect1"
                     >
+                      <option
+                        v-for="(item) in items"
+                        :key="item.id"
+                        :value="item.id"
+                      >{{ item.name }}</option>
+                    </select>
+                  </div>
+                </b-modal>
+                <b-modal v-model="editModal" title="Организационная структура" @ok="updateItem">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Организационная структура</label>
                     <input
                       v-model="update.name"
                       type="text"
                       class="form-control"
                       placeholder="Введите структура"
                     />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">по пункту</label>
+                    <select
+                      v-model="update.parent_id"
+                      class="form-control"
+                      id="exampleFormControlSelect1"
+                    >
+                      <option
+                        v-for="(item) in items"
+                        :key="item.id"
+                        :value="item.id"
+                      >{{ item.name }}</option>
+                    </select>
                   </div>
                 </b-modal>
               </div>
@@ -126,16 +141,20 @@ export default {
     return {
       items: [],
       create: {
+        parent_id: null,
         name: '',
       },
       update: {
         name: '',
+        parent_id: null,
         id: '',
       },
       createModal: false,
       editModal: false,
       deleteModal: false,
       showLoader: true,
+      treeDataLoaded: false,
+      treeData: [],
     }
   },
   mounted() {
@@ -143,8 +162,12 @@ export default {
       this.items = response.items
       this.showLoader = false
     })
+    this.loadTreeData()
   },
   methods: {
+    getParentName(item) {
+      return item.parent ? item.parent.name : 'Корень'
+    },
     createItem() {
       this.$axios
         .$post('/organizational-structures', this.create)
@@ -153,6 +176,7 @@ export default {
           this.create = {
             name: '',
           }
+          this.loadTreeData()
         })
     },
     editItem(index) {
@@ -170,6 +194,7 @@ export default {
             1,
             response.item
           )
+          this.loadTreeData()
         })
     },
     deleteItem(idx) {
@@ -179,7 +204,16 @@ export default {
           this.items.findIndex((i) => i.id === item.id),
           1
         )
+        this.loadTreeData()
       })
+    },
+    loadTreeData() {
+      this.$axios
+        .$get('/organizational-structures/tree-view')
+        .then((response) => {
+          this.treeData = response.items
+          this.treeDataLoaded = true
+        })
     },
   },
 }

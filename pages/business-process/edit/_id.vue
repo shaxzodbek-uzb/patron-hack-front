@@ -65,9 +65,7 @@
                   v-for="(item, code) in groups"
                   :key="code"
                   :value="item.id"
-                >
-                  {{ item.code }}: {{ item.name }}
-                </option>
+                >{{ item.code }}: {{ item.name }}</option>
               </select>
             </label>
           </form>
@@ -79,9 +77,7 @@
         <div class="card-header py-3">
           <div
             class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
-          >
-            Бизнес процесс
-          </div>
+          >Бизнес процесс</div>
         </div>
         <div class="card-body">
           <div class="table-responsive border rounded">
@@ -110,19 +106,12 @@
                   <td>{{ classification.name }}</td>
                   <td>
                     <div class="row text-center">
-                      <span class="col-6">
-                        {{ classification.pivot.date_start }}
-                      </span>
-                      <span class="col-6">
-                        {{ classification.pivot.date_finish }}
-                      </span>
+                      <span class="col-6">{{ classification.pivot.date_start }}</span>
+                      <span class="col-6">{{ classification.pivot.date_finish }}</span>
                     </div>
                   </td>
                   <td>
-                    <div
-                      class="input-group input-group-sm"
-                      v-if="!classification.pivot.done"
-                    >
+                    <div class="input-group input-group-sm" v-if="!classification.pivot.done">
                       <input
                         placeholder="Время"
                         type="text"
@@ -141,12 +130,8 @@
                       />
                     </div>
                     <div v-else>
-                      <span class="badge badge-warning">
-                        {{ classification.pivot.time_rate }}
-                      </span>
-                      <span class="badge badge-info">
-                        {{ classification.pivot.quality_rate }}
-                      </span>
+                      <span class="badge badge-warning">{{ classification.pivot.time_rate }}</span>
+                      <span class="badge badge-info">{{ classification.pivot.quality_rate }}</span>
                     </div>
                   </td>
                   <td>
@@ -163,37 +148,34 @@
                 </tr>
               </tbody>
               <tfoot>
-                <td class="text-center small text-success" colspan="5">
-                  Заполните все поля для добавления нового процесса
-                </td>
+                <td
+                  class="text-center small text-success"
+                  colspan="5"
+                >Заполните все поля для добавления нового процесса</td>
               </tfoot>
-              {{
-                groups
-              }}
-              <br />
-              <br />
-              <br />
-              {{
-                payment
-              }}
-              <br />
-              <br />
-              <br />
-              {{
-                update
-              }}
             </table>
           </div>
         </div>
       </div>
 
-      <b-modal
-        v-model="createModal"
-        title="Группа классификация"
-        @ok="createItem"
-      >
+      <b-modal v-model="createPaymentModel" title="Создать платеж" @ok="createPayment">
         <div class="form-group">
           <div class="row">
+            <div class="col-md-6">
+              <label class="input-group input-group-sm">
+                Тип платежа:
+                <select
+                  class="form-control small w-100"
+                  v-model="payment.payment_type_id"
+                >
+                  <option
+                    v-for="(item, code) in payment_types"
+                    :key="code"
+                    :value="item.id"
+                  >{{ item.name }}</option>
+                </select>
+              </label>
+            </div>
             <div class="col-md-6">
               <label class="input-group input-group-sm">
                 Общая сумма:
@@ -201,22 +183,24 @@
                   type="text"
                   class="form-control w-100"
                   readonly
-                  :value="update.payment_amount"
+                  v-model="payment.amount"
                 />
               </label>
             </div>
             <div class="col-md-6">
               <label class="input-group input-group-sm">
-                Тип платежа
-                <select class="form-control small w-100">
-                  <option
-                    v-for="(item, code) in payment"
-                    :key="code"
-                    :value="item.id"
-                  >
-                    {{ item.name }}
-                  </option>
-                </select>
+                Детали платежа:
+                <input
+                  type="text"
+                  class="form-control w-100"
+                  v-model="payment.payment_detail"
+                />
+              </label>
+            </div>
+            <div class="col-md-6">
+              <label class="input-group input-group-sm">
+                Дата:
+                <input type="date" class="form-control w-100" v-model="payment.date" />
               </label>
             </div>
           </div>
@@ -225,9 +209,7 @@
 
       <b-modal v-model="message" title="Процесс завершен" @ok="message = false">
         <div class="form-group">
-          <div
-            class="d-flex text-success flex-column justify-content-center align-items-center"
-          >
+          <div class="d-flex text-success flex-column justify-content-center align-items-center">
             <span class="my-3">Операция выполнена успешно</span>
             <i class="fas fa-check fa-2x"></i>
           </div>
@@ -238,12 +220,8 @@
       <div class="w-100" v-if="update.status == 'done'">
         <div class="card shadow mb-4">
           <!-- Card Header - Dropdown -->
-          <div
-            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
-          >
-            <h6 class="m-0 font-weight-bold text-primary">
-              Количество платежей
-            </h6>
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Количество платежей</h6>
             <div class="dropdown no-arrow">
               <a
                 class="dropdown-toggle"
@@ -263,10 +241,7 @@
             <ChartLine :height="100" :chartdata="dataset" />
           </div>
         </div>
-        <div
-          @click="createModal = true"
-          class="d-flex justify-content-end pb-5"
-        >
+        <div @click="openPaymentModal" class="d-flex justify-content-end pb-5">
           <button class="btn btn-sm btn-primary btn-icon-split">
             <span class="icon text-white">
               <i class="fas fa-check"></i>
@@ -284,15 +259,17 @@ export default {
   data() {
     return {
       message: false,
-      createModal: false,
+      createPaymentModel: false,
       loading: false,
       groups: [],
-      payment: [],
-      create: {
-        payment_amount: '',
-        payment_type: '',
-        payment_status: '',
-        status: 'done',
+      payment_types: [],
+      payment: {
+        payment_detail: '',
+        amount: '',
+        payment_type_id: null,
+        business_process_id: this.$route.params.id,
+        date: null,
+        payment_status: 'completed',
       },
       update: {
         id: this.$route.params.id,
@@ -395,7 +372,7 @@ export default {
         })
       })
     this.$axios.$get(`/payment-types`).then(({ items }) => {
-      this.payment = items
+      this.payment_types = items
     })
   },
   watch: {
@@ -419,13 +396,13 @@ export default {
           this.$router.push('/business-process')
         })
     },
-    createItem() {
-      this.$axios
-        .post('/payment-transactions', {
-        payment_detail: this.create.payment_detail,
-        payment_status: this.create.status,
-        amount: update.payment_amount,
-      })
+    createPayment() {
+      this.$axios.post('/payment-transactions', this.payment)
+    },
+    openPaymentModal() {
+      this.createPaymentModel = true
+      this.payment.payment_detail = this.update.payment_detail
+      this.payment.amount = this.update.payment_amount
     },
   },
   completeClassification(index) {

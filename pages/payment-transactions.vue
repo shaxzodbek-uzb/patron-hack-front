@@ -29,10 +29,53 @@
             <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
               <thead>
                 <tr>
+                  <th>ID</th>
+                  <th>Бизнес-процесс</th>
+                  <th>Общая сумма</th>
+                  <th>Детали платежа</th>
+                  <th>Тип платежа</th>
+                  <th>Статус</th>
+                  <th>Дата</th>
+                  <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
-                {{ items }}
+                <tr v-for="(item, idx) in items" :key="item.id">
+                  <td>{{ item.id }}</td>
+                  <td>
+                    <nuxt-link
+                      :to="`/business-process/edit/${item.business_process_id}`"
+                    >{{ item.business_process.id }}: {{ item.business_process.name }}</nuxt-link>
+                  </td>
+                  <td>{{ item.amount }}</td>
+                  <td>{{ item.payment_detail }}</td>
+                  <td>{{ item.payment_type.name }}</td>
+                  <td>
+                    <span
+                      class="badge badge-success"
+                    >{{ item.payment_status=='completed'?'Завершенный':'В ожидании' }}</span>
+                  </td>
+                  <td>{{ item.date }}</td>
+                  <td>
+                    <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
+                      <span class="icon text-white">
+                        <i class="fas fa-eye"></i>
+                      </span>
+                    </div>
+                    <div @click="deleteModal = true" class="btn btn-sm btn-danger btn-icon-split">
+                      <span class="icon text-white">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                    </div>
+                  </td>
+                  <b-modal
+                    v-model="deleteModal"
+                    title="Удаление классификации"
+                    @ok="deleteItem(idx)"
+                  >
+                    <p class="pt-3">Вы действительно хотите удалить запись?</p>
+                  </b-modal>
+                </tr>
               </tbody>
             </table>
             <Loader v-else-if="showLoader" />

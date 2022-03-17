@@ -43,11 +43,16 @@
       </li>
 
       <li class="nav-item">
-        <nuxt-link to="/business-process" class="nav-link collapsed" data-toggle="collapse">
+        <div
+          v-b-toggle.my-collapse
+          class="nav-link collapsed"
+          data-toggle="collapse"
+          @click="isCollapsed = !isCollapsed"
+        >
           <i v-if="!isCollapsed" class="fas fa-folder"></i>
           <i v-else class="fas fa-folder-open"></i>
-          <span @click="isCollapsed = !isCollapsed" v-b-toggle.my-collapse>Бизнес процесс</span>
-        </nuxt-link>
+          <span>Бизнес процесс</span>
+        </div>
         <div
           id="collapseTwo"
           class="collapse"
@@ -55,23 +60,30 @@
           data-parent="#accordionSidebar"
         ></div>
         <b-collapse id="my-collapse" class="bg-white p-2 rounded" style="font-size: 12px">
+          <nuxt-link to="/business-process" class="collapse-item d-block">Бизнес процесс</nuxt-link>
           <nuxt-link to="/classifications" class="collapse-item d-block">Классификация</nuxt-link>
           <nuxt-link to="/classification-groups" class="collapse-item d-block">Группы</nuxt-link>
         </b-collapse>
       </li>
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <nuxt-link to="/rules" class="nav-link">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Бизнес правила</span>
         </nuxt-link>
-      </li>
+      </li>-->
 
-       <li class="nav-item">
-        <nuxt-link to="/payment-types" class="nav-link collapsed" data-toggle="collapse">
-          <i class="fas fa-fw far fa-credit-card"></i>
-          <span @click="pyCollapsed = !pyCollapsed" v-b-toggle.py-collapse>Тип платежа</span>
-        </nuxt-link>
+      <li class="nav-item">
+        <div
+          class="nav-link collapsed"
+          data-toggle="collapse"
+          @click="pyCollapsed = !pyCollapsed"
+          v-b-toggle.py-collapse
+        >
+          <i v-if="!pyCollapsed" class="fas fa-folder"></i>
+          <i v-else class="fas fa-folder-open"></i>
+          <span>Платежи</span>
+        </div>
         <div
           id="collapseTwo"
           class="collapse"
@@ -79,9 +91,8 @@
           data-parent="#accordionSidebar"
         ></div>
         <b-collapse id="py-collapse" class="bg-white p-2 rounded" style="font-size: 12px">
-          <nuxt-link to="/payment-transactions" class="collapse-item d-block">
-            История платежей
-          </nuxt-link>
+          <nuxt-link to="/payment-types" class="collapse-item d-block">Тип платежа</nuxt-link>
+          <nuxt-link to="/payment-transactions" class="collapse-item d-block">История платежей</nuxt-link>
         </b-collapse>
       </li>
 
@@ -100,7 +111,7 @@ export default {
   data() {
     return {
       isCollapsed: false,
-      pyCollapsed: false
+      pyCollapsed: false,
     }
   },
 }
