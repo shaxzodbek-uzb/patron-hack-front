@@ -55,7 +55,7 @@
                       </span>
                     </div>
                     <div
-                      @click="deleteItem(idx)"
+                      @click="deleteModal = true"
                       class="btn btn-sm btn-danger btn-icon-split"
                     >
                       <span class="icon text-white">
@@ -63,6 +63,14 @@
                       </span>
                     </div>
                   </td>
+
+                  <b-modal
+                    v-model="deleteModal"
+                    title="Удаление классификации"
+                    @ok="deleteItem(idx)"
+                  >
+                    <p class="pt-3">Вы действительно хотите удалить запись?</p>
+                  </b-modal>
                 </tr>
               </tbody>
             </table>
@@ -143,6 +151,7 @@ export default {
       },
       createModal: false,
       editModal: false,
+      deleteModal: false,
       showLoader: true,
     }
   },
