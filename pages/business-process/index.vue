@@ -29,6 +29,7 @@
             >
               <thead>
                 <tr>
+                  <th>ID</th>
                   <th>Имя</th>
                   <th>Детали платежа</th>
                   <th>Сумма платежа</th>
@@ -38,6 +39,7 @@
               </thead>
               <tbody>
                 <tr v-for="(item, idx) in items" :key="item.id">
+                  <td>{{ item.id }}</td>
                   <td>{{ item.name }}</td>
                   <td>Быстро</td>
                   <td>{{ item.payment_amount }}</td>

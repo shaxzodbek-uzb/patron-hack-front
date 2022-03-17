@@ -30,12 +30,14 @@
             <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
               <thead>
                 <tr>
+                  <th>ID</th>
                   <th>Бизнес правила</th>
                   <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(item, idx) in items" :key="item.id">
+                  <td>{{ item.id }}</td>
                   <td>{{ item.name }}</td>
                   <td>
                     <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">

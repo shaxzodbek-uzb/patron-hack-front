@@ -32,6 +32,7 @@
           >
             <thead>
               <tr>
+                <th>ID</th>
                 <th scope="col">Позиция</th>
                 <th scope="col">Зарплата</th>
                 <th scope="col">Действия</th>
@@ -39,6 +40,7 @@
             </thead>
             <tbody>
               <tr v-for="(item, idx) in items" :key="item.id">
+                <td>{{ item.id }}</td>
                 <td>{{ item.name }}</td>
                 <td>${{ item.salary }}</td>
                 <td>

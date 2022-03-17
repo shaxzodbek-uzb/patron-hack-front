@@ -35,6 +35,7 @@
                 >
                   <thead>
                     <tr>
+                      <th>ID</th>
                       <th>Код</th>
                       <th>Имя</th>
                       <th>Действия</th>
@@ -42,6 +43,7 @@
                   </thead>
                   <tbody>
                     <tr v-for="(item,idx) in items" :key="item.id">
+                      <td>{{ item.id }}</td>
                       <td>{{ item.code }}</td>
                       <td>{{ item.name }}</td>
                       <td>

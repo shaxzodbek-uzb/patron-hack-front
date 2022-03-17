@@ -167,6 +167,21 @@
                   Заполните все поля для добавления нового процесса
                 </td>
               </tfoot>
+              {{
+                groups
+              }}
+              <br />
+              <br />
+              <br />
+              {{
+                payment
+              }}
+              <br />
+              <br />
+              <br />
+              {{
+                update
+              }}
             </table>
           </div>
         </div>
@@ -175,11 +190,11 @@
       <b-modal
         v-model="createModal"
         title="Группа классификация"
-        @ok="message = true"
+        @ok="createItem"
       >
         <div class="form-group">
           <div class="row">
-            <div class="col-md-6 ">
+            <div class="col-md-6">
               <label class="input-group input-group-sm">
                 Общая сумма:
                 <input
@@ -190,7 +205,7 @@
                 />
               </label>
             </div>
-            <div class="col-md-6 ">
+            <div class="col-md-6">
               <label class="input-group input-group-sm">
                 Тип платежа
                 <select class="form-control small w-100">
@@ -208,13 +223,11 @@
         </div>
       </b-modal>
 
-        <b-modal
-        v-model="message"
-        title="Процесс завершен"
-        @ok="message"
-      >
+      <b-modal v-model="message" title="Процесс завершен" @ok="message = false">
         <div class="form-group">
-          <div class="d-flex text-success flex-column justify-content-center align-items-center">
+          <div
+            class="d-flex text-success flex-column justify-content-center align-items-center"
+          >
             <span class="my-3">Операция выполнена успешно</span>
             <i class="fas fa-check fa-2x"></i>
           </div>
@@ -274,9 +287,12 @@ export default {
       createModal: false,
       loading: false,
       groups: [],
+      payment: [],
       create: {
         payment_amount: '',
         payment_type: '',
+        payment_status: '',
+        status: 'done',
       },
       update: {
         id: this.$route.params.id,
@@ -405,28 +421,29 @@ export default {
     },
     createItem() {
       this.$axios
-        .post('/payment-transactions', this.create)
-        .then(({ data: { items } }) => {
-          this.$router.push('/payment-transactions')
-        })
+        .post('/payment-transactions', {
+        payment_detail: this.create.payment_detail,
+        payment_status: this.create.status,
+        amount: update.payment_amount,
+      })
     },
-    completeClassification(index) {
-      this.$axios
-        .post('/business-processes/complete-classification', {
-          business_process_id: this.update.id,
-          classification_id: this.update.classifications[index].id,
-          time_rate: this.update.classifications[index].pivot.time_rate,
-          quality_rate: this.update.classifications[index].pivot.quality_rate,
-        })
-        .then(({ data: { done, success } }) => {
-          if (success) {
-            this.update.classifications[index].pivot.done = true
-          }
-          if (done) {
-            this.update.status = 'done'
-          }
-        })
-    },
+  },
+  completeClassification(index) {
+    this.$axios
+      .post('/business-processes/complete-classification', {
+        business_process_id: this.update.id,
+        classification_id: this.update.classifications[index].id,
+        time_rate: this.update.classifications[index].pivot.time_rate,
+        quality_rate: this.update.classifications[index].pivot.quality_rate,
+      })
+      .then(({ data: { done, success } }) => {
+        if (success) {
+          this.update.classifications[index].pivot.done = true
+        }
+        if (done) {
+          this.update.status = 'done'
+        }
+      })
   },
 }
 </script>

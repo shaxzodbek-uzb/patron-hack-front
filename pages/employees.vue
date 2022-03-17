@@ -34,6 +34,7 @@
             >
               <thead>
                 <tr>
+                  <th>ID</th>
                   <th>Имя</th>
                   <th>Позиция</th>
                   <th>Дата начала</th>
@@ -42,6 +43,7 @@
               </thead>
               <tbody>
                 <tr v-for="(item, idx) in items" :key="item.id">
+                  <td>{{ item.id }}</td>
                   <td>{{ item.full_name }}</td>
                   <td>{{ getEmployeePositionName(item) }}</td>
                   <td>{{ item.created_at.substring(0, 10) }}</td>

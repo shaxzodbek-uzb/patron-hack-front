@@ -80,8 +80,6 @@
                           </span>
                         </div>
                       </td>
-                      
-                        @ok="deleteItem(idx)"
                     </tr>
                   </tbody>
                 </table>
