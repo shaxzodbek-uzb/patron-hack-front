@@ -50,12 +50,22 @@
                             <i class="fas fa-eye"></i>
                           </span>
                         </div>
-                        <div @click="deleteItem(idx)" class="btn btn-sm btn-danger btn-icon-split">
+                        <div @click="deleteModal = true" class="btn btn-sm btn-danger btn-icon-split">
                           <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
                         </div>
                       </td>
+
+                      <b-modal
+                        v-model="deleteModal"
+                        title="Удаление классификации"
+                        @ok="deleteItem(idx)"
+                      >
+                        <p class="pt-3">
+                          Вы действительно хотите удалить запись?
+                        </p>
+                      </b-modal>
                     </tr>
                   </tbody>
                 </table>
@@ -131,6 +141,7 @@ export default {
       },
       createModal: false,
       editModal: false,
+      deleteModal: false,
       showLoader: true,
     }
   },
@@ -171,12 +182,17 @@ export default {
           )
         })
     },
+    
     deleteItem(index) {
       let item = this.items[index]
       this.$axios.$delete('/classification-groups/' + item.id).then(() => {
-        this.items.splice(this.items.findIndex((i) => i.id === item.id))
+        this.items.splice(
+          this.items.findIndex((i) => i.id === item.id),
+          1
+        )
       })
     },
+    
   },
 }
 </script>

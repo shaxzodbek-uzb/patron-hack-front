@@ -80,15 +80,8 @@
                           </span>
                         </div>
                       </td>
-                      <b-modal
-                        v-model="deleteModal"
-                        title="Удаление классификации"
+                      
                         @ok="deleteItem(idx)"
-                      >
-                        <p class="pt-3">
-                          Вы действительно хотите удалить запись?
-                        </p>
-                      </b-modal>
                     </tr>
                   </tbody>
                 </table>
@@ -380,8 +373,6 @@ export default {
       this.$axios.$delete('/classifications/' + item.id).then(() => {
         this.items.splice(this.items.findIndex((i) => i.id === item.id))
       })
-      console.log(this.update.id)
-      console.log(this.items)
     },
   },
 }

@@ -4,8 +4,7 @@
       <div class="card w-100 shadow mb-4">
         <div class="card-header py-3">
           <div
-            class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center"
-          >
+            class="m-0 font-weight-bold text-primary d-flex justify-content-between align-items-center">
             Бизнес процесс
             <span>
               <nuxt-link
@@ -22,7 +21,12 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
+            <table
+              v-if="!showLoader"
+              class="table table-bordered"
+              id="dataTable"
+              cellspacing="0"
+            >
               <thead>
                 <tr>
                   <th>Имя</th>
@@ -33,7 +37,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in items" :key="item.id">
+                <tr v-for="(item, idx) in items" :key="item.id">
                   <td>{{ item.name }}</td>
                   <td>Быстро</td>
                   <td>{{ item.payment_amount }}</td>
@@ -47,12 +51,22 @@
                         <i class="fas fa-eye"></i>
                       </span>
                     </nuxt-link>
-                    <a class="btn btn-sm btn-danger btn-icon-split">
+                    <div
+                      @click="deleteModal = true"
+                      class="btn btn-sm btn-danger btn-icon-split"
+                    >
                       <span class="icon text-white">
                         <i class="fas fa-trash"></i>
                       </span>
-                    </a>
+                    </div>
                   </td>
+                  <b-modal
+                    v-model="deleteModal"
+                    title="Удаление классификации"
+                    @ok="deleteItem(idx)"
+                  >
+                    <p class="pt-3">Вы действительно хотите удалить запись?</p>
+                  </b-modal>
                 </tr>
               </tbody>
             </table>
@@ -72,6 +86,7 @@ export default {
       items: [],
       idx: '',
       showLoader: true,
+      deleteModal: false,
     }
   },
   mounted() {
@@ -88,10 +103,14 @@ export default {
     getGroupName(item) {
       return item ? item.name : '-'
     },
-    deleteItem(index) {
-      let item = this.items[index]
+    deleteItem(idx) {
+      let item = this.items[idx]
+      console.log(item)
       this.$axios.$delete('/business-processes/' + item.id).then(() => {
-        this.items.splice(this.items.findIndex((i) => i.id === item.id))
+        this.items.splice(
+          this.items.findIndex((i) => i.id === item.id),
+          1
+        )
       })
     },
   },

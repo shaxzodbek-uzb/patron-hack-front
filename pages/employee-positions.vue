@@ -24,7 +24,12 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
+          <table
+            v-if="!showLoader"
+            class="table table-bordered"
+            id="dataTable"
+            cellspacing="0"
+          >
             <thead>
               <tr>
                 <th scope="col">Позиция</th>
@@ -37,17 +42,31 @@
                 <td>{{ item.name }}</td>
                 <td>${{ item.salary }}</td>
                 <td>
-                  <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
+                  <div
+                    @click="editItem(idx)"
+                    class="btn btn-sm btn-primary btn-icon-split"
+                  >
                     <span class="icon text-white">
                       <i class="fas fa-eye"></i>
                     </span>
                   </div>
-                  <div @click="deleteItem(idx)" class="btn btn-sm btn-danger btn-icon-split">
+                  <div
+                    @click="deleteModal = true"
+                    class="btn btn-sm btn-danger btn-icon-split"
+                  >
                     <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </div>
                 </td>
+
+                <b-modal
+                  v-model="deleteModal"
+                  title="Удаление классификации"
+                  @ok="deleteItem(idx)"
+                >
+                  <p class="pt-3">Вы действительно хотите удалить запись?</p>
+                </b-modal>
               </tr>
             </tbody>
           </table>
@@ -55,7 +74,12 @@
           <b-modal v-model="createModel" title="Позиция" @ok="createItem">
             <div class="form-group">
               <label for="exampleInputEmail1">Название</label>
-              <input v-model="create.name" type="text" class="form-control" placeholder="Название" />
+              <input
+                v-model="create.name"
+                type="text"
+                class="form-control"
+                placeholder="Название"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Зарплата</label>
@@ -70,7 +94,12 @@
           <b-modal v-model="editModal" title="Позиция" @ok="updateItem">
             <div class="form-group">
               <label for="exampleInputEmail1">Название</label>
-              <input v-model="update.name" type="text" class="form-control" placeholder="Название" />
+              <input
+                v-model="update.name"
+                type="text"
+                class="form-control"
+                placeholder="Название"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Зарплата</label>
@@ -104,6 +133,7 @@ export default {
       },
       createModel: false,
       editModal: false,
+      deleteModal: false,
       showLoader: true,
     }
   },
