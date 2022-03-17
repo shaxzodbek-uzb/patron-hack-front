@@ -342,10 +342,8 @@ export default {
             backgroundColor: false,
             borderColor: 'red',
           },
-
           {
             fill: false,
-
             label: 'Рейтинг в классификации',
             data: classification_rates,
             borderWidth: 2,
