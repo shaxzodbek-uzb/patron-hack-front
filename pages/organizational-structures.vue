@@ -140,12 +140,10 @@ export default {
     this.$axios.$get('/organizational-structures').then((response) => {
       this.items = response.items
       this.showLoader = false
-      console.log(response)
     })
   },
   methods: {
     createItem() {
-      console.log('createItem')
       this.$axios
         .$post('/organizational-structures', this.create)
         .then((response) => {

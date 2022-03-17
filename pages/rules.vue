@@ -112,12 +112,10 @@ export default {
     this.$axios.$get('/rules').then((response) => {
       this.items = response.items
       this.showLoader = false
-      console.log(response)
     })
   },
   methods: {
     createItem() {
-      console.log('createItem')
       this.$axios.$post('/rules', this.create).then((response) => {
         this.items.push(response.item)
         this.create = {

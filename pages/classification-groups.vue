@@ -149,7 +149,6 @@ export default {
     this.$axios.$get('/classification-groups').then((response) => {
       this.items = response.items
       this.showLoader = false
-      console.log(response)
     })
   },
   methods: {

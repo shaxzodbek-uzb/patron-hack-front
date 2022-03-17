@@ -93,7 +93,6 @@ export default {
     this.$axios.$get('/business-processes').then((response) => {
       this.items = response.items
       this.showLoader = false
-      console.log(response)
     })
     this.$axios.$get('/classification-groups').then((response) => {
       this.groups = response.items
@@ -105,7 +104,6 @@ export default {
     },
     deleteItem(idx) {
       let item = this.items[idx]
-      console.log(item)
       this.$axios.$delete('/business-processes/' + item.id).then(() => {
         this.items.splice(
           this.items.findIndex((i) => i.id === item.id),

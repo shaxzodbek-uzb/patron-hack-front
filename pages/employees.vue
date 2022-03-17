@@ -160,7 +160,6 @@ export default {
       this.positions = response.items
     })
     this.$axios.$get('/employees').then((response) => {
-      console.log(response)
       this.items = response.items
       this.showLoader = false
     })
@@ -170,7 +169,6 @@ export default {
       return item.employee_position ? item.employee_position.name : '-'
     },
     createItem() {
-      console.log('createItem')
       this.$axios.$post('/employees', this.create).then((response) => {
         this.items.push(response.item)
         this.create = {

@@ -166,7 +166,6 @@ export default {
   mounted() {
     this.$axios.$get('/classification-groups').then((response) => {
       this.groups = response.items
-      console.log(response)
     })
   },
   watch: {
@@ -184,7 +183,6 @@ export default {
   },
   methods: {
     itemCreate() {
-      console.log('createItem')
       this.$axios.$post('/business-processes', this.create).then((response) => {
         this.$router.push('/business-process')
       })

@@ -329,7 +329,6 @@ export default {
       }
     },
     createItem() {
-      console.log('createItem')
       this.$axios.$post('/classifications', this.create).then((response) => {
         this.items.push(response.item)
         this.create = {
