@@ -10,18 +10,16 @@
           >
             Бизнес правила
             <span>
-              <a
-                @click="createModal = true"
+              <nuxt-link
+                to="/rules/create"
                 class="btn btn-sm btn-primary btn-icon-split"
                 type="button"
-                data-toggle="modal"
-                data-target="#exampleModal"
               >
                 <span class="icon text-white">
                   <i class="text-white fas fa-plus"></i>
                 </span>
                 <span class="text">Добавить</span>
-              </a>
+              </nuxt-link>
             </span>
           </div>
         </div>
@@ -40,7 +38,10 @@
                   <td>{{ item.id }}</td>
                   <td>{{ item.name }}</td>
                   <td>
-                    <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
+                    <div
+                      @click="$router.push(`/rules/edit/${item.id}`)"
+                      class="btn btn-sm btn-primary btn-icon-split"
+                    >
                       <span class="icon text-white">
                         <i class="fas fa-eye"></i>
                       </span>

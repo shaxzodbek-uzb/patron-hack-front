@@ -40,6 +40,7 @@
                     <tr>
                       <th>ID</th>
                       <th>Имя</th>
+                      <th>Классификационные группы</th>
                       <th>по пункту</th>
                       <th>Действия</th>
                     </tr>
@@ -48,6 +49,13 @@
                     <tr v-for="(item, idx) in items" :key="item.id">
                       <td>{{ item.id }}</td>
                       <td>{{ item.name }}</td>
+                      <td>
+                        <div v-for="(group, idx) in item.classification_groups" :key="group.id">
+                          <!-- checked icon of font-awesome -->
+                          <span class="fas fa-check-square"></span>
+                          {{ group.name }}
+                        </div>
+                      </td>
                       <td>{{ getParentName(item) }}</td>
                       <td>
                         <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
@@ -99,6 +107,17 @@
                       >{{ item.name }}</option>
                     </select>
                   </div>
+                  <!-- vue-bootstrap checkbox group -->
+                  <b-form-group label="Группа классификация" v-slot="{ ariaDescribedby }">
+                    <b-form-checkbox
+                      v-model="create.classification_group_ids"
+                      v-for="option in classification_groups"
+                      :key="option.id"
+                      :value="option.id"
+                      :aria-describedby="ariaDescribedby"
+                      name="flavour-3a"
+                    >{{ option.name }}</b-form-checkbox>
+                  </b-form-group>
                 </b-modal>
                 <b-modal v-model="editModal" title="Организационная структура" @ok="updateItem">
                   <div class="form-group">
@@ -125,6 +144,17 @@
                       >{{ item.name }}</option>
                     </select>
                   </div>
+                  <!-- vue-bootstrap checkbox group -->
+                  <b-form-group label="Группа классификация" v-slot="{ ariaDescribedby }">
+                    <b-form-checkbox
+                      v-model="update.classification_group_ids"
+                      v-for="option in classification_groups"
+                      :key="option.id"
+                      :value="option.id"
+                      :aria-describedby="ariaDescribedby"
+                      name="flavour-3a"
+                    >{{ option.name }}</b-form-checkbox>
+                  </b-form-group>
                 </b-modal>
               </div>
             </div>
@@ -140,13 +170,16 @@ export default {
   data() {
     return {
       items: [],
+      classification_groups: [],
       create: {
+        classification_group_ids: [],
         parent_id: null,
         name: '',
       },
       update: {
         name: '',
         parent_id: null,
+        classification_group_ids: [],
         id: '',
       },
       createModal: false,
@@ -161,6 +194,10 @@ export default {
     this.$axios.$get('/organizational-structures').then((response) => {
       this.items = response.items
       this.showLoader = false
+    })
+
+    this.$axios.$get('/classification-groups').then((response) => {
+      this.classification_groups = response.items
     })
     this.loadTreeData()
   },
@@ -183,6 +220,10 @@ export default {
       let item = this.items[index]
       this.update.name = item.name
       this.update.id = item.id
+      this.update.parent_id = item.parent_id
+      this.update.classification_group_ids = item.classification_groups.map(
+        (item) => item.id
+      )
       this.editModal = true
     },
     updateItem() {
