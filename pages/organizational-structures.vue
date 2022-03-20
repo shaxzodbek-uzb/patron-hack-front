@@ -50,7 +50,7 @@
                       <td>{{ item.id }}</td>
                       <td>{{ item.name }}</td>
                       <td>
-                        <div v-for="(group, idx) in item.classification_groups" :key="group.id">
+                        <div v-for="group in item.classification_groups" :key="group.id">
                           <!-- checked icon of font-awesome -->
                           <span class="fas fa-check-square"></span>
                           {{ group.name }}
