@@ -66,12 +66,12 @@
         </b-collapse>
       </li>
 
-      <!-- <li class="nav-item">
+      <li class="nav-item">
         <nuxt-link to="/rules" class="nav-link">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Бизнес правила</span>
         </nuxt-link>
-      </li>-->
+      </li>
 
       <li class="nav-item">
         <div

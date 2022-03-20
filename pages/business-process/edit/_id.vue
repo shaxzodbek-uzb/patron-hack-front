@@ -92,6 +92,7 @@
                       <div class="col-6">Конец</div>
                     </span>
                   </th>
+                  <th class="border-bottom">Файл</th>
                   <th class="border-bottom">Оценка</th>
                   <th class="border-bottom"></th>
                 </tr>
@@ -111,8 +112,32 @@
                     </div>
                   </td>
                   <td>
+                    <div v-if="!classification.pivot.file">
+                      <!-- file upload input -->
+                      <input type="file" class="file-input" @change="addFileToList($event, index)" />
+
+                      <div class="btn btn-sm btn-success btn-icon-split" @click="uploadFile(index)">
+                        <span class="icon text-white">
+                          <i class="fas fa-cloud-upload-alt"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <div v-else>
+                      <a
+                        :href="$config.rootURL + classification.pivot.file"
+                        target="_blank"
+                        class="btn btn-sm btn-success btn-icon-split"
+                      >
+                        <span class="icon text-white">
+                          <i class="fas fa-cloud-download-alt"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </td>
+                  <td>
                     <div class="input-group input-group-sm" v-if="!classification.pivot.done">
                       <input
+                        :disabled="!classification.pivot.file"
                         placeholder="Время"
                         type="text"
                         class="form-control form-control-sm"
@@ -121,6 +146,7 @@
                         v-model="classification.pivot.time_rate"
                       />
                       <input
+                        :disabled="!classification.pivot.file"
                         placeholder="Качество"
                         type="text"
                         class="form-control form-control-sm"
@@ -135,7 +161,8 @@
                     </div>
                   </td>
                   <td>
-                    <div
+                    <button
+                      :disabled="!classification.pivot.file"
                       class="btn btn-sm btn-success btn-icon-split"
                       @click="completeClassification(index)"
                       v-if="!classification.pivot.done"
@@ -143,7 +170,7 @@
                       <span class="icon text-white">
                         <i class="fas fa-check"></i>
                       </span>
-                    </div>
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -206,7 +233,37 @@
           </div>
         </div>
       </b-modal>
-
+      <b-modal v-model="openBRModal" title="Проверьте бизнес-правило:" ok-only>
+        <div>
+          <button @click="getBusinessRule" class="btn btn-info w-100">Проверить</button>
+          <hr />
+          <div v-if="proper_rule" class="text-center">
+            <p>
+              Название бизнес-правила:
+              <b>{{ proper_rule.name }}</b>
+            </p>
+            <p>
+              Идентификатор бизнес-правила:
+              <b>#{{ proper_rule.id }}</b>
+            </p>
+            <div v-if="proper_rule.result == 'payment' ">
+              <p>Бизнес-процесс успешно завершен, и вы можете его оплатить</p>
+              <button
+                type="button"
+                class="btn btn-sm btn-success"
+                @click="() => {openBRModal = false; openPaymentModal()}"
+              >Платить</button>
+            </div>
+            <div v-else>
+              <p>Бизнес-процесс должен быть отменен бизнес-правилом.</p>
+              <button @click="cancelBusinessProcess" class="btn btn-warning">Отменить</button>
+            </div>
+          </div>
+          <div v-else>
+            <p v-if="requestSent">Бизнес-правило не найдено</p>
+          </div>
+        </div>
+      </b-modal>
       <b-modal v-model="message" title="Процесс завершен" @ok="message = false">
         <div class="form-group">
           <div class="d-flex text-success flex-column justify-content-center align-items-center">
@@ -241,8 +298,13 @@
             <ChartLine :height="100" :chartdata="dataset" />
           </div>
         </div>
-        <div @click="openPaymentModal" class="d-flex justify-content-end pb-5">
-          <button class="btn btn-sm btn-primary btn-icon-split">
+
+        <div class="d-flex justify-content-end pb-5">
+          <button
+            @click="openBRModal = true"
+            class="btn btn-sm btn-primary btn-icon-split"
+            type="button"
+          >
             <span class="icon text-white">
               <i class="fas fa-check"></i>
             </span>
@@ -258,11 +320,15 @@
 export default {
   data() {
     return {
+      requestSent: false,
       message: false,
       createPaymentModel: false,
       loading: false,
       groups: [],
       payment_types: [],
+      files: {},
+      openBRModal: false,
+      proper_rule: null,
       payment: {
         payment_detail: '',
         amount: '',
@@ -402,23 +468,61 @@ export default {
       this.payment.payment_detail = this.update.payment_detail
       this.payment.amount = this.update.payment_amount
     },
-  },
-  completeClassification(index) {
-    this.$axios
-      .post('/business-processes/complete-classification', {
-        business_process_id: this.update.id,
-        classification_id: this.update.classifications[index].id,
-        time_rate: this.update.classifications[index].pivot.time_rate,
-        quality_rate: this.update.classifications[index].pivot.quality_rate,
-      })
-      .then(({ data: { done, success } }) => {
-        if (success) {
-          this.update.classifications[index].pivot.done = true
-        }
-        if (done) {
-          this.update.status = 'done'
-        }
-      })
+    addFileToList($event, index) {
+      this.files[index] = $event.target.files[0]
+    },
+    completeClassification(index) {
+      this.$axios
+        .post('/business-processes/complete-classification', {
+          business_process_id: this.update.id,
+          classification_id: this.update.classifications[index].id,
+          time_rate: this.update.classifications[index].pivot.time_rate,
+          quality_rate: this.update.classifications[index].pivot.quality_rate,
+        })
+        .then(({ data: { done, success } }) => {
+          if (success) {
+            this.update.classifications[index].pivot.done = true
+          }
+          if (done) {
+            this.update.status = 'done'
+          }
+        })
+    },
+    uploadFile(index) {
+      const formData = new FormData()
+      formData.append('business_process_id', this.update.id)
+      formData.append(
+        'classification_id',
+        this.update.classifications[index].id
+      )
+      formData.append('file', this.files[index])
+      this.$axios
+        .post('/business-processes/attach-file', formData)
+        .then(({ data: { success, file_path } }) => {
+          if (success) {
+            this.update.classifications[index].pivot.file = file_path
+          }
+        })
+    },
+    getBusinessRule() {
+      this.$axios
+        .get(`/rules/proper-for-business-process/${this.update.id}`, {})
+        .then(({ data: { rule } }) => {
+          this.requestSent = true
+
+          this.proper_rule = rule
+        })
+    },
+    cancelBusinessProcess() {
+      // business-processes/{business_process_id}/cancel
+      this.$axios
+        .get(`/business-processes/${this.update.id}/cancel`, {})
+        .then(({ data: { item } }) => {
+          this.update = item
+        })
+
+      console.log('send api for cancel')
+    },
   },
 }
 </script>

@@ -24,17 +24,13 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table
-            v-if="!showLoader"
-            class="table table-bordered"
-            id="dataTable"
-            cellspacing="0"
-          >
+          <table v-if="!showLoader" class="table table-bordered" id="dataTable" cellspacing="0">
             <thead>
               <tr>
                 <th>ID</th>
                 <th scope="col">Позиция</th>
                 <th scope="col">Зарплата</th>
+                <th scope="col">Организационная структура</th>
                 <th scope="col">Действия</th>
               </tr>
             </thead>
@@ -43,30 +39,21 @@
                 <td>{{ item.id }}</td>
                 <td>{{ item.name }}</td>
                 <td>${{ item.salary }}</td>
+                <td>{{ getOrganizationalStructureName(item) }}</td>
                 <td>
-                  <div
-                    @click="editItem(idx)"
-                    class="btn btn-sm btn-primary btn-icon-split"
-                  >
+                  <div @click="editItem(idx)" class="btn btn-sm btn-primary btn-icon-split">
                     <span class="icon text-white">
                       <i class="fas fa-eye"></i>
                     </span>
                   </div>
-                  <div
-                    @click="deleteModal = true"
-                    class="btn btn-sm btn-danger btn-icon-split"
-                  >
+                  <div @click="deleteModal = true" class="btn btn-sm btn-danger btn-icon-split">
                     <span class="icon text-white">
                       <i class="fas fa-trash"></i>
                     </span>
                   </div>
                 </td>
 
-                <b-modal
-                  v-model="deleteModal"
-                  title="Удаление классификации"
-                  @ok="deleteItem(idx)"
-                >
+                <b-modal v-model="deleteModal" title="Удаление классификации" @ok="deleteItem(idx)">
                   <p class="pt-3">Вы действительно хотите удалить запись?</p>
                 </b-modal>
               </tr>
@@ -76,12 +63,7 @@
           <b-modal v-model="createModel" title="Позиция" @ok="createItem">
             <div class="form-group">
               <label for="exampleInputEmail1">Название</label>
-              <input
-                v-model="create.name"
-                type="text"
-                class="form-control"
-                placeholder="Название"
-              />
+              <input v-model="create.name" type="text" class="form-control" placeholder="Название" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Зарплата</label>
@@ -92,16 +74,22 @@
                 placeholder="Зарплата"
               />
             </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Организационная структура</label>
+              <select v-model="create.organizational_structure_id" class="form-control">
+                <option
+                  v-for="(item, idx) in organizationalStructures"
+                  :key="idx"
+                  :value="item.id"
+                >{{ item.name }}</option>
+              </select>
+            </div>
           </b-modal>
           <b-modal v-model="editModal" title="Позиция" @ok="updateItem">
             <div class="form-group">
               <label for="exampleInputEmail1">Название</label>
-              <input
-                v-model="update.name"
-                type="text"
-                class="form-control"
-                placeholder="Название"
-              />
+              <input v-model="update.name" type="text" class="form-control" placeholder="Название" />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Зарплата</label>
@@ -111,6 +99,16 @@
                 class="form-control"
                 placeholder="Зарплата"
               />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Организационная структура</label>
+              <select v-model="update.organizational_structure_id" class="form-control">
+                <option
+                  v-for="(item, idx) in organizationalStructures"
+                  :key="idx"
+                  :value="item.id"
+                >{{ item.name }}</option>
+              </select>
             </div>
           </b-modal>
         </div>
@@ -124,14 +122,17 @@ export default {
   data() {
     return {
       items: [],
+      organizationalStructures: [],
       create: {
         name: '',
         salary: 0,
+        organizational_structure_id: null,
       },
       update: {
         id: '',
         name: '',
         salary: 0,
+        organizational_structure_id: null,
       },
       createModel: false,
       editModal: false,
@@ -143,6 +144,9 @@ export default {
     this.$axios.$get('/employee-positions').then((response) => {
       this.items = response.items
       this.showLoader = false
+    })
+    this.$axios.$get('/organizational-structures').then((response) => {
+      this.organizationalStructures = response.items
     })
   },
   methods: {
@@ -160,6 +164,7 @@ export default {
       this.update.name = item.name
       this.update.salary = item.salary
       this.update.id = item.id
+      this.update.organizational_structure_id = item.organizational_structure_id
       this.editModal = true
     },
     updateItem() {
@@ -178,6 +183,11 @@ export default {
       this.$axios.$delete('/employee-positions/' + item.id).then(() => {
         this.items.splice(this.items.findIndex((i) => i.id === item.id))
       })
+    },
+    getOrganizationalStructureName(item) {
+      return item.organizational_structure
+        ? item.organizational_structure.name
+        : '-'
     },
   },
 }

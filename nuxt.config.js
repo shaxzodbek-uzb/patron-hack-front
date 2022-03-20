@@ -1,4 +1,9 @@
 export default {
+  // env config
+
+  publicRuntimeConfig: {
+    rootURL: process.env.ROOT_URL || 'https://api.brainly.uz/'
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'АСУБП',

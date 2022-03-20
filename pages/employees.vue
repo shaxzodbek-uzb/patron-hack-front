@@ -31,7 +31,6 @@
                 <tr>
                   <th>ID</th>
                   <th>ФИО</th>
-                  <th>Отдел</th>
                   <th>Позиция</th>
                   <th>Дата начала</th>
                   <th>Действия</th>
@@ -41,7 +40,7 @@
                 <tr v-for="(item, idx) in items" :key="item.id">
                   <td>{{ item.id }}</td>
                   <td>{{ item.full_name }}</td>
-                  <td>{{ getOrganizationalStructureName(item) }}</td>
+                  <td>{{ getOrganizationalStructureName(item.employee_position) }}</td>
                   <td>{{ getEmployeePositionName(item) }}</td>
                   <td>{{ item.created_at.substring(0, 10) }}</td>
                   <td>
@@ -88,16 +87,6 @@
                   >{{ position.name }}</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Позиция</label>
-                <select v-model="create.organizational_structure_id" class="form-control">
-                  <option
-                    v-for="position in organizational_structures"
-                    :key="position.id"
-                    :value="position.id"
-                  >{{ position.name }}</option>
-                </select>
-              </div>
             </b-modal>
             <b-modal v-model="editModal" title="Ползователи" @ok="updateItem">
               <div class="form-group">
@@ -114,16 +103,6 @@
                 <select v-model="update.employee_position_id" class="form-control">
                   <option
                     v-for="position in positions"
-                    :key="position.id"
-                    :value="position.id"
-                  >{{ position.name }}</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Позиция</label>
-                <select v-model="update.organizational_structure_id" class="form-control">
-                  <option
-                    v-for="position in organizational_structures"
                     :key="position.id"
                     :value="position.id"
                   >{{ position.name }}</option>
