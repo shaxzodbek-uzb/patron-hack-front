@@ -79,13 +79,17 @@
                   <td>
                     <select v-model="classification.state" class="form-control">
                       <!--
-                            -1 - Низкий
-                            0 - Средний
-                            1 - Высокий
+                        -2 - Ochen nizkiy
+                        -1 - Низкий
+                        0 - Средний
+                        1 - Высокий
+                        2 - Ochen vysoki
                       -->
+                      <option value="-2">Очень низкий</option>
                       <option value="-1">Низкий</option>
                       <option value="0">Средний</option>
                       <option value="1">Высокий</option>
+                      <option value="2">Очень высокий</option>
                     </select>
                   </td>
                 </tr>
