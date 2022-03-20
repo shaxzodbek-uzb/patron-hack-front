@@ -4,8 +4,8 @@
       class="navbar-nav font-weight-bold bg-gradient-primary sidebar sidebar-dark accordion"
       id="accordionSidebar"
     >
-      <nuxt-link to="/" class="sidebar-brand d-flex align-items-center justify-content-center">
-        <img style="width: 70%" src="~/assets/images/logo.png" alt />
+      <nuxt-link to="/" class="sidebar-brand h1 d-flex align-items-center justify-content-center">
+        АСУБП
       </nuxt-link>
 
       <hr class="sidebar-divider my-0" />
